@@ -1,0 +1,75 @@
+
+
+<!DOCTYPE html>
+<head>
+  <%-include css_js.ejs %>
+    <title>
+      <%= title %>
+    </title>
+    <link rel="stylesheet" href="/stylesheets/admin_dashboard_10.css">
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/wangeditor@latest/dist/wangEditor.min.js"></script> -->
+</head>
+<body>
+<div class="dashboard">
+<%-include  admin_dashboard_0_leftSelect.ejs %>
+<div class="right-content">
+ <!-- //會員列表---點"刪除"---刪除會員資料頁 -->
+ <div class="containerdisplay" id="deleteMemberDetailcontainer">
+   <div class="deleteMemberbox">
+     <p>您正要刪除  <span style="color:#c5724c ;font-weight: 700;"><%=memberData.memberName%></span> 的會員資料</p>
+     <table id="memberForm" class="memberFormBox">
+       <tr>
+         <td>會員編號</td>
+         <td><%=memberData.memberId%></td>
+       </tr>
+       <tr>
+         <td>姓名</td>
+         <td><%=memberData.memberName%></td>
+       </tr>
+       <tr>
+         <td>生日</td>
+         <td><%= `${memberData.memberBirthday.getFullYear()} / ${memberData.memberBirthday.getMonth()+1} / ${memberData.memberBirthday.getDate()} ` %></td>
+       </tr>
+       <tr>
+         <td>性別</td>
+         <td><%= (memberData.memberGender == "M"? '男':'女') %></td>
+       </tr>
+       <tr>
+         <td>國內市話</td>
+         <td><%=memberData.memberTel%></td>
+       </tr>
+       <tr>
+         <td>手機號碼</td>
+         <td><%=memberData.memberPhone%></td>
+       </tr>
+       <tr>
+         <td>通訊地址</td>
+         <td><%=memberData.memberAddress%></td>
+       </tr>
+     </table>
+    <form id="hideform">
+        
+      會員編號<input type="hidden" value="<%=memberData.memberId%>" name="memberId"> <br>
+      <span class="memberInfoText">姓名</span><input type="hidden" value="<%=memberData.memberName%>" name="memberName"> <br>
+      <span class="memberInfoText">生日</span><input type="hidden"value="<%=memberData.memberBirthday %>" > <br>
+      <span class="memberInfoText">性別</span><input type="radio"  <%= (memberData.memberGender == "M")? 'checked':'' %>>男 <input type="radio"  <%= (memberData.memberGender == "F")? 'checked':'' %> >女<br>
+      國內市話 <input type="hidden" value="<%=memberData.memberTel%>" name="memberTel"> <br>
+      手機號碼 <input type="hidden" value="<%=memberData.memberPhone%>" name="memberPhone"> <br>
+      通訊地址 <input type="hidden" value="<%=memberData.memberAddress%>" name="memberAddress"> <br>
+      
+    </form>
+
+    <form action="/admin/dashboard/delmember" method="post" id="checkBox">
+        <input type="hidden" id="TodoItemId" name="TodoItemId" 
+            value="<%=memberData.memberId%>" 
+        />
+        <input onclick="return alert('您確定要刪除此筆會員資料?')" type="submit" value="確定刪除" class="admin-addarticleBtn" /> <!-- onclick="return alert('您確定要刪除此筆會員資料?')"  -->
+        <a href="http://localhost:3000/admin/dashboard" class="orderCancelBtn">取消返回</a>
+    </form>
+    <!-- <button type="submit" id='memberPersonalInformationEdit' class="memberDashboardBtn" >確認刪除</button> -->
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

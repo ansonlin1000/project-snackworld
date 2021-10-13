@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+  <head>
+    <%-include css_js.ejs %>
+    <title>金流測試機</title>
+    <style>
+        .test{
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+  </head>
+  <body>
+    <%-include  navbar.ejs %>
+    <div class="test">
+        <h1>訂單確認</h1>
+
+            <form id="formCreditCard" method="post" accept-charset="UTF-8"
+        action="https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut/V5">
+        
+        商店代號: 
+        <input type="text" name="MerchantID" value="2000132" /><br />
+        
+        交易編號: 
+        <input type="text" name="MerchantTradeNo" value="DX2021092520564221b" /><br />
+        
+        交易時間: 
+        <input type="text" name="MerchantTradeDate" value="2021/09/25 20:56:42" /><br />
+        
+        交易類型: 
+        <input type="text" name="PaymentType" value="aio" /><br />
+        
+        金額: 
+        <input type="text" name="TotalAmount" value="5" /><br />
+        
+        交易描述: 
+        <input type="text" name="TradeDesc" value="建立信用卡測試訂單" /><br />
+        
+        商品名稱: 
+        <input type="text" name="ItemName" value="MacBook 30元X2#iPhone6s 40元X1" /><br />
+        
+        付款完成通知回傳網址: 
+        <input type="text" name="ReturnURL" value="https://developers.ecpay.tw/AioMock/MerchantReturnUrl" /><br />
+        
+        預設付款方式: 
+        <input type="text" name="ChoosePayment" value="Credit" /><br />
+        
+        <!-- 會員商店代碼:  -->
+        <!-- <input type="text" name="StoreID" value="" /><br /> -->
+        
+        <!-- ClientBackURL Client端返回廠商網址: 
+        <input type="text" name="ClientBackURL" value="https://developers.opay.tw/AioMock/MerchantClientBackUrl" /><br /> -->
+        
+        <!-- CreditInstallment 刷卡分期期數: 
+        <input type="text" name="CreditInstallment" value="" /><br /> -->
+        
+        <!-- InstallmentAmount 使用刷卡分期的付款金額: 
+        <input type="text" name="InstallmentAmount" value="" /><br /> -->
+        
+        <!-- Redeem 信用卡是否使用紅利折抵: 
+        <input type="text" name="Redeem" value="" /><br /> -->
+        
+        <!-- CheckMacValue 簽章類型: 
+        <input type="text" name="EncryptType" value="1" /><br /> -->
+        
+        CheckMacValue 檢查碼: 
+        <input type="text" name="CheckMacValue" value="83952DBFCB7961ACCB4D9FC7C883492B11726CB7A274C1143CD10BA5326CFE36" /><br />
+        
+        <input type="submit" value="送出訂單" />
+        
+        </form>
+    </div>
+    
+    <footer><%-include footer.ejs %></footer>
+  </body>
+</html>

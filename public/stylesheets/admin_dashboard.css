@@ -1,0 +1,635 @@
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    /* border: 1px solid #f2eae3; */
+
+}
+:root{
+    --color1: #16264f ;
+    --color2: #f2eae3 ;
+    --color3: #dfcbba ;
+    --color4: #c5724c ;
+}
+
+.fontsize30{ font-size: 30px; }
+.fontsize24{ font-size: 24px; }
+.fontsize16{ font-size: 16px; }
+.fontsize10{ font-size: 10px; }
+.fontsizeM{ font-size: Medium; }
+.fontweightB{ font-weight: bold; }
+
+.width660{ width: 660px; }
+.width460{ width: 460px; }
+.width360{ width: 360px; }
+.width260{ width: 260px; }
+.width160{ width: 160px; }
+.width150{ width: 150px; }
+.width100{ width: 100px; }
+.width80 { width: 80px; }
+.width60 { width: 60px; }
+.width40 { width: 40px; }
+.width20 { width: 20px; }
+
+
+
+.borderradius35{ border-radius: 35px; }
+
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+}
+ 
+.left-aside{
+    width: 400px;
+    padding: 15px;
+    background-color: #16264f;
+    color: white;
+}
+.logoBox{
+    margin: 10px;
+    padding: 20px;
+}
+.userBox{
+    display: flex;
+    width: 330px;
+    height: 85px;
+    background-color: white;
+    margin: 20px;
+    padding: 10px;
+    color: var(--color1);
+    border-radius: 20px;
+}
+.left-aside p{
+    margin: 20px;
+    color: white;
+    font-size: 18px;
+}
+.userBox p{
+    line-height: 40px;
+    margin: 10px;
+    margin-left: 20px;
+    color: var(--color1);
+
+}
+.userBox img{
+    margin-left: 10px;
+}
+
+.asideList{
+    margin: 20px;
+    list-style:none;
+    line-height: 60px;
+}
+.asideList a{
+    margin-left: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+}
+
+
+/* 下拉選單效果 */
+/* #orderList,#memberList,#articleList{
+    display: none;
+} */
+
+#productList .active,#orderList .active,#memberList .active,#articleList .active{
+    display: block;
+}
+
+
+
+.smallList{
+    list-style: none;
+    line-height: 50px;
+
+}
+.smallList li{
+    width: 400px;
+    
+}
+
+.smallList a{
+    margin-left: 70px;
+    font-weight: normal;
+}
+.smallList li:hover {
+    width: 400px;
+    color: var(--color1);
+    background-color: var(--color3);
+    border-radius: 20px 0 0 20px;
+}
+
+
+
+.smallListfixed{
+    width: 400px;
+    color: var(--color1);
+    background-color: var(--color3);
+    border-radius: 20px 0 0 20px;
+}
+
+.smallList li a:hover {
+   color: var(--color1);
+   
+}
+
+ 
+
+/* ------------------------------------------------------------- */
+.right-content {
+    background-color: #f2eae3;
+    flex-grow:1;
+}
+
+/* #addproductcontainer,
+#ordercontainer,
+#returnordercontainer,
+#membercontainer,
+#articlecontainer,
+#addarticlecontainer,
+#checkorderdetailcontainer,
+#returnorderdetailcontainer,
+#editProductDetailcontainer,
+#editMemberDetailcontainer,
+#deleteMemberDetailcontainer{
+    display: none;
+
+} */
+
+.containerdisplay{
+    padding: 30px;
+}
+
+.admin-breadcrumbs p{
+    color: var(--color1);
+}
+
+.admin-topBox{
+    background-color: white;
+    margin-bottom: 20px;
+    padding: 40px;
+    width: 84%;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+
+.deletemanyProductbtn{
+    margin-right: 10px;
+    background-color: var(--color4);
+    color: white;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+    font-weight: 400;
+}
+.addProductbtn{
+    margin-right: 10px;
+    background-color: #3b84be;
+    color: white;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+    font-weight: 400;
+}
+.admin-ListBar{
+    width: 100%;
+    text-align: center;
+    padding: 0px 5px 0px 5px;
+}
+.admin-ListBar td{
+    color: #16264f;
+}
+.admin-productListDetail{
+    background-color: white;
+    margin: 20px 0px;
+    padding:20px 5px 20px 5px;
+    width: 100%;
+    border-radius: 20px;
+    display: flex;
+    text-align: center;
+    justify-content: flex-start;
+    color: #16264f;
+    font-size: 14px;
+    /* line-height: 30px; */
+    align-items: center;
+}
+
+
+#membercontainer .admin-productListDetail {
+    width: 84%;
+    
+}
+#membercontainer  .adminMemberListBox .admin-productListDetail {
+    width: 103%;
+
+}
+.product-table{
+    width: 84%;
+}
+
+.admin-productListDetail td{
+    border-right:1px solid #16264f;
+}
+.admin-productListDetail td:last-child{
+    border-right:0px
+}
+/* ------------------列表按鈕狀態區----------------------------- */
+/* 上架/已完成 */
+/* orderPay<%=item.orderPaymentNo %>Btn */
+.productON, .orderFinishBtn,.orderState1Btn,.orderState2Btn,.orderSend1Btn{
+    background-color: #83B353;
+    border: 1px solid transparent;
+    color: white;
+    padding: .375rem .75rem;
+    font-size: 0.5rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+    font-weight: 400;
+}
+/* 已取消/已退貨 */
+.orderCancelBtn,.orderReturnBtn,.orderState3Btn,.orderSend3Btn{
+    background-color: #717071;
+    border: 1px solid transparent;
+    color: white;
+    padding: .375rem .75rem;
+    font-size: 0.5rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+    margin-left: 50px;
+    font-weight: 400;
+}
+
+.orderCancelBtn{
+    margin-left: 20px;
+}
+
+.orderState3Btn, .orderSend3Btn{
+    margin-left: 0px;
+}
+/* 審核中/儲存草稿 */
+.checkingBtn,.admin-savedraftBtn,.orderState4Btn,.orderPay2Btn,.orderSend2Btn{
+    background-color: #c76b43;
+    border: 1px solid transparent;
+    color: white;
+    padding: .375rem .75rem;
+    font-size: 0.5rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+    font-weight: 400;
+}
+/*付款方式,待退貨,待出貨 */
+.waitingBtn,.orderPay1Btn,.orderSend4Btn{
+    background-color:white;
+    border: 1px solid #3B84BE;
+    color: #3B84BE;
+    padding: .375rem .75rem;
+    font-size: 0.5rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+    font-weight: 400;
+}
+
+
+/* 處理中*/
+.orderState5Btn,.orderSend4Btn{
+    background-color:#3B84BE;
+    border: 1px solid #3B84BE;
+    color: white;
+    padding: .375rem .75rem;
+    font-size: 0.5rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+    font-weight: 400;
+}
+/* 編輯按鈕/新增文章 */
+.admin-editBtn,.admin-addarticleBtn{
+    background-color: #3B84BE;
+    border: 1px solid transparent;
+    color: white;
+    padding: .375rem .5rem;
+    font-size: 0.5rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+    font-weight: 400;
+}
+
+.admin-editBtnCheck {
+    margin: 2px 2px;
+    height: 29px;
+    width: 68px;
+
+}
+/* 刪除按鈕 */
+.admin-deleteBtn{
+    background-color: #C3634F;
+    border: 1px solid transparent;
+    color: white;
+    padding: .375rem .5rem;
+    font-size: 0.5rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+    font-weight: 400;
+    margin: 0px 2px;
+}
+/* ------------------------------------------------------------- */
+.admin-ListBar .orderselect{
+    border: 1px solid transparent;
+    background-color: transparent;
+    font-weight: 400;
+    color: #16264f;
+}
+
+
+/* 新增商品/新增文章頁面--------------------------------------- */
+.admin-addpage{
+    background-color: white;
+    margin: 5px;
+    padding: 20px 50px;
+    border-radius: 20px;
+}
+.admin-addpage-flex{
+    display: flex;
+    margin: 20px 0px;
+}
+.admin-addpage-flex .admin-addpage-uploadimg,.admin-prodpageimgBox{
+    width: 200px;
+    height: 200px;
+    background-color: rgb(230, 230, 230);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px dashed rgb(195, 195, 195);
+    /* text-align: center; */
+   
+}
+.admin-prodpageimgBox img{
+width: 100%;
+}
+/* .admin-addpage-flex input{
+    width: 350px;
+    height: 30px;
+} */
+
+.admin-addpage-flex select{
+    width: 120px;
+    height: 30px;
+}
+.admin-addpage-Btn{
+    display: flex;
+    justify-content: center;
+}
+.admin-addpage-Btn button{
+    margin: 0px 10px;
+}
+/* -----------------------------彈出視窗------------------  */
+.Backdrop {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    background-color: rgba(0,0,0,0.5);
+  }
+.Modal {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    z-index: 500;
+    background-color: white;
+    width: 50%;
+    
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px black;
+    padding: 16px;
+    left: 28%;
+    box-sizing: border-box;
+    transition: all 0.3s ease-out;
+}
+/* 彈出視窗---確認按鈕 */
+.Pop-checkBtn{
+    background-color: #3B84BE;
+    border: 1px solid transparent;
+    color: white;
+    padding: .375rem .5rem;
+    font-size: 0.5rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+    font-weight: 400;
+    margin: 2px 200px;
+}
+/* 彈出視窗---取消按鈕 */
+.Pop-backBtn{
+    background-color: #C3634F;
+    border: 1px solid transparent;
+    color: white;
+    padding: .375rem .5rem;
+    font-size: 0.5rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+    font-weight: 400;
+    margin: 2px 200px;
+}
+
+#checkorderdetailBtn,#returnorderdetailBtn{
+    border: none;
+    background-color: white;
+    color: #C3634F;
+}
+#checkorderdetailBtn:hover{
+    color: #007bff;
+    text-decoration: underline;
+}
+#returnorderdetailBtn:hover{
+    color: #007bff;
+    text-decoration: underline;
+}
+
+#admin-producttextEditor,#admin-editproducttextEditor{
+    width: 1000px;
+    height: 300px;
+}
+
+/* 管理員後台 會員刪除頁面 */
+.deleteMemberbox{
+display: flex;
+justify-content: center;
+flex-direction: column;
+}
+#memberForm {
+    margin: 20px;
+    background-color: white;
+    border-radius: 20px;
+    padding: 50px;
+    width: 550px;
+}
+#memberForm input{
+    padding: 5px;
+    border: 1px solid  var(--color3); 
+    
+    background-color: var(--color2);
+    border-radius: 5px;
+    margin: 20px;
+
+}   
+#checkBox{
+    margin: 20px;
+    padding: 20px;
+    display: flex;
+    justify-content: flex-end;
+    width: 550px;
+}
+
+
+
+
+/* 一般訂單-訂單詳細資訊 */
+#adminOrderDetail{
+    display: flex;
+}
+#adminOrderListOn{
+    height: 500px;
+    width: 560px;
+}
+#adminOrderListOn tr{
+    height: 70px;
+    border-bottom: 1px solid var(--color1) ;
+    text-align: center;
+}
+#adminOrderDetail input ,.returnBtn {
+    margin-top: 20px;
+    width: 70px;
+    height: 35px;
+    border: none;
+    background-color: var(--color1);
+    color: white;
+    border-radius: 10px;
+    outline: none;
+}
+#adminOrderDetailTextBox{
+    background-color: var(--color3);
+    width: 400px;
+    height: 510px;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    border-radius: 35px;
+    /* margin-top: 35px;    */
+    margin-left: 30px;
+}
+
+
+#adminOrderDetailTextBox table{
+    width: 380px;
+    text-align: center;
+}
+
+#adminOrderDetailTextBox table tr{
+    height: 55px;
+}
+
+#subProdListAll{
+    width: 1000px;
+    background-color: white;
+    border-radius: 40px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 30px;
+}
+
+#subProdListAll img{
+    width: 200px;
+}
+
+.eachSubProd{
+    width: 200px;
+    margin: 10px;
+    text-align: center;
+}
+
+.flexCard{
+    width: 900px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+}
+
+#returnorderdetailcontainerBox{
+    background-color: var(--color3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 40px;
+    padding-top: 30px;
+    height: 1600px;
+}
+
+#returnorderdetailcontainer tr{
+    height: 50px;
+}
+
+#returnorderdetailcontainer table{
+    width: 800px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.containerBoxDisplay{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hrLine{
+    border-top: var(--color1) 1px solid;
+    width: 1000px;
+    height: 5px;
+}

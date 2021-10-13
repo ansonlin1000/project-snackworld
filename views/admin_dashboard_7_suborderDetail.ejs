@@ -1,0 +1,68 @@
+
+  <!DOCTYPE html>
+  <head>
+    <%-include css_js.ejs %>
+      <title>
+        <%= title %>
+      </title>
+      <link rel="stylesheet" href="/stylesheets/admin_dashboard.css">
+      <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/wangeditor@latest/dist/wangEditor.min.js"></script> -->
+  </head>
+<body>
+  <div class="dashboard">
+  <%-include  admin_dashboard_0_leftSelect.ejs %>
+  <div class="right-content">
+ <!-- 點"查看----退貨訂單詳情 -->
+ <div class="containerdisplay" id="returnorderdetailcontainer">
+   <div id="returnorderdetailcontainerBox">
+     <p>訂閱訂單編號：<%= sqlsuborderlist[1].orderNo  %></p>
+     <div class="hrLine"></div>
+     <div class="containerBoxDisplay">
+       <table>
+         <tr>
+           <td class="width160">訂購人</td>
+           <td class="width260"><%= sqlsuborderlist[1].orderName  %></td>
+          </tr>
+          <tr>
+            <td class="width160">訂閱類別</td>
+            <td class="width260"><%= sqlsuborderlist[1].orderType  %></td>
+            <td class="width160">消費金額</td>
+            <td class="width260"><%= sqlsuborderlist[1].orderPrice  %></td>
+          </tr>
+          <tr>
+           <td>訂單成立時間</td>
+           <td><%=`${sqlsuborderlist[1].orderDate.getFullYear()}/${sqlsuborderlist[1].orderDate.getMonth()+1}/${sqlsuborderlist[1].orderDate.getDate()}` %></td>
+           <td>付款方式</td>
+           <td><%= sqlsuborderlist[1].orderPayment  %></td>
+         </tr>
+         <tr>
+           <td>訂單狀態</td>
+           <td><%= sqlsuborderlist[1].orderState  %></td>
+           <td>出貨狀態</td>
+           <td><%= sqlsuborderlist[1].orderSendState  %></td>
+         </tr>
+       </table>
+       <div id="subProdListAll">
+         <div class="fontsize24">當月零食箱內容</div>
+         <div class="flexCard">
+           <% for (let item of subOrderProdList) { %>
+           <div class="eachSubProd">
+             <div>
+               <img src="<%= item.prodPhoto1 %>" alt="">
+             </div>
+             <div><%= item.prodName %></div>
+           </div>
+           <% } %>
+         </div>
+   
+       </div>
+   
+     </div>
+
+     <input class="returnBtn" type="button" value="返回" onclick="location.href='/admin/dashboard/suborderlist'">
+   </div>
+</div>
+</div>
+</div> 
+</body>
+</html>

@@ -1,0 +1,120 @@
+:root{
+    --color1: #16264f ;
+    --color2: #f2eae3 ;
+    --color3: #dfcbba ;
+    --color4: #c5724c ;
+}
+
+.fontsize30{ font-size: 30px; }
+.fontsize24{ font-size: 24px; }
+.fontsize16{ font-size: 16px; }
+.fontsize10{ font-size: 10px; }
+.fontsizeM { font-size: Medium; }
+.fontweightB{ font-weight: bold; }
+
+.width660{ width: 660px; }
+.width460{ width: 460px; }
+.width420{ width: 420px; }
+.width300{ width: 300px; }
+.width260{ width: 260px; }
+.width160{ width: 160px; }
+.width150{ width: 150px; }
+.width120{ width: 120px; }
+.width100{ width: 100px; }
+.width80 { width: 80px; }
+.width60 { width: 60px; }
+
+.borderradius35-lt{ border-radius: 35px 0px 0px 0px; }
+.borderradius35-rt{ border-radius: 0px 35px 0px 0px; }
+
+#memberHeader{
+    text-align: center;
+    /* margin-top: 20px; */
+    top:30px;
+    position: relative;
+}
+#memberDashboard{
+    /* height: 1000px; */
+    position: relative;
+    left: 0px;
+    right: 0px;
+    margin: 20px auto 100px auto;
+    width: 1300px;
+    top: 40px;
+}
+
+#memberDashboardBar{
+    display: flex;
+    text-align: center;
+    margin-bottom: -10px;
+    margin-left: 40px;
+}
+#memberDashboardBar button{
+    background-color: var(--color2);
+    color: var(--color1);
+    padding: 10px 30px;
+    margin: 0 8px;
+    border-radius: 10px 10px 0px 0px;
+    border: none;
+    height: 50px;
+}
+#memberDashboardBar #memberLab_collectProd{
+    background-color: var(--color1);
+    color: white;
+    
+}
+
+
+
+#memberDashboardMain{
+    position: relative;
+    left: 0px;
+    right: 0px;
+    margin: 0px auto;
+    width: 1300px;
+    height: 660px;
+    background-color: var(--color3) ;
+    border-radius: 40px;
+}
+
+.menberMainBox{
+    /* display: none; */
+    align-items: center;
+    min-height: 660px;
+    justify-content: space-around;
+}
+
+
+.memberCollectProdAddCaetBtn , .memberShoppingCartDelBtn{
+    background: none;
+    border: none;
+}
+
+
+#memberCollectProd{
+    display: flex;
+    justify-content: center;
+    align-items:flex-start;
+    }
+#memberCollectProdList{
+    text-align: center;
+}
+#memberCollectProd tr{
+    height: 70px;
+    border-bottom: 1px solid var(--color1) ;
+}
+
+#memberCollectProd .memberCollectProdHeader{
+    border-bottom: 2px solid var(--color1) ;
+}
+
+.memberCollectProdIngandName , .memberShoppingCartProdIngandName{
+    display: flex;
+    align-items: center;
+    text-align: left;
+}
+
+.memberCollectProdImg , .memberShopppingCartProdImg{
+    width: 85px;
+    margin: 10px 10px 10px 50px;
+}

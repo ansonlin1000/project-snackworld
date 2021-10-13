@@ -1,0 +1,151 @@
+:root{
+    --color1: #16264f ;
+    --color2: #f2eae3 ;
+    --color3: #dfcbba ;
+    --color4: #c5724c ;
+}
+
+.fontsize30{ font-size: 30px; }
+.fontsize24{ font-size: 24px; }
+.fontsize16{ font-size: 16px; }
+.fontsize10{ font-size: 10px; }
+.fontsizeM { font-size: Medium; }
+.fontweightB{ font-weight: bold; }
+
+.width660{ width: 660px; }
+.width460{ width: 460px; }
+.width420{ width: 420px; }
+.width300{ width: 300px; }
+.width260{ width: 260px; }
+.width160{ width: 160px; }
+.width150{ width: 150px; }
+.width120{ width: 120px; }
+.width100{ width: 100px; }
+.width80 { width: 80px; }
+.width60 { width: 60px; }
+
+.borderradius35-lt{ border-radius: 35px 0px 0px 0px; }
+.borderradius35-rt{ border-radius: 0px 35px 0px 0px; }
+
+#memberHeader{
+    text-align: center;
+    top:30px;
+    position: relative;
+}
+#memberDashboard{
+    position: relative;
+    left: 0px;
+    right: 0px;
+    margin: 20px auto 100px auto;
+    width: 1300px;
+    top: 40px;
+}
+
+#memberDashboardBar{
+    display: flex;
+    text-align: center;
+    margin-bottom: -10px;
+    margin-left: 40px;
+}
+#memberDashboardBar button{
+    background-color: var(--color2);
+    color: var(--color1);
+    padding: 10px 30px;
+    margin: 0 8px;
+    border-radius: 10px 10px 0px 0px;
+    border: none;
+    height: 50px;
+}
+#memberDashboardBar #memberLab_personalInfo{
+    background-color: var(--color2);
+    color: var(--color1);   
+}
+
+#memberDashboardMain{
+    position: relative;
+    left: 0px;
+    right: 0px;
+    margin: 0px auto;
+    width: 1300px;
+    height: 660px;
+    background-color: var(--color3) ;
+    border-radius: 40px;
+}
+
+.menberMainBox{
+    align-items: center;
+    min-height: 660px;
+    justify-content: space-around;
+}
+
+#memberOrder{
+    display: none;
+}
+#memberOrderList{
+    text-align: center;
+    border-radius: 35px;
+}
+#memberOrder tr{
+    height: 70px;
+}
+#memberOrder #memberOrderList tr:nth-child(odd){
+    background-color: var(--color2);
+}
+
+#memberOrder #memberOrderList .memberOrderHeader:nth-child(1){
+    border-bottom: 2px solid var(--color1) ;
+    background-color: var(--color3);
+}
+
+#memberOrderDetail{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+#memberDashboardBar #memberLab_order{
+    background-color: var(--color1);
+    color: white;
+}
+
+
+#memberOrderListOn{
+    height: 500px;
+    width: 760px;
+}
+#memberOrderListOn tr{
+    height: 70px;
+    border-bottom: 1px solid var(--color1) ;
+    text-align: center;
+}
+
+#memberOrderDetailTextBox{
+    background-color: var(--color2);
+    width: 400px;
+    height: 580px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 35px;
+    margin-top: 35px;   
+}
+
+
+#memberOrderDetailTextBox table{
+    width: 380px;
+    text-align: center;
+}
+
+#memberOrderDetailTextBox table tr{
+    height: 55px;
+}
+
+#memberOrderDetail input{
+    margin-top: 20px;
+    width: 70px;
+    height: 35px;
+    border: none;
+    background-color: var(--color1);
+    color: white;
+    border-radius: 10px;
+    outline: none;
+}

@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+
+<head>
+  <%-include css_js.ejs %>
+    <title>
+      <%= title %>
+    </title>
+    <script>
+      $(function () {
+        getCartList();
+        $(document).on("click", ".btn-delete", deleteBtn);
+      })
+      const getCartList = function () {
+        let memberId = sessionStorage.getItem("memberId");
+        let orderlistId = sessionStorage.getItem("orderlistId");
+
+        // $("#show2").html("")
+        $.ajax({
+          type: 'get',
+          url: '/getCartList',
+          data: { "memberId": memberId, "orderlistId": orderlistId },
+          success: function (data) {
+
+            if (data.status == 200) {
+              let arr = data.data;
+              for (let i in arr) {
+                let obj = arr[i]
+                // $("#show2").append(`
+                //          <tr><td><input type="radio"></td>
+                //                <td scope="col">${obj.goodName}</td>
+                //                <td scope="col">${obj.goodNum}</td>
+                //                 <td scope="col">${obj.price}$</td>
+                //                 <td scope="col">${obj.goodqutity}</td>
+                //                 <td scope="col">
+                //                     <button type="button" class="btn btn-danger btn-delete" data-id="${obj.goodId}"">刪除</button>
+                //                 </td>
+                //           </tr>`)
+              } if (arr.length == 0) {
+                alert("資料庫沒有數據！");
+              }
+            }
+            else if (data.status = 400) {
+              alert("連接有問題！");
+
+            }
+          }
+        })
+      }
+      //刪除單個商品
+      function deleteBtn(e) {
+        let id = $(e.target).attr("data-id");
+        $.ajax({
+          type: "get",
+          url: "/deleteCart",
+          data: { "orderlistId": orderlistId },
+          success: function (data) {
+            if (data.status == 200) {
+              alert("刪除成功！");
+            } else if (data.status == 400) {
+              alert("刪除失敗！");
+            }
+          }
+        })
+          .done(function () {
+            getCartList();
+          })
+      }
+
+      //刪除所有商品
+      $("#btn2")[0].addEventListener("click", function () {
+        $.ajax({
+          type: "get",
+          url: "/deleteAllCart",
+          success: function (data) {
+            if (data.status == 200) {
+              alert("删除成功！");
+            } else if (data.status == 400) {
+              alert("删除失敗！");
+            }
+          }
+        })
+          .done(function () {
+            getCartList();
+          })
+      }, true)
+
+
+    </script>
+    <script src="/javascripts/product.js"></script>
+    <link rel="stylesheet" href="/stylesheets/member_dashboard_02.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous">
+      </script>
+    <!-- jQuery Modal -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+</head>
+
+<body>
+  <%-include navbar.ejs %>
+
+    <!-- 功能內容區塊 -->
+    <div id='memberDashboardMain'>
+      <div id='memberShoppingCart' class="menberMainBox">
+        <!-- 2-1 第一頁-購物清單 -->
+        <div id='memberShoppingCartList'>
+          <!-- 左側清單區塊 -->
+          <div id='memberShoppingCartDetail'>
+            <!-- 購物車無內容 -->
+            <table id='memberShoppingCartListNone'>
+              <tr class="memberShoppingCartDetailHeader">
+                <td class="width460">商品名稱</td>
+                <td class="width80">單價</td>
+                <td class="width80">數量</td>
+                <td class="width80">小計</td>
+                <td class="width60">刪除</td>
+              </tr>
+              <tr>
+                <td colspan="6">我不敢相信你的購物車竟然還是空的！</td>
+              </tr>
+            </table>
+            <!-- 購物車有內容(用reacr產生內容) -->
+            <table id='memberShoppingCartListOn'>
+            </table>
+          </div>
+          <!-- 下方總計區塊 -->
+          <div id='memberShoppingCartTotle'>
+            <button class="memberDashboardBtn" onclick="ClearCart()">清空購物車</button>
+            <p>總計 NT＄<span class="total">0</span>元</p>
+          </div>
+        </div>
+        <!-- 2-2 第二頁-結帳運送與付款方式 -->
+        <div id='memberShoppingCartPayandDeli'>
+          <!-- 付款方式選單 -->
+          <div id='memberShoppingCartPayment'>
+            <p class="memberShoppingCartPayandDeliTitle">付款方式</p>
+            <div>
+              <input type="radio" id='jkos' name="payment" value="jkos" class="menberPaymentOptionRadio">
+              <label for="jkos" class="menberPaymentOption">
+                <p>街口支付<br><span class="fontsize10 memberShoppingCartPayandDeliMemo">以街口帳戶、銀行帳戶或國內發行之信用卡付款</span></p>
+              </label>
+            </div>
+            <div>
+              <input type="radio" id='creditcard' name="payment" value="creditcard"
+                class="menberPaymentOptionRadio"><label for="creditcard" class="menberPaymentOption">
+                <p>信用卡一次付清<br><span class="fontsize10 memberShoppingCartPayandDeliMemo">刷玉山卡滿888 贈50元抵用券(數量有限)</span>
+                </p>
+              </label>
+            </div>
+            <div>
+              <input type="radio" id='convenienceStore' name="payment" value="convenienceStore"
+                class="menberPaymentOptionRadio"><label for="convenienceStore" class="menberPaymentOption">
+                <p>超商取貨付款<br><span class="fontsize10 memberShoppingCartPayandDeliMemo">以此方式支付不得選取宅配</span></p>
+              </label>
+            </div>
+            <div>
+              <input type="radio" id='atm' name="payment" value="atm" class="menberPaymentOptionRadio"><label for="atm"
+                class="menberPaymentOption">
+                <p>ATM付款<br><span class="fontsize10 memberShoppingCartPayandDeliMemo">帳號將於訂單送出後提供</span></p>
+              </label>
+            </div>
+            <div>
+              <input type="radio" id='linepay' name="payment" value="linepay" class="menberPaymentOptionRadio"><label
+                for="linepay" class="menberPaymentOption">
+                <p>LINE PAY<br><span class="fontsize10 memberShoppingCartPayandDeliMemo">可用LINE Points點數折抵</span></p>
+              </label>
+            </div>
+          </div>
+          <!-- 運送方式選單 -->
+          <div id='memberShoppingCartDelivery'>
+            <p class="memberShoppingCartPayandDeliTitle">運送方式</p>
+            <div>
+              <input type="radio" id='family' name="delivery" value="family" class="menberPaymentOptionRadio">
+              <label for="family" class="menberPaymentOption">
+                <p>全家取貨<br><span class="fontsize10 memberShoppingCartPayandDeliMemo">全家取貨(滿NT$899免運費)</span></p>
+                <p class="deliMoney">NT$ 70</p>
+              </label>
+            </div>
+            <div>
+              <input type="radio" id='hilife' name="delivery" value="hilife" class="menberPaymentOptionRadio"><label
+                for="hilife" class="menberPaymentOption">
+                <p>萊爾富取貨<br><span class="fontsize10 memberShoppingCartPayandDeliMemo">付款後萊爾富取貨(滿NT$899免運費)</span></p>
+                <p class="deliMoney">NT$ 70</p>
+              </label>
+            </div>
+            <div>
+              <input type="radio" id='seven11' name="delivery" value="seven11" class="menberPaymentOptionRadio"><label
+                for="seven11" class="menberPaymentOption">
+                <p>7-ELEVEN取貨<br><span class="fontsize10 memberShoppingCartPayandDeliMemo">7-11取貨(滿NT$899免運費)</span></p>
+                <p class="deliMoney">NT$ 70</p>
+              </label>
+            </div>
+            <div>
+              <input type="radio" id='home' name="delivery" value="home" class="menberPaymentOptionRadio"><label
+                for="home" class="menberPaymentOption">
+                <p>宅配<br><span class="fontsize10 memberShoppingCartPayandDeliMemo">宅配(滿NT$899免運費)</span></p>
+                <p class="deliMoney">NT$ 120</p>
+              </label>
+            </div>
+          </div>
+        </div>
+        <!-- 右側總計區塊 -->
+        <div id='memberShoppingCartCountBox'>
+          <div>
+            優惠碼 <input id='discountBox' type="text">
+            <hr>
+            <p> <span class="memberShoppingCartCountBoxText">點數</span><span></span>點</p>
+            <hr>
+            <p> <span class="memberShoppingCartCountBoxText">共計</span><span class="count">0</span>項商品</p>
+            <hr>
+            運送地區 <select name="" id="">
+              <option value="Keelung">基隆市</option>
+              <option value="Taipei">台北市</option>
+              <option value="NewTaipei">新北市</option>
+              <option value="Taoyuan">桃園市</option>
+              <option value="HsinchuCounty">新竹縣</option>
+              <option value="Hsinchu">新竹市</option>
+              <option value="Miaoli">苗栗縣</option>
+              <option value="Taichung">台中市</option>
+              <option value="Changhua">彰化縣</option>
+              <option value="Yunlin">雲林縣</option>
+              <option value="Nantou">南投縣</option>
+              <option value="Chiayi">嘉義縣</option>
+              <option value="Tainan">台南市</option>
+              <option value="Kaohsiung">高雄市</option>
+              <option value="Pingtung">屏東縣</option>
+              <option value="Yilan">宜蘭縣</option>
+              <option value="Hualien">花蓮縣</option>
+              <option value="Taitung">台東縣</option>
+              <option value="Kinmen">金門縣</option>
+              <option value="Penghu">澎湖縣</option>
+              <option value="Matsu">馬祖縣</option>
+            </select>
+            <hr>
+            <!-- <p> <span class="memberShoppingCartCountBoxText">金額</span><span>NT $</span><span>1290</span>(含運費)</p> -->
+          </div>
+          <button id='memberShoppingCartBtn' class="memberDashboardBtn">下一步</button>
+        </div>
+        <!-- 2-3 訂單送出前確認-->
+        <div id='memberShoppingCartOrderSendBox'>
+          <div id='memberShoppingCartOrderSendBoxTitle'>
+            <p>共計<span>3</span>項商品</p>
+            <p>總共<span class="fontsize24">NT$</span><span class="fontsize24">1290</span>(含運費)</p>
+          </div>
+          <hr>
+          <form action="">
+            取件人資訊 <input type="checkbox" name="" id="">與會員資料同步
+            <hr>
+            姓名<input type="text">
+            <hr>
+            手機<input type="text">
+            <hr>
+            <!-- 宅配地址<input type="text"> -->
+            請選擇取件門市<input type="text">
+            <hr>
+            電子信箱<input type="text">
+            <hr>
+            <input type="checkbox" name="" id="">發票要打統邊 <br>
+            <input type="checkbox" name="" id="">願意收到活動與優惠相關內容 <br>
+            <input type="checkbox" name="" id="">我已經閱讀並同意 會員權益聲明 與 隱私權及網站使用條款 <br>
+            <div id='memberOrderSend'>
+              <input type="submit" id='memberOrderSendBtn' class="memberDashboardBtn" value="送出訂單">
+            </div>
+          </form>
+        </div>
+        <!-- 2-4 送出訂單
+          <div id='memberShoppingCartOrderFinish'>
+          <div class="memberOrderFinishImg" ><img src="/images/member_img/order_success.svg" alt=""></div>
+          <p class="fontsize24">訂單送出成功</p>
+          <a href="http://localhost:3000">返回首頁</a>
+          </div>
+        </div> -->
+
+
+      </div>
+    </div>
+
+    <script>
+
+
+      // 載入localStorage資料，準備好等待送出資料    
+      $(document).ready(() => {
+        var cartList = localStorage.getItem('CartList') == null;
+        var cart = {};
+        cart.prodId = [];
+        var storageData = localStorage.getItem('cart');
+        $('.total').text("0")
+        $('.count').text("0")
+
+        // 判斷是否已執行setItem
+        if (storageData === null) { runone(cart) }
+        var JSONData = JSON.parse(storageData)
+        var DataInObject = JSON.stringify(JSONData.prodId)
+        var prodList = []
+
+        productSocket(DataInObject)
+
+        JSONData.prodId.forEach(element => {
+          createDeleteProduct(element.prodId).then((resp) => { prodList.push(resp[0]) })
+        });
+        delay().then((value) => {
+          var push = []
+          var total = 0;
+          var count = 0;
+          prodList.forEach(element1 => {
+            count++
+            total += element1.prodPrice
+            console.log(total);
+            if (push.some(x => x.prodName == element1.prodName)) {
+              push.find(x => x.prodName == element1.prodName).prodquantity += 1
+            } else {
+              push.push({ "prodName": element1.prodName, "prodPrice": element1.prodPrice, "prodPhoto1": element1.prodPhoto1, "prodquantity": 1 })
+            }
+
+            $('.total').text(total)
+            $('.count').text(count)
+            localStorage.setItem("CartList", JSON.stringify(push))
+          })
+
+          if (location.href.indexOf("#reloaded") == -1) {
+            location.href = location.href + "#reloaded";
+            location.reload()
+          }
+        })
+        // location.reload()
+
+      })
+      function delay() {
+        return new Promise(function (resolve, reject) {
+          setTimeout(function () {
+            resolve('我是傳下去的值');
+          }, 100);
+        });
+      }
+      function productSocket(DataInObject) {
+        $.ajax({
+          url: "http://localhost:3000/product/localStorageReset",
+          type: "post",
+          data: DataInObject,
+          dataType: "json",
+          contentType: "application/json; charset=utf-8",
+          success: function (result) {
+
+            // $('.cartTitle').after(function(){return`<div>${result}</div>`})
+            // `<div class="cartItem"><div class="cartImage" style="background-image: url(${result[0].prodPhoto1})"></div><div class="cartContent"><p>${result[0].prodName}</p><div>NT$${result[0].prodPrice}</div></div><div class="garbageCan"></div></div>`
+          },
+          error: function (err) { throw (err) },
+          complete: function (response, textStatus) { return }
+        });
+      }
+
+      function runone(cart) { localStorage.setItem('cart', JSON.stringify(cart)); }
+
+      function createDeleteProduct(id) {
+        let deleteId = id;
+        // 要求照片：ajax => server => ajax
+        var result = $.ajax({
+          url: "http://localhost:3000/product/cart/" + deleteId,
+          type: "get",
+          contentType: 'application/json',
+          success: function (result) {
+            return result
+          },
+          error: function (err) { throw (err) },
+          complete: function (response, textStatus) { return }
+        });
+        return result
+      }
+
+      function ClearCart(){
+        window.localStorage.clear();
+        location.reload()
+      }
+
+
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.8.6/umd/react.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.6/umd/react-dom.development.js"></script>
+    <script type="text/babel">
+      //購物車
+      const Row = function (props) {
+        const { checked, value, onChange, onChecked } = props;
+        return (
+          <div>
+            <input
+              type="checkbox"
+              checked={checked}
+              onChange={onChecked}
+            />
+            <input type="text" value={value} onChange={onChange} />
+          </div>
+        );
+      }
+      class CartList extends React.Component {
+        state = { "cartList": JSON.parse(localStorage.getItem("CartList")) }
+
+        delete(item) {
+          const newState = this.state.cartList.slice();
+          if (newState.indexOf(item) > -1) {
+            newState.splice(newState.indexOf(item), 1);
+            this.setState({ data: newState })
+            console.log(newState)
+          }
+        }
+
+        render() {
+          return (
+            <React.Fragment>
+              {
+                this.state.cartList.map((item) =>
+                  <tr>
+                    <td> <div className='memberShoppingCartProdIngandName' ><img className='memberShopppingCartProdImg' src={item.prodPhoto1} alt="" /><div>{item.prodName}<br /><span className='memberShopppingCartProdChoose'>{item.prodChoose}</span></div> </div> </td>
+                    <td> NTD {item.prodPrice}  </td>
+                    <td> {item.prodquantity} </td>
+                    <td> NTD {item.prodPrice * item.prodquantity} </td>
+                    
+                  </tr>
+                )
+              }
+            </React.Fragment>
+          )
+        }
+      }
+
+      class App extends React.Component {
+        state = {}
+        render() {
+          return (
+            <React.Fragment>
+              <tr className='memberShoppingCartDetailHeader'>
+                <td className='width420'>商品名稱</td>
+                <td className='width80' >單價</td>
+                <td className='width120'>數量</td>
+                <td className='width80'>小計</td>
+              </tr>
+              <CartList />
+            </React.Fragment>
+          );
+        }
+      }
+
+      ReactDOM.render(
+        <App />,
+        document.getElementById("memberShoppingCartListOn")
+      )
+      // 訂單管理
+
+      // 訂單管理查看詳細資料
+      class OrderDeatilList extends React.Component {
+        state = {
+          cartList: [
+            { cartprodId: 1, prodImg: "/images/member_img/product13.jpeg", prodName: "【英國】Gnaw松鼠啃無添加手工巧克力100g-軟焦糖/海鹽焦糖/覆盆莓/杏仁太妃糖海鹽/香蕉太妃派/草莓白巧克力/果乾和餅乾牛奶", prodChoose: "草莓白巧克力", prodPrice: "145", prodquantity: "1" },
+            { cartprodId: 2, prodImg: "/images/member_img/product12.jpeg", prodName: "【德國】Kuhbonbon牛奶糖-經典焦糖/蜂蜜牛奶/咖啡/榛果/巧克力/蛋奶酒 (小牛糖)", prodChoose: "草莓白巧克力", prodPrice: "65", prodquantity: "2" },
+            { cartprodId: 3, prodImg: "/images/member_img/product11.jpeg", prodName: "【西班牙】Salysol罐頭軟糖60g-綜合/草莓", prodChoose: "草莓白巧克力", prodPrice: "99", prodquantity: "3" },
+          ]
+        }
+        render() {
+          return (
+            <React.Fragment>
+              {
+                this.state.cartList.map(item =>
+                  <tr>
+                    <td> <div className='memberShoppingCartProdIngandName' ><img className='memberShopppingCartProdImg' src={item.prodImg} alt="" /><div>{item.prodName}<br /><span className='memberShopppingCartProdChoose'>{item.prodChoose}</span></div> </div> </td>
+                    <td> NTD {item.prodPrice}  </td>
+                    <td>{item.prodquantity}</td>
+                    <td> NTD {item.prodPrice * item.prodquantity} </td>
+                  </tr>
+                )
+              }
+            </React.Fragment>
+          )
+        }
+      }
+
+      class OrderTable extends React.Component {
+        state = {}
+        render() {
+          return (
+            <React.Fragment>
+              <tr >
+                <td className='width300'>訂單明細</td>
+                <td className='width100' >單價</td>
+                <td className='width100'>數量</td>
+                <td className='width100'>小計</td>
+              </tr>
+              <OrderDeatilList />
+            </React.Fragment>
+          );
+        }
+      }
+
+      ReactDOM.render(
+        <OrderTable />,
+        document.getElementById("memberOrderListOn")
+      )
+    </script>
+
+    <script src="/javascripts/member_dashboard.js"></script>
+
+    <footer>
+      <%-include footer.ejs %>
+    </footer>
+</body>
+
+</html>
+
+

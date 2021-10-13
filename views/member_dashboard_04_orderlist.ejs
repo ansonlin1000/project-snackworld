@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+  <head>
+    <%-include  css_js.ejs %>
+    <title>會員後台</title>
+    <link rel="stylesheet" href="/stylesheets/member_dashboard_04_orderlist.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" 
+            crossorigin="anonymous">
+    </script>
+        <!-- jQuery Modal -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+  </head>
+  <body>
+    <%-include  navbar.ejs %>
+    <!-- 頁面標題文字 -->
+    <div id='memberHeader'>
+      <p class="fontsize30">Hi ~ 小食界會員</p>
+      <p class="fontsize16">讓我們透過小食，認識異國</p>
+    </div>
+    <!-- 選單區塊 -->
+    <div id='memberDashboard'>
+      <!-- 功能選單(搭配Javascript切換) -->
+      <%-include  member_dashboard_00_select.ejs %>
+      <!-- 功能內容區塊 -->
+      <div id='memberDashboardMain'>
+        <!-- 詳細訂單 -->
+    <div id='memberOrderDetail'>
+    <!-- 左側商品清單 -->
+    <div>
+        <table id='memberOrderListOn'>
+            <tr>
+                <td>商品名稱</td>
+                <td>商品價格</td>
+                <td>數量</td>
+                <td>小計</td>
+            </tr>
+             <% for (let item of orderListDetail) { %>
+            <tr>
+                <td><%= item.prodName %></td>
+                <td><%= item.prodPrice %></td>
+                <td><%= item.orderQuantity %></td>
+                <td><%= item.prodPrice*item.orderQuantity %></td>
+            </tr>
+            <% } %>
+        </table>
+        <input type="button" value="返回" onclick="location.href='/member/dashboard/order'">
+    </div>
+    <!-- 右側訂單資訊 -->
+    <div id='memberOrderDetailTextBox'>
+        <div>
+        <table>
+            <tr class="memberOrderDetailText">
+                <td>訂單編號</td>
+                <td><%= orderListDetail1.orderNo %></td>
+            </tr>
+            <tr class="memberOrderDetailText">
+                <td>收件人</td>
+                <td><%= orderListDetail1.orderName %></td>
+            </tr>
+            <tr class="memberOrderDetailText">
+                <td>訂購日期</td>
+                <td><%= `${orderListDetail1.orderDate.getFullYear()}/${orderListDetail1.orderDate.getMonth()+1}/${orderListDetail1.orderDate.getDate()}`%>
+            <tr class="memberOrderDetailText">
+                <td>訂購總額</td>
+                <td>NT$ <%= orderListDetail1.orderPrice %></td>
+            </tr>
+            <tr class="memberOrderDetailText">
+                <td>運送方式</td>
+                <td><%= orderListDetail1.orderDeli %></td>
+            </tr>
+            <tr class="memberOrderDetailText">
+                <td>付款方式</td>
+                <td><%= orderListDetail1.orderPayment %></td>
+            </tr>
+            <tr class="memberOrderDetailText">
+                <td>訂單狀態</td>
+                <td><%= orderListDetail1.orderState %></td>
+            </tr>
+            <tr class="memberOrderDetailText">
+                <td>出貨狀態</td>
+                <td><%= orderListDetail1.orderSendState %></td>
+            </tr>
+            <tr class="memberOrderDetailText">
+                <td>訂單備註</td>
+                <td>無備註</td>
+            </tr>
+        </table>
+        </div>
+    </div>
+
+    </div>
+        
+      </div>
+    </div>
+     
+    <script src="/javascripts/member_dashboard.js"></script>
+ 
+    <footer><%-include footer.ejs %></footer>
+  </body>
+  </html>
+  

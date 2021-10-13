@@ -1,0 +1,83 @@
+
+
+  <!DOCTYPE html>
+  <head>
+    <%-include css_js.ejs %>
+      <title>
+        <%= title %>
+      </title>
+      <link rel="stylesheet" href="/stylesheets/admin_dashboard.css">
+      <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/wangeditor@latest/dist/wangEditor.min.js"></script> -->
+  </head>
+<body>
+  <div class="dashboard">
+  <%-include  admin_dashboard_0_leftSelect.ejs %>
+  <div class="right-content">
+ <!-- //商品列表---點"編輯"---編輯商品頁 -->
+
+ <div class="containerdisplay" id="editProductDetailcontainer">
+  <div class="admin-breadcrumbs">
+      <p>商品管理 > 編輯商品</p>
+    </div>
+    <!-- class="admin-addpage" -->
+    <form action="/admin/dashboard/editproduct" method="post" >
+    <div class="admin-addpage">
+      <div class="admin-addpage-flex">
+        <p>商品首圖：</p>
+        <div class="admin-prodpageimgBox">
+          <img src="<%= sqladminProd.prodPhoto1 %>" >
+        </div>
+      </div>
+      <div class="admin-addpage-flex">
+        <p>商品名稱：</p>
+        <input type="text" style="width:350px ; height:30px;" name="prodName"  value="<%= sqladminProd.prodName %>">
+      </div>
+      <!-- <div class="admin-addpage-flex">
+        <p>商品說明：</p>
+        <input type="text" style="width:350px ; height:30px;">
+      </div> -->
+      <div class="admin-addpage-flex">
+        <p>商品分類：</p>
+        <input  class="orderselect" id="" name="prodType" value="<%= sqladminProd.prodType %>">
+        
+      </div>
+      <div class="admin-addpage-flex">
+        <p>售價：</p>
+        <input type="text" style="width:100px ; height:30px;" name="prodPrice" value="<%= sqladminProd.prodPrice %>">
+        <p>&emsp;元</p>
+      </div>
+      <!-- <div class="admin-addpage-flex">
+        <p>優惠價：</p>
+        <input type="text" style="width:100px ; height:30px;">
+        <p>&emsp;元</p>
+      </div> -->
+      <div class="admin-addpage-flex">
+        <p>數量：</p>
+        <input type="text" style="width:100px ; height:30px;" name="prodStock" value="<%= sqladminProd.prodStock %>">
+      </div>
+      <div class="admin-addpage-flex">
+        <p>產地：</p>
+        <input  class="orderselect" id="" name="prodCountry" value="<%= sqladminProd.prodCountry %>">
+    
+      </div>
+  
+      <p>商品內容：</p>
+      <textarea id="admin-editproducttextEditor" name="prodInfo"><%= sqladminProd.prodInfo %></textarea>
+      
+      <div class="admin-addpage-Btn">
+       
+          <input type="hidden" id="" name="prodId" value="<%= sqladminProd.prodId %>" />
+          <input onclick="return alert('您確定要編輯此筆商品資料?')" type="submit" value="確認編輯" class="admin-editBtn" />
+          <a href="http://localhost:3000/admin/dashboard"><button class="orderCancelBtn">取消返回</button></a>
+        
+       
+      
+        
+      </div>
+    </div>
+  </form>
+  </div>
+</div>
+</div>
+</body>
+</html>

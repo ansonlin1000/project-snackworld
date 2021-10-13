@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+  <head>
+    <%-include  css_js.ejs %>
+    <title>會員後台</title>
+    <link rel="stylesheet" href="/stylesheets/member_dashboard_04_order.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" 
+            crossorigin="anonymous">
+    </script>
+        <!-- jQuery Modal -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+  </head>
+  <body>
+    <%-include  navbar.ejs %>
+    <!-- 頁面標題文字 -->
+    <div id='memberHeader'>
+      <p class="fontsize30">Hi ~ 小食界會員</p>
+      <p class="fontsize16">讓我們透過小食，認識異國</p>
+    </div>
+    <!-- 選單區塊 -->
+    <div id='memberDashboard'>
+      <!-- 功能選單(搭配Javascript切換) -->
+      <%-include  member_dashboard_00_select.ejs %>
+      <!-- 功能內容區塊 -->
+      <div id='memberDashboardMain'>
+        <div id='memberOrder' class="menberMainBox">
+    <!-- 訂單清單(MySQL資料) -->
+    <table id='memberOrderList'>
+    <tr class="memberOrderHeader">
+        <td class="width260 borderradius35-lt">訂單日期</td>
+        <td class="width160">訂購人</td>
+        <td class="width260">電話</td>
+        <td class="width150">訂單內容</td>
+        <td class="width160">付款方式</td>
+        <td class="width160">取貨方式</td>
+        <td class="width150 borderradius35-rt">狀態</td>
+    </tr>
+    <% for (let item of sqlorderlist) { %>
+        <tr>
+        <td><%= `${item.orderDate.getFullYear()}/${item.orderDate.getMonth()+1}/${item.orderDate.getDate()}` %></td>
+        <td><%= item.orderName %></td>
+        <td><%= item.orderPhone %></td>
+        <td><a href="http://localhost:3000/member/dashboard/order/<%= item.orderNo %>"><%= item.orderType %></a></td>
+        <td><%= item.orderPayment %></td>
+        <td><%= item.orderDeli %></td>
+        <td><%= item.orderState %></td>
+    </tr>
+        <% } %>
+        </table>
+    
+
+</div>
+        
+      </div>
+    </div>
+    
+     
+    <script src="/javascripts/member_dashboard.js"></script>
+ 
+    <footer><%-include footer.ejs %></footer>
+  </body>
+  </html>
+  

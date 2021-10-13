@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+  <head>
+    <%-include  css_js.ejs %>
+    <title><%= title %></title>
+    <style>
+    h3{
+      text-align: center;
+    }
+    h5{
+    margin: 20px;
+    color: #a3a2a3;
+    }
+     .register_page{
+      width: 100%;
+      height: 850PX;
+    }
+    #container{
+      margin: 50px;
+      padding: 30px;
+      width: 1000px;
+      height: 720px;
+      background-color:#dfcbba;
+      border-radius: 10px;
+      box-shadow: 0 0px 70px rgba(0, 0, 0, 0.1);
+    
+      position:relative;   
+      margin: auto;
+      top: 100px;
+      text-align:center;  
+      }
+    .register{
+      display: flex;
+      flex-direction: column;
+    }
+    form{
+      display: flex;
+      flex-direction: column;
+      /* width: 450px; */
+      align-items: center;
+      /* padding-left: 60px; */
+      margin: 10px 0 0 0 ;
+    }
+    .inputbox{
+      width: 60%;
+      margin: 5px 0px;
+      display: flex;
+      /* letter-spacing: 22px; */
+      /* padding-left: 60px; */
+      justify-content: flex-start;
+    }
+   
+    .inputbox span{
+      line-height: 2;
+    }
+    #input4,#input5{
+      width:380px;
+    }
+  .submit{
+    color: white;  
+    background: #19294f;
+    width: 180px;
+    height: 50px;
+    margin: 10px 20px 10px 20px ;
+    padding: 5px;
+    border-radius: 5px;
+    border: 0px;
+    line-height: 0px;
+    }
+    .submit:hover{
+    background: #19294f;
+    }
+    input{
+    padding-left: 10px;
+    height: 37px;
+    border: none; 
+    width: 300px;
+    
+    background-color: var(--color2);
+    border-radius: 5px;
+    
+    }
+     input:focus{
+    outline: none;
+  }
+    .loginbtn{
+      /* margin: 10px; */
+      text-decoration: underline;
+      color: #19294f;
+    }
+    .loginbtn:hover{
+    color: black;
+    }
+    #memberRegisterInfoBox tr{
+      height: 48px;
+      text-align: left;
+    }
+    .width100{width: 100px;}
+    .width380{width: 380px;}
+    input[type=radio]{
+    margin: 0px 20px;
+    background-color: var(--color2);
+    border-radius: 5px;
+    border: 1px solid var(--color1);
+    padding-left:10px;
+    position: relative;
+    left: -3px;
+    top: 4px;
+    width: 22px; 
+    height: 22px; 
+}
+input[type=radio]:after { 
+    content: ""; 
+    display:block; 
+    width: 22px; 
+    height: 22px; 
+    border-radius: 50%; 
+    text-align: center; 
+    font-size: 16px; 
+    color: #fff; 
+    border: 5px solid var(--color1); 
+    background-color: #fff; 
+    box-sizing:border-box;
+}
+ input[type=radio]:checked:after { 
+    content: ""; 
+    border-color: white; 
+    background-color: var(--color1);
+    transition: background-color 0.2s ease-in;
+} 
+    </style>
+  </head>
+  <body>
+
+    <%-include  navbar.ejs %>
+    <div class="register_page">
+      <div id="container">
+
+        <div class="register">  
+          
+        <h3>成為小食界會員</h3>
+        <h5>異國美食：透過小食，認識異國</h5>
+
+         <form method="post" action="/member/register" data-ajax="false">
+            <input type="hidden" name="memberId" value="100982032" id="">
+                     <form method="post" action="/member/register" data-ajax="false">
+            <!-- <input type="hidden" name="memberId" value="100982032" id=""> -->
+            <table id="memberRegisterInfoBox">
+              <tr>
+                <td class="width100"><span>姓&emsp;名&emsp;</span></td>
+                <td class="width380"><input name="memberName" id="input1" type="text" required></td>
+              </tr>
+              <tr>
+                <td><span>生&emsp;日&emsp;</span></td>
+                <td><input name="memberBirthday" id="input2" type="text" required></td>
+              </tr>
+              <tr>
+                <td><span >性&emsp;別</span></td>
+                <td>
+                  <input name="memberGender" id="input3_1" type="radio" value="M" required>
+                  <label for="input3_1">男</label>
+                  <input name="memberGender" id="input3_2" type="radio" value="F" required>
+                  <label for="input3_2">女</label>
+                </td>
+              </tr>
+              <tr>
+                <td><span>電子信箱</span></td>
+                <td><input name="memberEmail" id="input4" type="text" required></td>
+              </tr>
+              <tr>
+                <td><span>通訊地址</span></td>
+                <td><input name="memberAddress" id="input5" type="text" required></td>
+              </tr>
+              <tr>
+                <td><span>家用電話</span></td>
+                <td><input name="memberTel" id="input6"  type="text" required></td>
+              </tr>
+              <tr>
+                <td><span>手&emsp;機</span></td>
+                <td><input name="memberPhone" id="input7" type="text" required></td>
+              </tr>
+              <tr>
+                <td><span>密&emsp;碼</span></td>
+                <td><input id="password"  name="password" onblur="checkpas1();"  type="password" required></td>
+              </tr>
+              <tr>
+                <td><span>確認密碼</span></td>
+                <td><input name="repassword" id="repassword" type="password" onChange="checkpas();" required></td>
+              </tr>
+            </table>
+<!--             
+            <div class="inputbox">
+            <div ><span>姓名:</span></div>&emsp;&emsp;<div ><input name="memberName" id="input1" type="text"></div>
+            </div>
+            <div class="inputbox"><div><span>生日:</span></div>&emsp;&emsp;<div ><input name="memberBirthday" id="input2" type="text" required></div></div>
+            <div class="inputbox"> <div ><span >性別:</span></div>&emsp;&emsp;<div><input name="memberGender" id="input3" type="radio" name="memberGender" value="M" >&emsp;男<input id="input3" type="radio" name="memberGender" value="F">&emsp;女</div></div>
+            <div class="inputbox"><div><span>電子信箱:</span></div><div ><input name="memberEmail" id="input4" type="text" required></div></div>
+            <div class="inputbox"><div><span>通訊地址:</span></div><div ><input name="memberAddress" id="input5" type="text" required></div></div>
+            <div class="inputbox"><div><span>家用電話:</span></div><div ><input name="memberTel" id="input6"  type="text" required></div></div>
+            <div class="inputbox"><div><span>手機:</span></div>&emsp;&emsp;<div ><input name="memberPhone" id="input7" type="text" required></div></div>
+            <div class="inputbox"><div><span>密碼:</span></div>&emsp;&emsp;<div><input id="password"  name="password" onblur="checkpas1();"  type="password" required></div></div>
+            <div class="inputbox"><div><span>確認密碼:</span></div><div><input name="repassword" id="repassword" type="password" onChange="checkpas();" required></div></div>
+             -->
+             <!-- <span class="tip" style="color: red;">兩次輸入的密碼不一致</span> -->
+            <input type="hidden" name="memberSnackTestResult" value="1" id="">
+      
+            <div><input type="submit" value="成為會員" class="submit" onclick="checkpas2();"></div>
+            
+          </form>  
+
+        
+          <a class="loginbtn" href="http://localhost:3000/member/login">我已經是小食界會員了</a>
+        </div><!-- login end-->
+      </div><!-- container1 end-->
+    </div>
+    <footer><%-include footer.ejs %></footer>
+    <script>
+      $(".tip").hide();
+      function checkpas1(){//當第一個密碼框失去焦點時，觸發checkpas1事件
+      var pas1=document.getElementById("password").value;
+      var pas2=document.getElementById("repassword").value;//獲取兩個密碼框的值
+      if(pas1!=pas2&&pas2!="")//此事件當兩個密碼不相等且第二個密碼是空的時候會顯示錯誤資訊
+      $(".tip").show();
+      else
+      $(".tip").hide();//若兩次輸入的密碼相等且都不為空時，不顯示錯誤資訊。
+      }
+      function checkpas(){//當第一個密碼框失去焦點時，觸發checkpas2件
+      var pas1=document.getElementById("password").value;
+      var pas2=document.getElementById("repassword").value;//獲取兩個密碼框的值
+      if(pas1!=pas2){
+      $(".tip").show();//當兩個密碼不相等時則顯示錯誤資訊
+      }else{
+      $(".tip").hide();
+      }
+      }
+      function checkpas2(){//點選提交按鈕時，觸發checkpas2事件，會進行彈框提醒以防無視錯誤資訊提交
+      var pas3=document.getElementById("password").value;
+      var pas4=document.getElementById("repassword").value;
+      if(pas3!=pas4){
+        
+            Swal.fire({
+                position: 'center',
+                // icon: 'success',
+                title: '兩次輸入的密碼不一致！',
+                showConfirmButton: false,
+                timer: 2000
+            })
+            
+        
+      // alert("兩次輸入的密碼不一致！");
+      return false;
+      }else{
+         Swal.fire({
+                position: 'center',
+                // icon: 'success',
+                title: '註冊成功',
+                showConfirmButton: false,
+                timer: 2000
+            })
+      }
+      }
+      </script>
+  </body>
+</html>

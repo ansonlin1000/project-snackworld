@@ -1,0 +1,427 @@
+
+/* * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 1rem;
+    color: black;
+} */
+
+.fontsize30{ font-size: 30px; }
+.fontsize24{ font-size: 24px; }
+.fontsize16{ font-size: 16px; }
+.fontsize10{ font-size: 10px; }
+.fontsizeM { font-size: Medium; }
+.fontweightB{ font-weight: bold; }
+
+.width660{ width: 660px; }
+.width460{ width: 460px; }
+.width420{ width: 420px; }
+.width300{ width: 300px; }
+.width260{ width: 260px; }
+.width160{ width: 160px; }
+.width150{ width: 150px; }
+.width120{ width: 120px; }
+.width100{ width: 100px; }
+.width80 { width: 80px; }
+.width60 { width: 60px; }
+
+/* ================== Main - header(NavBar) ==================*/
+.header{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #FFFFFF;
+}
+/* 
+.nav {
+    justify-content: space-around;
+}
+
+.nav-link {
+    display: inline-block;
+    align-self: center;
+    margin: 1rem 0;
+    color: black;
+} */
+
+.mainMainBorder{
+    width: 150px;
+    height: 50px;
+    background-color: #D7BCAB;
+    border-radius: 28.03rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+#testBtn{
+    position: fixed;
+    z-index: 1000;
+    width: 8%;
+    bottom: 350px;
+    right: 30px;
+    transition-duration: 0.5s;
+}
+@keyframes scaleDraw{
+    0%{
+        transform: scale(1);
+    }
+    25%{
+        transform: scale(1.2);
+    }
+    50%{
+        transform: scale(1);
+    }
+    75%{
+        transform: scale(1.2);
+    }
+}
+.testBtn_ani{
+   animation-name: scaleDraw;
+   animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-duration: 5s;
+}
+
+
+
+#testBtn:hover{
+    width: 10%;
+    
+}
+/* <!-- ====================================  heroPic ==================================== --> */
+.mainHeroPic{
+    display: flex;
+	justify-content: center;
+	flex-direction: column;
+    background-image: url('../images/MainCatch.jpg');
+    background-position: center;
+    background-attachment: fixed;
+    background-size:contain;
+    border-radius: 95% 86% 96% 50% / 43% 50% 45% 48%;
+    /* height: 100vh; */
+    height: 80vh;
+    width: 120%;
+    position: relative;
+    left: -125px;
+
+}
+.mainHeroPicTitleSupply{
+    margin: 2rem;
+    padding: 5px;
+    background-color: #f2eae3;
+    color: #16264f;
+    box-shadow:2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    font-weight: 500;
+    width:20%;
+}
+.mainHeroPicTitleSupply2{
+    margin: 2rem;
+    padding: 5px;
+    background-color: #f2eae3;
+    color: #16264f;
+    font-size: 50px;
+    box-shadow:2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    font-weight: 500;
+    width:50%;
+}
+.mainHeroPicTitle{
+    float: left;
+    margin-left: 2rem;
+    padding: 0.5rem 0;
+   
+}
+
+
+/* ================== mainWaveBannerPlusDot ================== */
+.mainWaveBannerPlusDot{
+    margin: 2rem 0;
+    height: 30vh;
+}
+.mainFirstWave{
+    position: absolute;
+    z-index: 30;
+}
+.mainPicHolder{
+    height: 60vh;
+    position: relative;
+    z-index: 20;
+    background-image: url('../images/MainSnake.jpg');
+    background-size:cover;
+    background-attachment: fixed;
+    transform: translateX();
+    transition: all 2s ease;
+}
+
+.mainSecondWave{
+    position: relative;
+    z-index: 30;
+    top: -4rem;
+}
+
+.mainWaveBannerDot{
+    height: 60vh;
+    position: relative;
+    z-index: 100;
+}
+
+
+.dot{
+    height: 400px;
+    width: 400px;
+    background-color: #071F3D;
+    border-radius: 42% 53% 52% 50% / 55% 50% 49% 47%;
+    animation: dot 15s infinite linear;
+    position: absolute;
+    right: 5rem;
+
+}
+@keyframes dot {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+.dotDes{
+    float: right;
+}
+
+.dotTitle{
+    position: relative;
+    top: 2rem;
+}
+
+.mainWaveBannerDes{
+    position: relative;
+    right: 6.5rem;
+    top: -1rem;
+    z-index: 99;
+    color: white;
+    word-spacing: 0.7rem;
+    line-height: 2rem;
+    margin-left: 3rem;
+    margin-top: 5rem;
+}
+
+/* ================== MainInstruction ================== */
+/* ==================  Step by Step  ================== */
+.MainInstructionSubscription{
+    background-color: #DAC0AD;
+    display: flex;
+    flex-direction: column;
+	justify-content: flex-start;
+    align-items: center;
+}
+
+.card-columns{
+    width: 40vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items:center;
+}
+
+.card-body>img{
+    margin-bottom: 3rem;
+    width: 130px;
+}
+
+.card-body>img:hover{
+    transform: scale(110%);
+    cursor: pointer;
+}
+
+.card-body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-text{
+    width: 250px;
+}
+
+
+/* <!-- ==================   MainInstructionSubscriptionChoices   ================== --> */
+.MainInstructionSubscriptionChoices{
+    width: 75vw; height: 150vh;
+    background-color: white;
+    border-radius: 5%;
+}
+
+.MainSubscriptionAItem{
+    width: 30%;
+    background-color: #EEE3DB;
+    border-radius: 5%;
+    padding: 2rem 0;
+}
+
+.mainSubscriptionitemPrice{
+    font-size: 2rem;
+    color: #B35332;
+    font-weight: bolder;
+}
+
+.MainInstructionSubscriptionButton{
+    width: 150px;
+    background-color: #041F3C;
+    border-color: #041F3C;
+
+}
+
+.btn-primary:hover  {
+    color: #fff;
+    background-color: rgb(4, 31, 60);
+    border-color: #041F3C
+}
+
+#aStealPlan{
+    background-color:var(--color2);
+    width:300px;
+    height:460px;
+    cursor: pointer;
+}
+#enjoyPlan{
+    background-color:var(--color4);
+    width:300px;
+    height:500px;
+    color:white;
+    cursor: pointer;
+}
+#partyPlan{
+    background-color:var(--color2);
+    width:300px;
+    height:460px;
+    cursor: pointer;
+}
+#aStealPlanImg{
+    height: 90px;
+}
+.planstyle{
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    text-align:center;
+    color:var(--color1);
+}
+.planstyle img{
+    width: 140px;
+}
+.planstyle table tr{
+    height: 35px;
+    text-align: left;
+    font-size: 16px;
+}
+.subPlanSlectBtn{
+    background-color: var(--color1);
+    color: var(--color2);
+    border-radius: 5px;
+    width: 150px;
+    height: 50px;
+    margin: 20px;
+    border: none;
+}
+#memberSubPlanChoose{
+    margin-top: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* display: none; */
+}
+
+.cardTitle{
+    color:rgb(0, 0, 0, 0.5);
+}
+
+
+/* ==================   mainDashLine   ==================*/
+.mainDashLine{
+        width:60vw;height:1vh;
+        border-bottom:1.5px dashed rgb(0, 0, 0, 0.2);
+        margin: 0 auto;
+}
+
+/*==================   mainSubscriptionFooter    ==================*/
+.mainSubscriptionFooterItem{
+    width: 70vw; 
+}
+.mainSubscriptionFooter{
+    margin-top: 1rem;
+}
+
+ /* ====================   collapsed Select   ==================== */
+.accordion{
+    width:60vw
+}
+
+.MaincollapsedSelectTitle, .MainCommonQuestionTitle{
+    text-align: center;
+    font-size: 1.3rem;
+    margin-top: 3.5rem;
+}
+
+ .card{
+    margin: 1rem;
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    word-wrap: break-word;
+    border: 0px solid rgba(0, 0, 0, 0)
+
+}
+
+.cardColor{
+    background-color: #DAC0AD;
+}
+
+.card-header {
+    padding: .75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: rgba(0, 0, 0, 0);
+    border-bottom: 0px solid rgba(0, 0, 0, 0)
+}
+
+.mb-0>.btn-link{
+    text-decoration: none
+}
+
+.btn-link:hover{
+    color: #041F3C;
+    text-decoration: none
+}
+
+button > span{
+    margin-left: 3rem;
+}
+
+
+
+
+
+/* ====================  MainCommonQuestion  ==================== */
+.CommonQuestion{
+    display: flex;
+    flex-direction: column;
+	justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 5rem;
+}
+
+
+
+
+
+.card h2 span{
+    font-size: 18px !important;
+}

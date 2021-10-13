@@ -1,0 +1,39 @@
+<nav id="navbar">
+    <div id='navbar_content' class="d-flex justify-content-between align-items-center">
+        <div>
+            <a href="http://localhost:3000/"><img id="navbarLogo" src="/images/blue_logo.svg"></a>
+        </div>
+        <div class="d-flex align-items-center">
+            <a class=" nav-link" href="http://localhost:3000/about">品牌理念</a>
+            <a class=" nav-link" id="navbarSubLink" href="http://localhost:3000/#Path_1536">訂閱零食箱</a>
+            <a class=" nav-link" href="http://localhost:3000/story">異國零食文化</a>
+            <a class=" nav-link" href="http://localhost:3000/product">異國零食總覽</a>
+            <a class=" nav-link" href="http://localhost:3000/member/dashboard">會員專區</a>
+            <div class="cart">
+                <img id='navbarShoppingCart' src="/images/blue_cart.svg">
+                <span class="CartCount badge badge-pill badge-danger">0</span>
+            </div>
+            <!-- <button id="navbarLoginBtn" onclick="location.href='http://localhost:3000/member/login'">登入</button> -->
+            <% if (memberPhone == "Guest") { %> <button id="navbarLoginBtn"
+                onclick="location.href='http://localhost:3000/member/login'">登入/註冊</button> <% }else{ %> <button
+                id="navbarLoginBtn" onclick="location.href='http://localhost:3000/member/logout'">登出</button> <% } %>
+        </div>
+    </div>
+    <!-- 購物車下拉式選單 -->
+    <div class="cartGocontainer show">
+        <div class="cartTitle">
+            <p>購物清單</p>
+        </div>
+        <a href="http://localhost:3000/shopping_cart"">
+        <button type=" button" class="btn btn-danger cartButton">結帳</button>
+        </a>
+    </div>
+</nav>
+<!-- navbarfix之後頁面的預留空間 -->
+<div id="navbarbox"></div>
+<div id='navbarBackground'>
+    <div id='navbarBackgroundBox'></div>
+    <img id='navbarLeaf' src="/images/header_img/leaf.svg" alt="">
+    <img id='navbarThreebars' src="/images/header_img/three_bars.svg" alt="">
+    <img id='navbarBgImg' src="/images/header_img/navbar_bg.svg" alt="">
+</div>

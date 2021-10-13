@@ -1,0 +1,138 @@
+
+  <!DOCTYPE html>
+  <head>
+    <%-include css_js.ejs %>
+      <title>
+        <%= title %>
+      </title>
+      <link rel="stylesheet" href="/stylesheets/admin_dashboard.css">
+      <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/wangeditor@latest/dist/wangEditor.min.js"></script> -->
+      <style>
+        #li-memberList1 {
+            width: 400px;
+            color: var(--color1);
+            background-color: var(--color3);
+            border-radius: 20px 0 0 20px;
+          }
+        #a-memberList1 {
+            
+            color: var(--color1);
+        
+          }
+        </style>
+  
+  
+  
+  
+    </head>
+<body>
+  <div class="dashboard">
+  <%-include  admin_dashboard_0_leftSelect.ejs %>
+  <div class="right-content">
+
+<!-- //會員列表 -->
+
+<div class="containerdisplay" id="membercontainer">
+  <div class="admin-breadcrumbs">
+    <p>會員管理 > 會員列表</p>
+  </div>
+  <div class="admin-topBox ">
+    <form class="d-flex ">
+      <input class="form-control me-2 light-table-filter searchbox" type="search" placeholder="Search" aria-label="Search" data-table="order-table" >
+      <img src="/images/admin_img/magnifier.svg" alt="">
+    </form>
+  </div>
+  <div class="admin-ListBar">
+    <table>
+      <tr>
+        <td class="width40"><input type="checkbox"></td>
+        <td class="width100">ID</td>
+        <td class="width100">顧客姓名</td>
+        <td class="width60">性別</td>
+        <td class="width160">聯絡電話</td>
+        <td class="width260">電子信箱</td>
+        <td class="width360">通訊地址</td>
+        <!-- <td class="width160">註冊時間</td> -->
+        <td class="width100">操作</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- 會員清單(MySQL資料) -->
+  <% for (let item of sqlmemberlist) { %> 
+   <div class="adminMemberListBox" >
+            <table class="order-table "  >
+              <tr class="admin-productListDetail">
+                <td>
+                  <div class="width40"><input type="checkbox" /></div>
+                </td>
+                <td class="width100"><%= item.memberId%></td>
+                <td class="width100"><%=item.memberName%></td>
+                <td class="width60"><%=item.memberGender%></td>
+                <td class="width160"><%=item.memberTel%></td>
+                <td class="width260"><%=item.memberEmail%></td>
+                <td class="width360"><%=item.memberAddress%></td>
+                
+                
+                <td class="width100"> 
+                  <!-- <button class="admin-editBtn" id="editMemberDetailBtn">編輯</button> -->
+                  <a href="http://localhost:3000/admin/dashboard/delmember/<%= item.memberId%>"><button class="admin-deleteBtn" id="deleteMemberDetailBtn">刪除</button></a>
+                </td>
+                </td>
+              </tr>
+            </table>
+          </div>
+  <% } %>
+      
+
+</div>
+</div>
+</div>
+<script>
+  (function(document) {
+    'use strict';
+  
+    // 建立 LightTableFilter
+    var LightTableFilter = (function(Arr) {
+  
+      var _input;
+  
+      // 資料輸入事件處理函數
+      function _onInputEvent(e) {
+        _input = e.target;
+        var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+        Arr.forEach.call(tables, function(table) {
+          Arr.forEach.call(table.tBodies, function(tbody) {
+            Arr.forEach.call(tbody.rows, _filter);
+          });
+        });
+      }
+  
+      // 資料篩選函數，顯示包含關鍵字的列，其餘隱藏
+      function _filter(row) {
+        var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+        row.style.display = text.indexOf(val) === -1 ? 'none' : 'block';
+      }
+  
+      return {
+        // 初始化函數
+        init: function() {
+          var inputs = document.getElementsByClassName('light-table-filter');
+          Arr.forEach.call(inputs, function(input) {
+            input.oninput = _onInputEvent;
+          });
+        }
+      };
+    })(Array.prototype);
+  
+    // 網頁載入完成後，啟動 LightTableFilter
+    document.addEventListener('readystatechange', function() {
+      if (document.readyState === 'complete') {
+        LightTableFilter.init();
+      }
+    });
+  
+  })(document);
+</script>
+</body>
+</html>

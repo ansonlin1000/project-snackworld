@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<head>
+  <%-include css_js.ejs %>
+    <title>
+      <%= title %>
+    </title>
+    <link rel="stylesheet" href="/stylesheets/admin_dashboard_11.css">
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/wangeditor@latest/dist/wangEditor.min.js"></script> -->
+</head>
+<body>
+<div class="dashboard">
+<%-include  admin_dashboard_0_leftSelect.ejs %>
+<div class="right-content">
+<!-- //商品列表---點"刪除"---刪除商品頁 -->
+
+<div class="containerdisplay" id="editProductDetailcontainer">
+<div class="admin-breadcrumbs">
+    <p>商品管理 > 刪除商品</p>
+  </div>
+  <!-- class="admin-addpage" -->
+  <div class="admin-addpage" >
+    您正要刪除 <span class="fontcolor4"> <%= sqladminProd.prodName %> </span>商品資料
+    <div id="delProdBox">
+      <table>
+        <tr>
+          <td class="width160">商品首圖</td>
+          <td class="width600"><img src="<%= sqladminProd.prodPhoto1 %>" ></td>
+        </tr>
+        <tr>
+          <td>商品名稱</td>
+          <td><%= sqladminProd.prodName %></td>
+        </tr>
+        <tr>
+          <td>售價</td>
+          <td><%= sqladminProd.prodPrice %></td>
+        </tr>
+        <tr>
+          <td>商品分類</td>
+          <td><%= sqladminProd.prodType %></td>
+        </tr>
+        <tr>
+          <td>國家</td>
+          <td><%= sqladminProd.prodCountry %></td>
+        </tr>
+        <tr>
+          <td>商品簡介</td>
+          <td><%= sqladminProd.prodInfo %></td>
+        </tr>
+      </table>
+
+    </div>
+    <div id="delInputHide">
+      <div class="admin-addpage-flex">
+        <p>商品首圖：</p>
+        <div class="admin-prodpageimgBox">
+          <img src="<%= sqladminProd.prodPhoto1 %>" >
+        </div>
+      </div>
+      <div class="admin-addpage-flex">
+        <p>商品名稱：</p>
+        <input type="text" style="width:350px ; height:30px;" value="<%= sqladminProd.prodName %>">
+      </div>
+      <!-- <div class="admin-addpage-flex">
+        <p>商品說明：</p>
+        <input type="text" style="width:350px ; height:30px;">
+      </div> -->
+      <div class="admin-addpage-flex">
+        <p>商品分類：</p>
+        <input name="商品分類" class="orderselect" id="" value="<%= sqladminProd.prodType %>">
+        
+      </div>
+      <div class="admin-addpage-flex">
+        <p>原價：</p>
+        <input type="text" style="width:100px ; height:30px;" value="<%= sqladminProd.prodPrice %>">
+        <p>&emsp;元</p>
+      </div>
+      <!-- <div class="admin-addpage-flex">
+        <p>優惠價：</p>
+        <input type="text" style="width:100px ; height:30px;">
+        <p>&emsp;元</p>
+      </div> -->
+      <div class="admin-addpage-flex">
+        <p>數量：</p>
+        <input type="text" style="width:100px ; height:30px;" value="<%= sqladminProd.prodStock %>">
+      </div>
+      <div class="admin-addpage-flex">
+        <p>產地：</p>
+        <input name="產地" class="orderselect" id="" value="<%= sqladminProd.prodCountry %>">
+    
+      </div>
+      <p>商品內容：</p>
+      <textarea id="admin-editproducttextEditor">
+      <%= sqladminProd.prodInfo %>"
+      </textarea>
+
+    </div>
+
+    
+    <div class="admin-addpage-Btn">
+      <form action="/admin/dashboard/delproduct" method="post" id="checkBox">
+        <input type="hidden" id="" name="" value="<%= sqladminProd.prodId %>" />
+        <input onclick="return alert('您確定要刪除此筆商品資料?')" type="submit" value="確認刪除" class="admin-addarticleBtn" />
+        <a href="http://localhost:3000/admin/dashboard"><button class="orderCancelBtn">取消返回</button></a>
+      
+      </form>
+    
+      
+    </div>
+  </div>
+  
+</div>
+</div>
+</div>
+</body>
+</html>

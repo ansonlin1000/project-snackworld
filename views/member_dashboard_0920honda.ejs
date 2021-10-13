@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+  <head>
+    <%-include  css_js.ejs %>
+    <title>會員後台</title>
+    <link rel="stylesheet" href="/stylesheets/member_dashboard.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" 
+            crossorigin="anonymous">
+    </script>
+        <!-- jQuery Modal -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+  </head>
+  <body>
+    <%-include  navbar.ejs %>
+    <!-- 頁面標題文字 -->
+    <div id='memberHeader'>
+      <p class="fontsize30">Hi ~ 小食界會員</p>
+      <p class="fontsize16">讓我們透過小食，認識異國</p>
+    </div>
+    <!-- 選單區塊 -->
+    <div id='memberDashboard'>
+      <!-- 功能選單(搭配Javascript切換) -->
+      <%-include  member_dashboard_00_select.ejs %>
+      <!-- 功能內容區塊 -->
+      <div id='memberDashboardMain'>
+        <%-include  member_dashboard_01.ejs %>  
+      </div>
+    </div>
+    <script type="text/babel">
+    // 購物車
+      class CartList extends React.Component {
+        state = {
+          cartList: [
+            { cartprodId: 1, prodImg:"/images/member_img/product13.jpeg" ,prodName: "【英國】Gnaw松鼠啃無添加手工巧克力100g-軟焦糖/海鹽焦糖/覆盆莓/杏仁太妃糖海鹽/香蕉太妃派/草莓白巧克力/果乾和餅乾牛奶", prodChoose:"草莓白巧克力" , prodPrice: "145" , prodquantity: "1" },
+            { cartprodId: 2, prodImg:"/images/member_img/product12.jpeg" ,prodName: "【德國】Kuhbonbon牛奶糖-經典焦糖/蜂蜜牛奶/咖啡/榛果/巧克力/蛋奶酒 (小牛糖)", prodChoose:"草莓白巧克力" ,prodPrice: "65" , prodquantity: "2"},
+            { cartprodId: 3, prodImg:"/images/member_img/product11.jpeg" ,prodName: "【西班牙】Salysol罐頭軟糖60g-綜合/草莓", prodChoose:"草莓白巧克力" ,prodPrice: "99" , prodquantity: "3"},
+          ]
+        }
+        render() {
+          return (
+            <React.Fragment>
+              {
+                this.state.cartList.map( item => 
+                    <tr>
+                      <td> <div className='memberShoppingCartProdIngandName' ><img className='memberShopppingCartProdImg' src= {item.prodImg} alt=""/><div>{item.prodName}<br/><span className='memberShopppingCartProdChoose'>{item.prodChoose}</span></div> </div> </td>
+                      <td> NTD {item.prodPrice}  </td>
+                      <td> <button className='memberShoppingCartProdAddDelBtn'>-</button><input type="text" value={item.prodquantity}/> <button className='memberShoppingCartProdAddDelBtn'>+</button></td>
+                      <td> NTD {item.prodPrice * item.prodquantity} </td>
+                      <td><button className='memberShoppingCartDelBtn'><img src="/images/delete.svg" /></button></td>
+                    </tr>
+                )
+              }
+            </React.Fragment>
+          )
+        }
+      }
+
+      class App extends React.Component {
+        state = { }
+        render() {
+          return (
+            <React.Fragment>
+                <tr className='memberShoppingCartDetailHeader'>
+                  <td className='width420'>商品名稱</td>
+                  <td className='width80' >單價</td>
+                  <td className='width120'>數量</td>
+                  <td className='width80'>小計</td>
+                  <td className='width60'>刪除</td>
+                </tr>
+              <CartList />
+            </React.Fragment> 
+          );
+        }
+      } 
+
+      ReactDOM.render(
+        <App />,
+        document.getElementById("memberShoppingCartListOn")
+      )
+      // 訂單管理
+
+      // 訂單管理查看詳細資料
+      class OrderDeatilList extends React.Component {
+        state = {
+          cartList: [
+            { cartprodId: 1, prodImg:"/images/member_img/product13.jpeg" ,prodName: "【英國】Gnaw松鼠啃無添加手工巧克力100g-軟焦糖/海鹽焦糖/覆盆莓/杏仁太妃糖海鹽/香蕉太妃派/草莓白巧克力/果乾和餅乾牛奶", prodChoose:"草莓白巧克力" , prodPrice: "145" , prodquantity: "1" },
+            { cartprodId: 2, prodImg:"/images/member_img/product12.jpeg" ,prodName: "【德國】Kuhbonbon牛奶糖-經典焦糖/蜂蜜牛奶/咖啡/榛果/巧克力/蛋奶酒 (小牛糖)", prodChoose:"草莓白巧克力" ,prodPrice: "65" , prodquantity: "2"},
+            { cartprodId: 3, prodImg:"/images/member_img/product11.jpeg" ,prodName: "【西班牙】Salysol罐頭軟糖60g-綜合/草莓", prodChoose:"草莓白巧克力" ,prodPrice: "99" , prodquantity: "3"},
+          ]
+        }
+        render() {
+          return (
+            <React.Fragment>
+              {
+                this.state.cartList.map( item => 
+                    <tr>
+                      <td> <div className='memberShoppingCartProdIngandName' ><img className='memberShopppingCartProdImg' src= {item.prodImg} alt=""/><div>{item.prodName}<br/><span className='memberShopppingCartProdChoose'>{item.prodChoose}</span></div> </div> </td>
+                      <td> NTD {item.prodPrice}  </td>
+                      <td>{item.prodquantity}</td>
+                      <td> NTD {item.prodPrice * item.prodquantity} </td>
+                    </tr>
+                )
+              }
+            </React.Fragment>
+          )
+        }
+      }
+    
+      class OrderTable extends React.Component {
+        state = { }
+        render() {
+          return (
+            <React.Fragment>
+                <tr >
+                  <td className='width300'>訂單明細</td>
+                  <td className='width100' >單價</td>
+                  <td className='width100'>數量</td>
+                  <td className='width100'>小計</td>
+                </tr>
+              <OrderDeatilList />
+            </React.Fragment> 
+          );
+        }
+      } 
+    
+      ReactDOM.render(
+        <OrderTable />,
+        document.getElementById("memberOrderListOn")
+      )
+      </script>
+     
+    <script src="/javascripts/member_dashboard.js"></script>
+ 
+    <footer><%-include footer.ejs %></footer>
+  </body>
+  </html>
+  

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+  <head>
+    <%-include  css_js.ejs %>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="stylesheets/snack_test.css">
+  </head>
+  <body>
+    <div class="bgBox"></div>
+    <img class="snack_test_bg" src="images/snack_test_img/snack_test_bg1.svg" alt="">
+    <img class="snack_test_bars" src="images/snack_test_img/three_bars.svg" alt="">
+    <img class="snack_test_leaf" src="images/snack_test_img/leaf.svg" alt="">
+    <div class="quiz-container">
+      <div class="title">零食診斷</div>
+      <div id="question" class="question"></div>
+      <label class="option">
+          <input type="radio" name="option" value="1" />
+          <span class="option1"></span>
+      </label>
+      <label class="option">
+          <input type="radio" name="option" value="2" />
+          <span class="option2"></span>
+      </label>
+      <label class="option">
+          <input type="radio" name="option" value="3" />
+          <span class="option3"></span>
+      </label>
+      <!--按鈕 -->
+      <div class="controls">
+          <button class="previous">回上一題</button>
+          <button class="next">下一題</button>
+      </div>
+  </div>
+  
+  
+  <div class="result">
+
+  </div>
+  <script>
+
+const questions = [
+{
+  "question": "您通常會選擇哪一類的飲品？",
+  "answer1": "咖啡",
+  "answer1Total": "1",
+  "answer2": "茶",
+  "answer2Total": "2",
+  "answer3": "牛奶",
+  "answer3Total": "3",
+},
+{
+  "question": "您通常會在哪裡吃零食?",
+  "answer1": "家中",
+  "answer1Total": "1",
+  "answer2": "工作場所",
+  "answer2Total": "2",
+  "answer3": "戶外",
+  "answer3Total": "3"
+},
+{
+  "question":
+    "您通常會在哪個時段吃零食？",
+  "answer1": "下午2點～5點",
+  "answer1Total": "1",
+  "answer2": "晚上6點～10點",
+  "answer2Total": "3",
+  "answer3": "晚上10點過後",
+  "answer3Total": "2"
+},
+{
+  "question": "您通常會選擇哪種類型的零食？",
+  "answer1": "餅乾",
+  "answer1Total": "3",
+  "answer2": "糖果",
+  "answer2Total": "2",
+  "answer3":"堅果/果乾",
+  "answer3Total": "1"
+},
+{
+  "question": "下列哪種食物是您不能吃的？",
+  "answer1": "蛋奶類",
+  "answer1Total": "1",
+  "answer2": "堅果類",
+  "answer2Total": "2",
+  "answer3": "都可以吃",
+  "answer3Total": "3"
+},
+{
+  "question":
+    "對鹹口味零食的喜愛程度",
+  "answer1":
+    "超喜歡",
+  "answer1Total": "3",
+  "answer2": "還可以",
+  "answer2Total": "2",
+  "answer3": "不喜歡",
+  "answer3Total": "1"
+},
+{
+  "question": "你會勇於嘗試沒吃過的零食嗎",
+  "answer1": "我只吃我喜歡的那幾款",
+  "answer1Total": "1",
+  "answer2": "看情況",
+  "answer2Total": "2",
+  "answer3": "我都會想試試看",
+  "answer3Total": "3"
+}
+]
+
+
+let currentQuestion = 0;
+let score = [];
+let selectedAnswersData = [];
+const totalQuestions =questions.length;
+
+const container = document.querySelector('.quiz-container');
+const questionEl = document.querySelector('.question');
+const option1 = document.querySelector('.option1');
+const option2 = document.querySelector('.option2');
+const option3 = document.querySelector('.option3');
+const nextButton = document.querySelector('.next');
+const previousButton = document.querySelector('.previous');
+const restartButton = document.querySelector('.restart');
+const result = document.querySelector('.result');
+
+
+function generateQuestions (index) {
+  //傳遞一個特定索引來選擇每個問題
+  const question = questions[index];
+  const option1Total = questions[index].answer1Total;
+  const option2Total = questions[index].answer2Total;
+  const option3Total = questions[index].answer3Total;
+  //加入Html 元素 
+  questionEl.innerHTML = `${index + 1}. ${question.question}`
+  option1.setAttribute('data-total', `${option1Total}`);
+  option2.setAttribute('data-total', `${option2Total}`);
+  option3.setAttribute('data-total', `${option3Total}`);
+  option1.innerHTML = `${question.answer1}`
+  option2.innerHTML = `${question.answer2}`
+  option3.innerHTML = `${question.answer3}`
+}
+
+//按”下一題“
+function loadNextQuestion () {
+  const selectedOption = document.querySelector('input[type="radio"]:checked');
+  //是否輸入答案了
+  if(!selectedOption) {
+      alert('哎呀～這題您還沒回答！');
+      return;
+  }
+  //取得選項的值
+  const answerScore = Number(selectedOption.nextElementSibling.getAttribute('data-total'));
+
+  //加入回答的分數到分數陣列
+  score.push(answerScore);
+
+  selectedAnswersData.push()
+  
+
+  const totalScore = score.reduce((total, currentNum) => total + currentNum);
+
+  //最後我們增加當前問題編號（用作每個數組的索引）
+  currentQuestion++;
+
+   //完成後清除選項
+      selectedOption.checked = false;
+  //最後一題按鈕
+  if(currentQuestion == totalQuestions - 1) {
+      nextButton.textContent = '完成';
+  }
+  //顯示結果
+  if(currentQuestion == totalQuestions) {
+      container.style.display = 'none';
+      if(totalScore > 15 && totalScore < 21){
+          result.innerHTML =`<h3>零食小怪獸</h3>
+          <img class="card-style" src="images/snack_test_img/card1.svg" alt="">
+          <a href="http://localhost:3000/member/register"><button class="registerBtn">註冊會員</button></a>
+          <button class="restart">重新測驗</button>`
+      }else if(totalScore > 10 && totalScore < 15){
+          result.innerHTML =`<h3>零食美食家</h3>
+          <img class="card-style" src="images/snack_test_img/card2.svg" alt="">
+          <a href="http://localhost:3000/member/register"><button class="registerBtn">註冊會員</button></a>
+          <button class="restart">重新測驗</button>`
+      }else if(totalScore > 5 && totalScore < 10){
+          result.innerHTML =`<h3>零食獵人</h3>
+          <img class="card-style" src="images/snack_test_img/card3.svg" alt="">
+          <a href="http://localhost:3000/member/register"><button class="registerBtn">註冊會員</button></a>
+          <button class="restart">重新測驗</button>`
+      }else{
+          result.innerHTML =`<h3>零食小精靈</h3>
+          <img class="card-style" src="images/snack_test_img/card4.svg" alt="">
+          <a href="http://localhost:3000/member/register"><button class="registerBtn">註冊會員</button></a>
+          <button class="restart">重新測驗</button>`
+      };
+      
+      return;
+  }
+  generateQuestions(currentQuestion);
+}
+
+//按”回到上一題“
+function loadPreviousQuestion() {
+  //Decrement quentions index
+  currentQuestion--;
+  //remove last array value;
+  score.pop();
+  //Generate the question
+  generateQuestions(currentQuestion);
+}
+
+//按”重新測驗“
+function restartQuiz(e) {
+  if(e.target.matches('button')) {
+  //reset array index and score
+  currentQuestion = 0;
+  score = [];
+  //Reload quiz to the start
+  location.reload();
+  }
+
+}
+
+
+generateQuestions(currentQuestion);
+nextButton.addEventListener('click', loadNextQuestion);
+previousButton.addEventListener('click',loadPreviousQuestion);
+result.addEventListener('click',restartQuiz);
+  </script>
+  </body>
+</html>

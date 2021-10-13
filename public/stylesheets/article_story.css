@@ -1,0 +1,135 @@
+* {
+  /* box-sizing: border-box; */
+  /* margin: 0; */
+  /* padding: 0; */
+  /* font-family: 'Noto Sans TC', sans-serif; */
+  /* font-size: 1rem; */
+  /* color: black; */
+}
+
+/*==================   articleHot   ==================*/
+.HotHit {
+  width: 70vw;
+  margin: 0 auto;
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/*================== articleTitle ==================*/
+.articleTitle {
+  width: inherit;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.line {
+  width: 80%;
+  height: 0.5px;
+  border: 1px solid rgb(0, 0, 0, 0.3);
+}
+
+
+.articleHotHit {
+  margin-top: 2rem;
+  width: inherit;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.imageContainer {
+  background-image: url(../images/article_story/1/1_1.jpg);
+  background-size: cover;
+  background-position: center;
+  /* width: 300px; */
+  height: 500px;
+  border-radius: 2%;
+  flex-grow: 2;
+}
+
+.imageContainer:hover{
+  opacity: 0.8;
+}
+
+
+.row1 {
+  flex-grow: 1;
+  width: 250px;
+  height: 400px;
+}
+
+.articleItselfContainer {
+  float:left;
+  flex-direction:row;
+  width: 250px;
+  height: 400px;
+  margin: 2rem 0.3rem;
+}
+
+.articleHotHitSection{
+  width: inherit;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.card-img-top {
+  width: inherit;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 2%;
+}
+
+.card-img-top:hover {
+  opacity: 0.5;
+  transition: all 0.2s ease-in;
+}
+
+.cardBody {
+  width: inherit;
+  /* height: inherit; */
+  max-width: 100%;
+}
+.card-title {
+  margin: 1rem 0;
+  padding: 0;
+}
+
+.card-text {
+  word-wrap: break-word;
+  color: black;
+}
+
+.CardTitleForMainImage {
+  letter-spacing: 0.15em;
+  color: white;
+}
+
+.CardTitleForMainImage:hover, .articleHotHitLink:hover{
+  text-decoration: none;
+}
+
+/*==================  articleSelected  ==================*/
+.articleSelected {
+  width: 70vw;
+  /* height: 220vh; */
+  margin: 10rem auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.articleSelectedSection{
+  /* margin: 0 auto; */
+  margin-left: 5.5rem;
+}
+

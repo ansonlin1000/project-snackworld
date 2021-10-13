@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+  <head>
+    <%-include css_js.ejs %>
+      <title>
+        <%= title %>
+      </title>
+      <link rel="stylesheet" href="/stylesheets/admin_dashboard.css">
+      <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/wangeditor@latest/dist/wangEditor.min.js"></script> -->
+      <style>
+      #li-productList1 {
+          width: 400px;
+          color: var(--color1);
+          background-color: var(--color3);
+          border-radius: 20px 0 0 20px;
+        }
+      #a-productList1 {
+          
+          color: var(--color1);
+      
+        }
+      </style>
+    </head>
+<body>
+  
+  <div class="dashboard">
+
+  <!-- //商品列表 -->
+  <%-include  admin_dashboard_0_leftSelect.ejs %>
+  <div class="right-content">
+  <div class="containerdisplay" id="productcontainer">
+  <div class="admin-breadcrumbs">
+  <p>商品管理 > 商品列表</p>
+  </div>
+    <div class="admin-topBox ">
+    <div>
+      <button class="deletemanyProductbtn">多個刪除</button>
+      <a href="/admin/dashboard/addproduct"><button class="addProductbtn" id="a-productList2-1">新增商品</button></a>
+    </div>
+
+    <form class="d-flex ">
+      <input class="form-control me-2 light-table-filter searchbox" type="search" placeholder="Search" aria-label="Search" data-table="product-table" >
+      <img src="/images/admin_img/magnifier.svg" alt="">
+    </form>
+  </div>
+  <div class="admin-ListBar">
+    <table>
+      <tr>
+        <td class="width40"><input type="checkbox"></td>
+        <td class="width80">分類</td>
+        <td class="width100">商品編號</td>
+        <td class="width360">商品名稱</td>
+        <td class="width80">售價</td>
+        <td class="width100">產地</td>
+        <td class="width80">數量</td>
+        <td class="width100">狀態</td>
+        <!-- <td class="width160">加入時間</td> -->
+        <td class="width100">操作</td>
+      </tr>
+    </table>
+  </div>
+  <!-- //商品列表(mysql產生) -->
+  <table class="product-table">
+  <% for (let item of sqlAllProd) { %>
+  <tr class="admin-productListDetail" >
+        <td>
+          <div class="width40"><input type="checkbox" /></div>
+        </td>
+        <td class="width80"> <%= item.prodType %> </td>
+        <td class="width100"> <%= item.prodId %> </td>
+        <td class="width360"> <%= item.prodName %> </td>
+        <td class="width80"> <%= item.prodPrice %> </td>
+        <td class="width100"><%= item.prodCountry %></td>
+        <td class="width80"><%= item.prodStock %></td>
+        <td class="width100"><button class="productON">上架中</button></td>
+        <!-- <td class="width160">{item.time}</td> -->
+        <td class="width100">
+          <!-- <a href="http://localhost:3000/product/<%= item.prodId %>"> -->
+          <a href="http://localhost:3000/admin/dashboard/editProductDetail/<%= item.prodId %>"><button class="admin-editBtn" id="editProductDetailBtn">編輯</button></a>
+          <a href="http://localhost:3000/admin/dashboard/delproduct/<%= item.prodId%>"><button class="admin-deleteBtn">刪除</button></a>
+          
+        </td>
+    </tr>
+    <% } %>
+    </table>
+  </div>
+ 
+
+</div>
+</div>
+<script>
+  (function(document) {
+    'use strict';
+  
+    // 建立 LightTableFilter
+    var LightTableFilter = (function(Arr) {
+  
+      var _input;
+  
+      // 資料輸入事件處理函數
+      function _onInputEvent(e) {
+        _input = e.target;
+        var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+        Arr.forEach.call(tables, function(table) {
+          Arr.forEach.call(table.tBodies, function(tbody) {
+            Arr.forEach.call(tbody.rows, _filter);
+          });
+        });
+      }
+  
+      // 資料篩選函數，顯示包含關鍵字的列，其餘隱藏
+      function _filter(row) {
+        var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+        row.style.display = text.indexOf(val) === -1 ? 'none' : 'block';
+      }
+  
+      return {
+        // 初始化函數
+        init: function() {
+          var inputs = document.getElementsByClassName('light-table-filter');
+          Arr.forEach.call(inputs, function(input) {
+            input.oninput = _onInputEvent;
+          });
+        }
+      };
+    })(Array.prototype);
+  
+    // 網頁載入完成後，啟動 LightTableFilter
+    document.addEventListener('readystatechange', function() {
+      if (document.readyState === 'complete') {
+        LightTableFilter.init();
+      }
+    });
+  
+  })(document);
+</script>
+</body>
+</html>

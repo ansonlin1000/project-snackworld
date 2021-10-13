@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <%-include  css_js.ejs %> <title><%= title %>
+    </title>
+    <link rel="stylesheet" href="/stylesheets/about.css">
+  </head>
+
+  <body>
+    <header><%-include  navbar.ejs %></header>
+    <!-- ================== AboutWaveBanner ================== -->
+    <div class="mainWaveBanner">
+      <div class="mainFirstWave">
+        <img id='navbarBgImg' src="/images/header_img/navbar_bg.svg" alt="no Image">
+      </div>
+      <div class="mainPicHolder">
+      </div>
+      <div class="mainSecondWave">
+        <svg xmlns="http://www.w3.org/2000/svg" width="100vw" height="85.265">
+          <path id="Path_1563" data-name="Path 1563"
+            d="M-2913.727,870.3V807.248c-119.905,32.354-184.32,8.592-271.1-3.01-79.5-10.656-158.927,13.586-238.664,7.819-105.01-6.78-180.23-55.943-289.9-2.1-55.889,21.179-84.959,32.208-161.792,26.147-218.586-20.406-439.078,45.114-654.041,6.887-102.332-15.505-197.284-69.716-302.973-35.8V870.3Z"
+            transform="translate(4832.205 -785.039)" fill="#fff" />
+        </svg>
+      </div>
+    </div>
+    <!-- <div class="mainChildWaveBanner">
+      <div class="mainChildFirstWave">
+        <svg xmlns="http://www.w3.org/2000/svg" width="100vw" height="85.333">
+          <path id="Path_1641" data-name="Path 1641"
+            d="M-4832.205,1523.837v63.106c120-32.379,184.467-8.6,271.32,3.013,79.56,10.664,159.053-13.6,238.853-7.825,105.094,6.785,180.374,55.987,290.134,2.106,55.933-21.2,85.026-32.233,161.92-26.168,218.76,20.423,439.426-45.15,654.56-6.891,102.413,15.516,197.44,69.771,303.213,35.832v-63.173Z"
+            transform="translate(4832.205 -1523.837)" fill="#fff" />
+        </svg>
+      </div>
+      <div class="mainPicChildHolder">
+        <img src="/images/about/AboutRoll1_1.jpg" alt="No Image">
+        <img src="/images/about/AboutRoll1_2.jpg" alt="No Image">
+        <img src="/images/about/AboutRoll1_3.jpg" alt="No Image">
+      </div>
+      <div class="mainChildSecondWave">
+        <svg xmlns="http://www.w3.org/2000/svg" width="100vw" height="85.266">
+          <path id="Path_1642" data-name="Path 1642"
+            d="M-2913.727,2163.879v-63.056c-119.905,32.354-184.32,8.591-271.1-3.011-79.5-10.655-158.927,13.587-238.664,7.819-105.01-6.78-180.23-55.943-289.9-2.1-55.889,21.178-84.959,32.207-161.792,26.146-218.586-20.406-439.078,45.115-654.041,6.887-102.332-15.5-197.284-69.716-302.973-35.8v63.123Z"
+            transform="translate(4832.205 -2078.613)" fill="#fff" />
+        </svg>
+      </div>
+    </div> -->
+    <!-- ================== mainTextBanner  ==================-->
+    <div id="MainWaveBannerRoot"></div>
+    <script type="text/babel">
+      class MainWaveBanner extends React.Component {
+        // constructor(props) {
+        //   super(props);
+        //   this.state = { svgHeigh: "80", }
+        // }
+
+        state = {
+          info: [
+            {
+              id: "one",
+              img: "/images/about/AboutRoll0_4.jpg",
+              describ1: "小食界提供的不僅僅是「異國零食」",
+              describ2: "還有令人充滿期待的每月零食驚喜體驗。",
+              describ3: "",
+              describ4: "",
+              describ5: "",
+              describ6: "",
+              waveImage1: "/images/about/AboutRoll1_1.jpg",
+              waveImage2: "/images/about/AboutRoll1_2.jpg",
+              waveImage3: "/images/about/AboutRoll1_3.jpg",
+            },
+            {
+              id: "two",
+              img: "/images/about/AboutRoll1_4.jpg",
+              describ1: "小食界精心挑選的零食",
+              describ2: "由各國製成美味的零食。",
+              describ3: "我們將世界各地的生產商和客戶聯繫起來，興奮地提供對身心有益的美味零食。",
+              describ4: "讓零食時間變得寶貴，豐富人們的心靈和生活。",
+              describ5: "",
+              waveImage1: "/images/about/AboutRoll2_1.jpg",
+              waveImage2: "/images/about/AboutRoll2_2.jpg",
+              waveImage3: "/images/about/AboutRoll2_3.jpg",
+            },
+          ]
+        }
+
+        clickHandler = () => {
+          console.log("ok")
+        }
+
+        render() {
+
+          return (
+            this.state.info.map(item =>
+              <React.Fragment>
+                <div class="mainTextBanner">
+                  <div class="mainHandWrittenText">
+                    <img src={item.img} alt="No Image" id={item.id} />
+                  </div>
+                  <div class="mainParagraphDiv">
+                    <div class="mainParagraph">{item.describ1}</div>
+                    <div class="mainParagraph">{item.describ2}</div>
+                    <div class="mainParagraph">{item.describ3}</div>
+                    <div class="mainParagraph">{item.describ4}</div>
+                    <div class="mainParagraph">{item.describ5}</div>
+                  </div>
+                </div>
+
+                <div class="mainChildWaveBanner"
+                  onMouseOver={this.clickHandler}>
+                  <div class="mainChildFirstWave">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                      width="100vw"
+                      height="80">
+                      <path id="Path_1641" data-name="Path 1641" d="M-4832.205,1523.837v63.106c120-32.379,184.467-8.6,271.32,3.013,79.56,10.664,159.053-13.6,238.853-7.825,105.094,6.785,180.374,55.987,290.134,2.106,55.933-21.2,85.026-32.233,161.92-26.168,218.76,20.423,439.426-45.15,654.56-6.891,102.413,15.516,197.44,69.771,303.213,35.832v-63.173Z" transform="translate(4832.205 -1523.837)" fill="#fff" />
+                    </svg>
+                  </div>
+                  <div class="mainPicChildHolder">
+                    <img src={item.waveImage1} alt="No Image" />
+                    <img src={item.waveImage2} alt="No Image" />
+                    <img src={item.waveImage3} alt="No Image" />
+                  </div>
+                  <div class="mainChildSecondWave">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                      width="100vw"
+                      height="85.266">
+                      <path id="Path_1642" data-name="Path 1642"
+                        d="M-2913.727,2163.879v-63.056c-119.905,32.354-184.32,8.591-271.1-3.011-79.5-10.655-158.927,13.587-238.664,7.819-105.01-6.78-180.23-55.943-289.9-2.1-55.889,21.178-84.959,32.207-161.792,26.146-218.586-20.406-439.078,45.115-654.041,6.887-102.332-15.5-197.284-69.716-302.973-35.8v63.123Z"
+                        transform="translate(4832.205 -2078.613)" fill="#fff" />
+                    </svg>
+                  </div>
+                </div>
+              </React.Fragment>
+            )
+          )
+        }
+      }
+
+      class TheFinalPart extends React.Component {
+        state = {
+          info: [
+            {
+              id: "three",
+              img: "/images/about/AboutRoll2_4.jpg",
+              describ1: "我們用零食小故事串起您與世界上的某個角落，提供對有趣的美味零食。",
+              describ2: "讓零食時間變得寶貴也豐富心靈和生活。",
+              describ3: "當我們還是個孩子的時候，總是迫不及待地想吃零食。",
+              describ4: "不管今天吃什麼零食，都讓人充滿期待，一個不僅能填飽肚子，還能填飽內心的快樂時光。",
+              describ5: "「零食」，能讓我們想起一段溫馨愉快的時光。",
+            }
+          ]
+        }
+
+
+        render() {
+          return (
+            this.state.info.map(item =>
+              <React.Fragment>
+                <div class="mainTextBanner" style={{margin: "100px"}}>
+                  <div class="mainHandWrittenText">
+                    <img src={item.img} alt="No Image" id={item.id} />
+                  </div>
+                  <div class="mainParagraphDiv">
+                    <div class="mainParagraph">{item.describ1}</div>
+                    <div class="mainParagraph">{item.describ2}</div>
+                    <div class="mainParagraph">{item.describ3}</div>
+                    <div class="mainParagraph">{item.describ4}</div>
+                    <div class="mainParagraph">{item.describ5}</div>
+                  </div>
+                </div>
+              </React.Fragment>
+            )
+          )
+        }
+
+      }
+
+
+      class Output extends React.Component {
+        state = {}
+        render() {
+          return (
+            <React.Fragment>
+              <MainWaveBanner />
+              <TheFinalPart />
+            </React.Fragment>
+          )
+        }
+
+      }
+
+      ReactDOM.render(
+        <Output />,
+        document.getElementById("MainWaveBannerRoot")
+      )
+
+
+
+    </script>
+    <footer><%-include footer.ejs %></footer>
+  </body>
+
+</html>

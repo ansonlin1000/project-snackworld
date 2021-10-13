@@ -1,0 +1,34 @@
+
+
+<!DOCTYPE html>
+<head>
+  <%-include css_js.ejs %>
+    <title>
+      <%= title %>
+    </title>
+    <link rel="stylesheet" href="/stylesheets/admin_dashboard.css">
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/wangeditor@latest/dist/wangEditor.min.js"></script> -->
+</head>
+<body>
+<div class="dashboard">
+<%-include  admin_dashboard_0_leftSelect.ejs %>
+<div class="right-content"></div>
+<!-- //會員列表---點"編輯"---編輯會員資料頁 -->
+<div class="containerdisplay" id="editMemberDetailcontainer">
+    <form id="memberForm" action="" method="POST">
+        
+            會員編號<input type="text" value="" name="memberId"> <br>
+            <span class="memberInfoText">姓名</span><input type="text" value="" name="memberName"> <br>
+            <span class="memberInfoText">生日</span><input type="text"value="" > <br>
+            <span class="memberInfoText">性別</span><input type="radio"  >>男 <input type="radio"  > >女 <br>
+            國內市話 <input type="text" value="" name="memberTel"> <br>
+            手機號碼 <input type="text" value="" name="memberPhone"> <br>
+            通訊地址 <input type="text" value="" name="memberAddress"> <br>
+      
+    </form>
+    <button type="submit" id='memberPersonalInformationEdit' class="memberDashboardBtn" >編輯</button>
+</div>
+</div>
+</div>
+</body>
+</html>

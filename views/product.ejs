@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+
+<head> <%-include  css_js.ejs %> <title>商品總覽</title>
+  <link rel="stylesheet" href="/stylesheets/product.css">
+  <!-- 按愛心收藏 -->
+  <!-- <script>
+    $(function () {
+      var flag = 0;
+      $(".like").click(function () {
+        if (flag == 0) {
+          flag = 1;
+          $(this).attr('src', '/images/product_img/heart-solid.svg');
+        } else if (flag != 0) {
+          flag = 0;
+          $(this).attr('src', '/images/product_img/heart-regular.svg');
+        }
+        // console.log(flag)
+      })
+    })
+  </script> -->
+  <!-- <script>
+        $(".cartBtn").click(function addToCar(item){
+              //item為品項名稱，型態為字串
+          if(Cookies.get("carItem") == undefined){
+                      //若目前沒有 carItem 這個 key 的 Cookie ，直接新增一個，並只對購物車頁面設定 Cookie
+              Cookies.set("carItem", item.currentTarget.id,{ expires: 7 })
+          }
+          else{
+              //有的話就用逗號將品項做分隔再加入至 carItem 中
+              currentItem = Cookies.get("carItem");
+              currentItem = currentItem+","+item.currentTarget.id; 
+              Cookies.set("carItem", currentItem, { expires: 7 });
+          }
+          alert("已加入"+item.currentTarget.id+"至購物車");
+      })
+    </script> -->
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@beta/dist/js.cookie.min.js"></script>
+</head>
+
+<body>
+  <header><%-include  navbar.ejs %></header>
+  <!-- navbarfix之後頁面的預留空間 -->
+  <div id="navbarbox"></div>
+  <div id='navbarBackground'>
+    <div id='navbarBackgroundBox'></div>
+    <img id='navbarLeaf' src="/images/header_img/leaf.svg" alt="">
+    <img id='navbarThreebars' src="/images/header_img/three_bars.svg" alt="">
+    <img id='navbarBgImg' src="/images/header_img/navbar_bg.svg" alt="">
+  </div>
+  <!-- 產品頁面內文部分 -->
+  <div class="pagetitle">
+    <h3>零食總覽</h3>
+    <div class="line"></div>
+  </div>
+  <div id="searchBox">
+    <input type="search" id="search" placeholder="依分類搜尋" />
+    <div id="selectBox">
+      <table id="selectTable">
+        <tr class="checkbox">
+          <td class="selectTable1"><span>口味</span></td>
+          <td class="selectTable2">
+            <label><input type="radio" name="prodTaste" id="prodTaste0" checked='checked' value="全部"><span
+                class="round button">全部</span></label>
+            <label><input type="radio" name="prodTaste" id="prodTaste1" value="甜"><span
+                class="round button">甜</span></label>
+            <label><input type="radio" name="prodTaste" id="prodTaste2" value="鹹"><span
+                class="round button">鹹</span></label>
+            <label><input type="radio" name="prodTaste" id="prodTaste3" value="酸"><span
+                class="round button">酸</span></label>
+          </td>
+        </tr>
+        <tr class="checkbox">
+          <td class="selectTable1"><span>國家</span></td>
+          <td class="selectTable2">
+            <!-- <label><input type="radio" name="prodCountry" value="台灣" checked="checked"><span class="round button">台灣</span></label> -->
+            <label><input type="radio" name="prodCountry" id="prodCountry0" checked='checked' value="全部"><span
+                class="round button">全部</span></label>
+            <label><input type="radio" name="prodCountry" id="prodCountry1" value="日本"><span
+                class="round button">日本</span></label>
+            <label><input type="radio" name="prodCountry" id="prodCountry2" value="泰國"><span
+                class="round button">泰國</span></label>
+            <label><input type="radio" name="prodCountry" id="prodCountry3" value="英國"><span
+                class="round button">英國</span></label>
+            <label><input type="radio" name="prodCountry" id="prodCountry4" value="美國"><span
+                class="round button">美國</span></label>
+            <!-- <label><input type="radio" name="prodCountry" value="澳洲"><span class="round button">澳洲</span></label> -->
+            <label><input type="radio" name="prodCountry" id="prodCountry5" value="德國"><span
+                class="round button">德國</span></label>
+            <label><input type="radio" name="prodCountry" id="prodCountry6" value="韓國"><span
+                class="round button">韓國</span></label>
+            <label><input type="radio" name="prodCountry" id="prodCountry7" value="義大利"><span
+                class="round button">義大利</span></label>
+            <label><input type="radio" name="prodCountry" id="prodCountry8" value="其他"><span
+                class="round button">其他</span></label>
+          </td>
+        </tr>
+        <tr class="checkbox">
+          <td class="selectTable1"><span>種類</span></td>
+          <td class="selectTable2">
+            <label><input type="radio" name="label" id="prodType0" checked='checked' value="全部"><span
+                class="round button">全部</span></label>
+            <label><input type="radio" name="label" id="prodType1" value="餅乾"><span
+                class="round button">餅乾</span></label>
+            <label><input type="radio" name="label" id="prodType2" value="洋芋片"><span
+                class="round button">洋芋片</span></label>
+            <label><input type="radio" name="label" id="prodType3" value="糖果"><span
+                class="round button">糖果</span></label>
+            <label><input type="radio" name="label" id="prodType4" value="堅果/果乾"><span
+                class="round button">堅果/果乾</span></label>
+            <label><input type="radio" name="label" id="prodType5" value="其他"><span
+                class="round button">其他</span></label>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div id="sqlProd"> <% for (let item of sqlAllProd) { %> <div
+      class="prodCard taste0 prodCountry0 prodType0 taste<%= item.prodTasteNo %> prodCountry<%= item.prodCountryNo %> prodType<%= item.prodTypeNo %>">
+      <!-- <div class=" prodCountry<%= item.prodCountryNo %>"> -->
+      <div>
+        <a href="http://localhost:3000/product/<%= item.prodId %>">
+          <img src="<%= item.prodPhoto1 %>" class="card-img-top" alt="Card image cap">
+        </a>
+        <div class="prodInfo">
+          <div class="prodNameBox">
+            <a href="http://localhost:3000/product/<%= item.prodId %>"><%= item.prodName %></a>
+          </div>
+          <div class="prodPriceAndIcon">
+            <P>NT$<%= item.prodPrice %></P>
+            <form action="post" id="formData">
+              <div class="icon">
+                <div class="cartBtn" id="<%= item.prodId %>">
+                  <input type="hidden" id="prodName" value="<%= item.prodName %>">
+                  <input type="hidden" id="prodPrice" value="<%= item.prodPrice %>">
+                  <img id="<%= item.prodId %>" src="/images/product_img/blue_cart.svg">
+                </div>
+                <div class="heart" id="<%= item.prodId %>"></div>
+                <!-- <img id="<%= item.prodId %>" class="like" src="/images/product_img/heart-regular.svg"> -->
+                <input type="hidden" value="<%= item.prodId %>" id="inputValue" name="prodId">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- </div> -->
+    </div> <% } %> </div>
+  <footer><%-include footer.ejs %></footer>
+  <script>
+    // 處理愛心 => hover效果、加入資料庫~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    $(".heart").on('click', function (e) {
+      var imgValue = this.id
+      $(this).addClass('heartHover')
+      $.ajax({
+        url: "http://localhost:3000/product/toCollect",
+        type: "post",
+        data: { prodId: `${imgValue}` },
+        success: (result) => { console.log(result) }
+      })
+    })
+
+    // // 購物車下拉~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // $('.cart').on('click', () => { $('.cartGocontainer').fadeToggle("fast").removeClass('show'); })
+
+
+    // // 載入頁面 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // $(window).ready(function() {
+    //   var cart = {};
+    //   cart.prodId = [];
+    //   var storageData = localStorage.getItem('cart');
+    //   // 判斷localStorage是否為空；如是，加上預設cart
+    //   if (storageData === null) { runone(cart) };
+    //   // 轉化資料格式（Data type Required） => {prodId:["1", "2","3","4","5"]};
+    //   var JSONData = JSON.parse(storageData);
+    //   // 處理載入，給紅色小標籤的值
+    //   var loadingCount = JSONData.prodId.length;
+    //   $('.CartCount').text(loadingCount);
+
+    //   // console.log(JSONData);
+    //   // getInfo(JSONData)
+    // })
+
+    // function runone(cart) { localStorage.setItem('cart', JSON.stringify(cart)); }
+
+    // // Pushing the data from localStorage into Cart
+    // // 請用dataType, contentType嚴格規範了client <=> server之前的傳送，
+    // // 務必記住，它們是雙向的，所以最後「送」與「回」都有明確的type
+    // // 舉例來說，dataType要求{prodId: '5'}的格式，再加個JSON.stringify，因為，它必定為string的傳送
+    // // 而如果是「the same key with multiple value」,using : {prodId:["1", "2","3","4","5"]}
+    // function getInfo(JSONData) {
+    //   $.ajax({
+    //     url: "http://localhost:3000/product/localStorageReset",
+    //     type: "post",
+    //     data: JSON.stringify(JSONData),
+    //     dataType: "json",
+    //     contentType: "application/json; charset=utf-8",
+    //     crossDomain: true,
+    //     success: function (result) {
+    //       // console.log(result);
+    //       for (index in result) {
+    //         $('.cartTitle').after(function () { return `<div class="cartItem" id="${result[index].prodId}"><div class="cartImage" style="background-image: url(${result[index].prodPhoto1})"></div><div class="cartContent"><p>${result[index].prodName}</p><div>NT$${result[index].prodPrice}</div></div><div class="garbageCan"></div></div>` })
+    //       }
+    //     },
+    //     error: function (err) { throw (err) },
+    //     complete: function (response, textStatus) { return }
+    //   });
+    // }
+
+
+
+    // // 處理購物車 => counting ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // var reduceBtnCount = JSON.parse(localStorage.getItem('cart'))
+    // var localStorageList = reduceBtnCount.prodId
+    // $('.cartBtn').on('click', (e, CartCount, localStorageList) => {
+    //   var CartCount = parseInt($('.CartCount').text());
+    //   var prodId = e.target.id;
+
+
+    //   adding(CartCount);
+    //   localStoragePush(prodId);
+    //   createProduct(prodId)
+    //   // garbageBtn(localStorageList, CartCount)
+    // })
+    // $("body").on('click', '.garbageCan', function () {garbageBtn()});
+
+
+
+    // function adding(CartCount) {
+    //   // console.log(CartCount);
+    //   CartCount++;
+    //   $('.CartCount').text(CartCount)
+    // };
+
+    // function localStoragePush(productItem) {
+    //   if (localStorage && localStorage.getItem('cart')) {
+    //     var cart = JSON.parse(localStorage.getItem('cart'))
+    //     cart.prodId.push(productItem)
+    //     localStorage.setItem('cart', JSON.stringify(cart));
+    //   }
+    //   // console.log(productItem)
+    //   // console.log(cart)
+    // }
+
+    // function createProduct(id) {
+    //   let deleteId = id;
+    //   // let count = CartCount;
+    //   // 要求購物車資料
+    //   $.ajax({
+    //     url: "http://localhost:3000/product/cart/" + deleteId,
+    //     type: "get",
+    //     contentType: 'application/json',
+    //     success: function (result) {
+    //       $('.cartTitle').after(function () { return `<div class="cartItem" id="${result[0].prodId}"><div class="cartImage" style="background-image: url(${result[0].prodPhoto1})"></div><div class="cartContent"><p>${result[0].prodName}</p><div>NT$${result[0].prodPrice}</div></div><div class="garbageCan"></div></div>` })
+    //     },
+    //     error: function (err) { throw (err) },
+    //     complete: function (response, textStatus) { return }
+    //   });
+    // }
+
+    // function garbageBtn() {
+
+    //   $('.garbageCan').click(function (deleteCartCount) {
+    //     let reduceBtnCount = JSON.parse(localStorage.getItem('cart'));
+    //     let List = reduceBtnCount.prodId;
+    //     let listLength = (List.length)-1;
+    //     let removingDiv = $(this).parent();
+    //     let garbageCanId = removingDiv.attr('id');
+
+    //     // 刪除購物車item 
+    //     removingDiv.remove();
+
+    //     // 刪除localStorage裡的值
+    //     for (index in List) {
+    //       if (parseInt(List[index]) === parseInt(garbageCanId)) {
+    //         List.splice(index, 1);
+    //         reduceBtnCount.prodId = List
+    //         localStorage.setItem('cart', JSON.stringify(reduceBtnCount));
+    //       }
+    //     }
+
+    //     // 減法紅色提示
+    //     if (listLength < 0) {
+    //       return
+    //     } else if(listLength === 0){
+    //       $('.CartCount').text(0)
+    //       return
+    //     }else{
+    //       $('.CartCount').text(listLength)
+
+    //     }
+    //   })
+    // }
+
+
+    // 進得刪除，不然localStorage不能累加
+      // localStorage.clear()
+  </script>
+  <script src="/javascripts/product.js"></script>
+</body>
+
+</html>

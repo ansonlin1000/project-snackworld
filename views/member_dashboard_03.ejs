@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+  <head>
+    <%-include  css_js.ejs %>
+    <title>會員後台</title>
+    <link rel="stylesheet" href="/stylesheets/member_dashboard_03.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" 
+            crossorigin="anonymous">
+    </script>
+        <!-- jQuery Modal -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+
+  </head>
+  <body>
+    <%-include  navbar.ejs %>
+    <!-- 頁面標題文字 -->
+    <div id='memberHeader'>
+      <p class="fontsize30">Hi ~ 小食界會員</p>
+      <p class="fontsize16">讓我們透過小食，認識異國</p>
+    </div>
+    <!-- 選單區塊 -->
+    <div id='memberDashboard'>
+      <!-- 功能選單(搭配Javascript切換) -->
+      <%-include  member_dashboard_00_select.ejs %>
+      <!-- 功能內容區塊 -->
+      <div id='memberDashboardMain'>
+        <div id='memberSubscription' class="menberMainBox">
+          <!-- 3-1 第一頁選擇方案 -->
+          <div id="memberSubPlanChoose">
+            <!-- 超值箱 -->
+            <div id='aStealPlan' class='planstyle'>
+                <img id="aStealPlanImg" src="/images/subplan_astealplan_box_blue.svg">
+                <p class='mb-0 mt-4'>超值箱</p>
+                <p class='mb-0 fontsize24 fontweightB'>NT$ 499 / month</p>
+                <table>
+                <tr>
+                    <td class="width260">免運費</td>
+                    <td>V</td>
+                </tr>
+                <tr>
+                    <td>精選6~8種零食</td>
+                    <td>V</td>
+                </tr>
+                <tr>
+                    <td>擁有至少3個國家</td>
+                    <td>V</td>
+                </tr>
+                <tr>
+                    <td>適合單人獨享</td>
+                    <td>V</td>
+                </tr>
+                </table>
+                <button id="subaStealPlanBtn" class='subPlanSlectBtn'>選擇方案</button>
+            </div>
+            <!-- 享樂箱 -->
+            <div id='enjoyPlan' class='planstyle'>
+                <img id='enjoyPlanImg' src="/images/subplan_enjoyplan_box_white.svg">
+                <p class='mb-0 mt-4'>享樂箱</p>
+                <p class='mb-0 fontsize24 fontweightB'>NT$ 699 / month</p>
+                <table>
+                <tr>
+                    <td class="width260">免運費</td>
+                    <td>V</td>
+                </tr>
+                <tr>
+                    <td>精選9~11種零食</td>
+                    <td>V</td>
+                </tr>
+                <tr>
+                    <td>擁有至少3個國家</td>
+                    <td>V</td>
+                </tr>
+                <tr>
+                    <td>適合雙人獨享</td>
+                    <td>V</td>
+                </tr>
+                </table>
+                <button id="subenjoyPlanBtn" class='subPlanSlectBtn'>選擇方案</button>
+            </div>
+            <!-- 派對箱 -->
+            <div id='partyPlan' class='planstyle'>
+                <img id='partyPlanImg' src="/images/subplan_partyplan_box_blue.svg">
+                <p class='mb-0 mt-4'>派對箱</p>
+                <p class='mb-0 fontsize24 fontweightB'>NT$ 999 / month</p>
+                <table>
+                <tr>
+                    <td class="width260">免運費</td>
+                    <td>V</td>
+                </tr>
+                <tr>
+                    <td>精選12~18種零食</td>
+                    <td>V</td>
+                </tr>
+                <tr>
+                    <td>擁有至少5個國家</td>
+                    <td>V</td>
+                </tr>
+                <tr>
+                    <td>適合多人獨享</td>
+                    <td>V</td>
+                </tr>
+                </table>
+                <button id='subpartyPlanSlectBtn' class='subPlanSlectBtn'>選擇方案</button>
+            </div>
+          </div>
+          <!-- <form action="" method=""> -->
+            <!-- 3-2 第二頁-結帳運送與付款方式 -->
+            <div>
+              <form id="formCreditCard" action="/member/dashboard/subscription/create" method="post" accept-charset="UTF-8">
+                <div class="hideBox">
+                  <input type="hidden" name="MerchantID" value="2000132" /><br />
+                  <input type="hidden" name="MerchantTradeNo" >
+                  <input type="hidden" name="MerchantTradeDate" >
+                  <input type="hidden" name="PaymentType" value="aio" /><br />
+                  <input type="hidden" name="TotalAmount" value="699">
+                  <!-- <input type="hidden" name="TotalAmount" value="5" /><br /> -->
+                  <input type="hidden" name="ItemName" value="小食界零食箱-訂閱方案：享樂箱" /><br />
+                  <!-- <input type="hidden" name="ItemName" value="派對laaa"> -->
+                  <!-- <input type="hidden" name="TradeDesc" value="零食箱訂閱"> -->
+                  <input type="hidden" name="TradeDesc" value="享樂箱" /><br />
+                  <input type="hidden" name="ReturnURL" value="https://developers.ecpay.tw/AioMock/MerchantReturnUrl" />
+                  <input type="hidden" name="ChoosePayment" value="Credit" />
+                  <input type="hidden" name="EncryptType" value="1" />
+                  <input type="hidden" name="CheckMacValue0">
+                  <!-- ---------------------------- -->
+                  <input type="hidden" name="orderNo" value="" id="subOrderIdCreate">
+                  <input type="hidden" name="orderDate" value="" id="subOrderDateCreate">
+                  <input type="hidden" name="orderPrice" value="" id="subOrderPrice">
+                  <input type="hidden" name="memberId" value="100938467">
+                  <input type="hidden" name="orderType" value="">
+                  <input type="hidden" name="orderTypeNo" value="">
+                  <input type="hidden" name="orderPaymentNo" value="1">
+                  <input type="hidden" name="orderState" value="處理中">
+                  <input type="hidden" name="orderStateNo" value="5">
+                  <input type="hidden" name="orderSendState" value="處理中">
+                  <input type="hidden" name="orderSendStateNo" value="4">
+                </div>
+              <div id='membersubPayandDeliBox'>
+                <!-- 左側付款方式、運送方式選單 -->
+                <div id='membersubPayandDeli'>
+                    <!-- 付款方式選單 -->
+                    <div id='memberShoppingCartPayment'>
+                    <p class="membersubPayandDeliTitle">付款方式</p>
+                    <div>
+                        <input type="radio" id='creditcard' name="orderPayment" value="信用卡" class="menberPaymentOptionRadio">
+                        <label for="creditcard" class="menberPaymentOption">
+                          <p>信用卡一次付清<br><span class="fontsize10 membersubPayandDeliMemo">刷玉山卡滿888 贈50元抵用券(數量有限)</span></p>
+                        </label>
+                    </div>
+                    </div>
+                    <!-- 運送方式選單 -->
+                    <div id='memberShoppingCartDelivery'>
+                    <p class="membersubPayandDeliTitle">運送方式</p>
+                     <div>
+                        <input type="radio" id='home' name="orderDeli" value="宅配" class="menberPaymentOptionRadio" >
+                        <label for="home" class="menberPaymentOption"> 
+                          <p>宅配<br><span class="fontsize10 membersubPayandDeliMemo"></span></p>
+                        </label>
+                    </div>
+                    <div>
+                        <input type="radio" id='family' name="orderDeli" value="全家取貨" class="menberPaymentOptionRadio">
+                        <label for="family" class="menberPaymentOption">
+                        <p>全家取貨<br><span class="fontsize10 membersubPayandDeliMemo">取貨時請攜帶有效證件</span></p>
+                        </label>
+                    </div>
+                    <div>
+                        <input type="radio" id='hilife' name="orderDeli" value="萊爾富取貨" class="menberPaymentOptionRadio">
+                        <label for="hilife" class="menberPaymentOption">
+                        <p>萊爾富取貨<br><span class="fontsize10 membersubPayandDeliMemo">取貨時請攜帶有效證件</span></p>
+                      </label>
+                    </div>
+                    <div>
+                        <input type="radio" id='seven11' name="orderDeli" value="711取貨" class="menberPaymentOptionRadio">
+                        <label for="seven11" class="menberPaymentOption">
+                          <p>7-ELEVEN取貨<br><span class="fontsize10 membersubPayandDeliMemo">取貨時請攜帶有效證件</span></p>
+                        </label>
+                    </div>
+                    </div>            
+                </div>
+                <!-- 右側總計區塊 -->
+                <div id='memberShoppingCartCountBox'>
+                  <table>
+                    <tr>
+                      <td class="width120">訂閱方案</td>
+                      <td><span id="countBoxSubPlan" class="width260 fontsize36"></span></td>
+                    </tr>
+                    <tr>
+                      <td><span class="memberShoppingCartCountBoxText">共計 </span></td>
+                      <td><span>1</span> 項商品</td>
+                    </tr>
+                    <tr>
+                      <td><span class="memberShoppingCartCountBoxText">金額</span></td>
+                      <td><span>NT$ </span><span class="countBoxPrice">1290</span>(免運費)</td>
+                    </tr>
+                    <tr class="sendplace">
+                      <td>運送地區</td>
+                      <td>
+                        <select name="" >
+                          <option value="">請選擇</option>
+                          <option value="Keelung">基隆市</option>
+                          <option value="Taipei">台北市</option>
+                          <option value="NewTaipei">新北市</option>
+                          <option value="Taoyuan">桃園市</option>
+                          <option value="HsinchuCounty">新竹縣</option>
+                          <option value="Hsinchu">新竹市</option>
+                          <option value="Miaoli">苗栗縣</option>
+                          <option value="Taichung">台中市</option>
+                          <option value="Changhua">彰化縣</option>
+                          <option value="Yunlin">雲林縣</option>
+                          <option value="Nantou">南投縣</option>
+                          <option value="Chiayi">嘉義縣</option>
+                          <option value="Tainan">台南市</option>
+                          <option value="Kaohsiung">高雄市</option>
+                          <option value="Pingtung">屏東縣</option>
+                          <option value="Yilan">宜蘭縣</option>
+                          <option value="Hualien">花蓮縣</option>
+                          <option value="Taitung">台東縣</option>
+                          <option value="Kinmen">金門縣</option>
+                          <option value="Penghu">澎湖縣</option>
+                          <option value="Matsu">馬祖縣</option>
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>開始訂閱日</td>
+                      <td id="startSubData"></td>
+                    </tr>
+                    <tr>
+                      <input type="hidden" name="orderStartTime" value="">
+                      <td>開始配送日</td>
+                      <td id="startSendTime"></td>
+                    </tr>
+                  </table>
+                  <div id="checkRadioIsCheck"></div>
+                  <div id='memberShoppingCartBtn' class="memberDashboardBtn"><span>下一步</span></div>
+                </div>
+              </div>
+              <!-- 3-3 訂單送出前確認-->
+              <div id='memberSubOrderSendBoxBg'>
+                <div id='memberSubOrderSendBox'>
+                    <div id='memberShoppingCartOrderSendBoxTitle'>
+                      <p>共計 <span>1</span> 項商品</p>
+                      <p>總共<span class="fontsize24">NT$</span><span class="fontsize24 countBoxPrice">1290</span>(含運費)</p>
+                    </div>
+                    <hr>
+                    <!-- <form action=""> -->
+                    <div id="orderForm">
+                      取件人資訊 <input type="checkbox" name="dataFromSqlcheck" id="dataFromSql"><label for="dataFromSql">與會員資料同步</label>
+                      <hr>
+                      姓名<input type="text" name="orderName">
+                      <hr>
+                      手機<input type="text" name="orderPhone">
+                      <hr>
+                      宅配地址<input type="text" name="orderMemo">
+                      <!-- 請選擇取件門市<input type="text"> -->
+                      <hr>
+                      電子信箱<input type="text" name="orderEmail">
+                      <hr>
+                      <!-- 信用卡資訊
+                      <p>信用卡僅限持卡人本人使用。本公司將依您提供的持卡人資訊與發卡銀行、收單行及持卡人照會是否屬實，並保留出貨權益。如有冒用信用卡或個資，將送司法單位處置。</p>
+                      <hr>
+                      信用卡號<input type="text" placeholder="請輸入信用卡號" >
+                      <hr>
+                      有效日期<input type="text" placeholder="MM/YY" >
+                      <hr>
+                      驗證碼<input type="text" placeholder="信用卡背面末三碼" >
+                      <hr> -->
+                      <input type="checkbox" name="" id="memo1"> <label for="memo1">發票要打統邊</label><br>
+                      <input type="checkbox" name="" id="memo2"> <label for="memo2">願意收到活動與優惠相關內容</label> <br>
+                      <input type="checkbox" name="" id="memo3"> <label for="memo3">我已經閱讀並同意 會員權益聲明 與 隱私權及網站使用條款 </label><br>
+                      
+                    </div>
+                    <div id='memberOrderSend'>
+                      <input type="submit"  id='memberOrderSendBtn' class="memberDashboardBtn" value="送出訂單">
+                      <!-- <input type=""  id='memberOrderSendBtn' class="memberDashboardBtn" value="送出訂單"> -->
+                      <p class="fontsize10">提醒您!交易授權過程中，請勿重新整理頁面或關閉視窗!</p>
+                    </div>
+                    <!-- </form> -->
+                </div>
+              </form>
+
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+        <!-- <script>
+       function show(){
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: '成功送出',
+                showConfirmButton: false,
+                timer: 5000
+            })
+        }
+    </script> -->
+     
+    <script src="/javascripts/member_dashboard.js"></script>
+    <script src="/javascripts/member_dashboard_03.js"></script>
+    <!-- <script src="/javascripts/ecpay.js"></script> -->
+    <footer><%-include footer.ejs %></footer>
+  </body>
+  </html>
+  

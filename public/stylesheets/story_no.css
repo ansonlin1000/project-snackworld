@@ -1,0 +1,175 @@
+/* 文章內文 ｜｜ articleContainer */
+.singleArticleContainer{
+    width: 80vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10rem;
+    margin: 4rem auto;
+}
+
+.articleContainer{
+    width: inherit;
+}
+
+
+.imageContainer{
+    width: inherit;
+    margin: 3rem auto;
+    display: flex;
+    justify-content: center;
+}
+
+.imageContainer:hover{
+    transform: scale(103%);
+    transition: all 0.7s ease-in-out;
+}
+
+.imageContainer>img{
+    width: 75%;
+    height: 400px;
+    object-position: center;
+    object-fit: cover;
+    display: inline-block;
+    border-top-left-radius: 30% 40%;
+    border-top-right-radius: 30% 50%;
+    border-bottom-right-radius: 40% 50%;
+    border-bottom-left-radius: 35% 50%;
+}
+
+@keyframes img {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+#firstImage{
+    width: 80%;
+    border-radius: 1%;
+}
+
+
+.wordsContainer{
+    width: 75%;
+    margin: 6rem auto;
+}
+
+.articleTitle{
+    font-size: 4rem;
+    word-spacing: 0.3rem;
+    margin: 3rem 0;
+}
+
+/* 分享此文 ｜| articleShare */
+.articleShare{
+    width: inherit;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.socialIconContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items: center;
+}
+
+
+.socialIcon{
+
+    width: inherit;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    
+}
+
+.Icon{
+    width: 27px;
+}
+
+.line{
+    width: 250px;
+    height: 2px;
+    border: 0.5px solid black;
+    opacity: 0.5;
+    margin: 0 5rem;
+}
+
+/* 推薦文章 | | articleMore */
+.articleMore{
+    width: inherit;
+    margin: 4rem auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.iconTitle{
+    margin-top: 1rem;
+}
+
+.articleItselfContainer {
+    width: 250px;
+    height: 400px;
+    margin: 2rem 0.3rem;
+    float:left;
+    flex-direction:row;
+  }
+  
+  .card-img-top {
+    width: inherit;
+    height: 250px;
+    object-fit: cover;
+    opacity: 1;
+    border-radius: 2%;
+  }
+  
+  .card-img-top:hover {
+    opacity: 0.5;
+    transition: all 0.2s ease-in;
+  }
+  
+  .cardBody {
+    width: inherit;
+    /* height: inherit; */
+    max-width: 100%;
+  }
+  .card-title {
+    margin: 1rem 0;
+    padding: 0;
+  }
+  
+  .card-text {
+    word-wrap: break-word;
+  }
+
+.buyBtn{
+    width: 180px;
+    height: 50px;
+    background-color: var(--color1);
+    color: white;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buyBtn a{
+    color: white;
+}
+
+.buyBtn a:hover{
+    text-decoration: none;
+    color: white;
+}

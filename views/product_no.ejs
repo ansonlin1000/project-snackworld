@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<head> <%-include  css_js.ejs %> <title><%= title %></title>
+  <link rel="stylesheet" href="/stylesheets/product_no.css">
+  <script>
+    $(function () {
+      $('.qtyplus').click(function (e) {
+        e.preventDefault();
+        fieldName = $(this).attr('field');
+        var currentVal = parseInt($('input[name=' + fieldName + ']').val());
+        if (!isNaN(currentVal)) {
+          $('input[name=' + fieldName + ']').val(currentVal + 1);
+        } else {
+          $('input[name=' + fieldName + ']').val(0);
+        }
+      });
+
+      $(".qtyminus").click(function (e) {
+        e.preventDefault();
+        fieldName = $(this).attr('field');
+        var currentVal = parseInt($('input[name=' + fieldName + ']').val());
+        if (!isNaN(currentVal) && currentVal > 0) {
+          $('input[name=' + fieldName + ']').val(currentVal - 1);
+        } else {
+          $('input[name=' + fieldName + ']').val(0);
+        }
+      });
+    });
+  </script>
+  <!-- 按愛心收藏 -->
+  <style>
+    .heart {
+      width: 100px;
+      height: 100px;
+      background: url(/images/product_img/heart.png) no-repeat;
+      cursor: pointer;
+      position: relative;
+      top: 1px;
+    }
+
+    .heartHover {
+      background-position: -2800px 0;
+      transition: background 1s steps(28);
+    }
+  </style>
+  <script>
+    $(function () {
+      $(".like").click(function () {
+        $(this).attr('src', '/images/product_img/heart-solid.svg');
+      })
+    })
+  </script>
+</head>
+
+<body>
+  <header><%-include  navbar.ejs %></header>
+  <!-- navbarfix之後頁面的預留空間 -->
+  <div id="navbarbox"></div>
+  <div id='navbarBackground'>
+    <div id='navbarBackgroundBox'></div>
+    <img id='navbarLeaf' src="/images/header_img/leaf.svg" alt="">
+    <img id='navbarThreebars' src="/images/header_img/three_bars.svg" alt="">
+    <img id='navbarBgImg' src="/images/header_img/navbar_bg.svg" alt="">
+  </div>
+  <div class="eachProdInfo">
+    <div class="prodHeader">
+      <div class="prodInfoImg">
+        <img src="<%= sqlAllProd2.prodPhoto1 %>">
+      </div>
+      <div class="prodInfoBox">
+        <div class="prodLike">
+          <img class="like" src="/images/product_img/heart-darkred.svg">
+        </div>
+        <p class="prodTitle"><%= sqlAllProd2.prodName %></p>
+        <p>國家：<%= sqlAllProd2.prodCountry %></p>
+        <p class="prodPrice">NT$ <%= sqlAllProd2.prodPrice %></p>
+        <form class='myform' method='POST' action='#'>
+          <input type='button' value='-' class='qtyminus' field='quantity' />
+          <input type='text' name='quantity' value='1' class='qty' />
+          <input type='button' value='+' class='qtyplus' field='quantity' />
+        </form>
+        <div class="shopBtn">
+          <div class="cartBtn btn btn-light btn-sm addToShoppingCart m2" id="<%= sqlAllProd2.prodId %>" role="button">
+            加入購物車</div>
+          <a class="btn btn-outline-danger btn-sm shoppingNow cartBtn" href="#" role="button">立即購買</a>
+        </div>
+      </div>
+    </div>
+    <div class="pordInfoLine">
+      <h3>商品介紹</h3>
+      <div class="infoLine"></div>
+    </div>
+    <div class="infoContent">
+      <img src="<%= sqlAllProd2.prodPhoto1 %>">
+      <p><%= sqlAllProd2.prodInfo %></p>
+      <img src="<%= sqlAllProd2.prodPhoto2 %>">
+      <img src="<%= sqlAllProd2.prodPhoto3 %>">
+    </div>
+    <div class="pordInfoLine">
+      <h3>精選推薦</h3>
+      <div class="infoLine"></div>
+    </div>
+    <div>
+      <div id="recommendProd">
+        <!-- 隨機商品1 -->
+        <div class="prodCard">
+          <a href="http://localhost:3000/product/<%= rendomProdCard1.prodId %>">
+            <img src="<%= rendomProdCard1.prodPhoto1 %>" class="card-img-top" alt="Card image cap">
+          </a>
+          <div class="prodInfo">
+            <div class="prodNameBox">
+              <a href="http://localhost:3000/product/<%= rendomProdCard1.prodId %>"><%= rendomProdCard1.prodName %></a>
+            </div>
+            <div class="prodPriceAndIcon">
+              <P>NT$<%= rendomProdCard1.prodPrice %></P>
+              <div class="icon">
+                <a class="cartBtn" href="#"><img src="/images/product_img/blue_cart.svg"></a>
+                <img class="like" src="/images/product_img/heart-regular.svg">
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 隨機商品2 -->
+        <div class="prodCard">
+          <a href="http://localhost:3000/product/<%= rendomProdCard2.prodId %>">
+            <img src="<%= rendomProdCard2.prodPhoto1 %>" class="card-img-top" alt="Card image cap">
+          </a>
+          <div class="prodInfo">
+            <div class="prodNameBox">
+              <a href="http://localhost:3000/product/<%= rendomProdCard2.prodId %>"><%= rendomProdCard2.prodName %></a>
+            </div>
+            <div class="prodPriceAndIcon">
+              <P>NT$<%= rendomProdCard2.prodPrice %></P>
+              <div class="icon">
+                <a class="cartBtn" href="#"><img src="/images/product_img/blue_cart.svg"></a>
+                <img class="like" src="/images/product_img/heart-regular.svg">
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 隨機商品3 -->
+        <div class="prodCard">
+          <a href="http://localhost:3000/product/<%= rendomProdCard3.prodId %>">
+            <img src="<%= rendomProdCard3.prodPhoto1 %>" class="card-img-top" alt="Card image cap">
+          </a>
+          <div class="prodInfo">
+            <div class="prodNameBox">
+              <a href="http://localhost:3000/product/<%= rendomProdCard3.prodId %>"><%= rendomProdCard3.prodName %></a>
+            </div>
+            <div class="prodPriceAndIcon">
+              <P>NT$<%= rendomProdCard3.prodPrice %></P>
+              <div class="icon">
+                <a class="cartBtn" href="#"><img src="/images/product_img/blue_cart.svg"></a>
+                <img class="like" src="/images/product_img/heart-regular.svg">
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 隨機商品4 -->
+        <div class="prodCard">
+          <a href="http://localhost:3000/product/<%= rendomProdCard4.prodId %>">
+            <img src="<%= rendomProdCard4.prodPhoto1 %>" class="card-img-top" alt="Card image cap">
+          </a>
+          <div class="prodInfo">
+            <div class="prodNameBox">
+              <a href="http://localhost:3000/product/<%= rendomProdCard4.prodId %>"><%= rendomProdCard4.prodName %></a>
+            </div>
+            <div class="prodPriceAndIcon">
+              <P>NT$<%= rendomProdCard4.prodPrice %></P>
+              <div class="icon">
+                <a href="#" class="cartBtn"><img src="/images/product_img/blue_cart.svg"></a>
+                <img class="like" src="/images/product_img/heart-regular.svg">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer><%-include footer.ejs %></footer>
+</body>
+<!-- <script>
+  // 處理愛心 => hover效果、加入資料庫
+  $(".heart").on('click', function (e) {
+    var imgValue = this.id
+    $(this).addClass('heartHover')
+    $.ajax({
+      url: "http://localhost:3000/product/toCollect",
+      type: "post",
+      data: { prodId: `${imgValue}` },
+      success: (result) => { console.log(result) }
+    })
+  })
+
+  // 購物車下拉
+  $('.cart').on('click', () => { $('.cartGocontainer').fadeToggle("fast").removeClass('show'); })
+
+
+  $('.heart').on('click', function () {
+    // alert('收藏慾望')
+    $(this).addClass('heartHover')
+  })
+
+  $(".heart").on('click', function (e) {
+    // 取本網站url的末數字，並且判斷為各位或十位數
+    var currentLocation = document.URL.toString();
+    // console.log(currentLocation.length)
+
+    if (currentLocation.length == 31) {
+      var stringlength = (currentLocation.length) - 1
+      var urlData = currentLocation.substr(stringlength, 1)
+
+    } else {
+      var stringlength = currentLocation.length - 2
+      var urlData = currentLocation.substr(stringlength, 2)
+    }
+    // console.log(urlData, stringlength)
+
+    $.ajax({
+      url: "http://localhost:3000/product/toSingleToCollect",
+      type: "post",
+      data: { prodId: `${urlData}` },
+      success: (result) => { console.log(result) }
+    })
+  })
+
+
+
+
+
+
+
+
+
+
+
+  // 處理購物車 => counting  
+  $('.cartBtn').on('click', (e) => {
+
+    // var prodName = $(`#${prodId}`).find('#prodName').val();
+    // var prodPrice = $(`#${prodId}`).find('#prodPrice').val();
+
+    // 點擊的商品本人
+    var prodId = e.target.id;
+    console.log(prodId)
+
+    // 處理紅色標籤
+    var CartCount = parseInt($('.CartCount').text());
+    // 處理 localStorage
+    var productItem = {};
+    productItem.prodId = prodId;
+
+    adding(CartCount);
+    localStoragePush(productItem);
+    createDeleteProduct(prodId, CartCount)
+  })
+
+
+
+
+  function adding(CartCount) {
+    CartCount++;
+    $('.CartCount').text(CartCount)
+  };
+
+  function localStoragePush(productItem) {
+    if (localStorage && localStorage.getItem('cart')) {
+      var cart = JSON.parse(localStorage.getItem('cart'))
+      cart.prodId.push(productItem)
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+    // console.log(productItem)
+    // console.log(cart)
+  }
+
+  function createDeleteProduct(id, CartCount) {
+    let deleteId = id;
+    let count = CartCount;
+    // 要求照片：ajax => server => ajax
+    $.ajax({
+      url: "http://localhost:3000/product/cart/" + deleteId,
+      type: "get",
+      contentType: 'application/json',
+      success: function (result) {
+        $('.cartTitle').after(function () { return `<div class="cartItem"><div class="cartImage" style="background-image: url(${result[0].prodPhoto1})"></div><div class="cartContent"><p>${result[0].prodName}</p><div>NT$${result[0].prodPrice}</div></div><div class="garbageCan"></div></div>` })
+      },
+      error: function (err) { throw (err) },
+      complete: function (response, textStatus) { return }
+    });
+
+    // 刪除購物車item、減法紅色提示、刪除localStorage裡的值
+    $('.garbageCan').click(function (deleteId, count) {
+      let removingDiv = $(this).parent();
+      let prodId = 'prodId'
+      let removeLocalStorageId = prodId.concat('', id)
+      // 刪除購物車item 
+      removingDiv.remove();
+      // 減法紅色提示
+      if (CartCount <= 0) {
+        return
+      } else {
+        CartCount--;
+        $('.CartCount').text(CartCount)
+      }
+    })
+  }
+
+
+
+
+
+  // 進得刪除，不然localStorage不能累加
+  localStorage.clear()
+</script> -->
+
+</html>

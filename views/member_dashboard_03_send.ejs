@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+  <head>
+    <%-include  css_js.ejs %>
+    <title>會員後台</title>
+    <link rel="stylesheet" href="/stylesheets/member_dashboard_03.css">
+    <link rel="stylesheet" href="/stylesheets/member_dashboard_03_send.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" 
+            crossorigin="anonymous">
+    </script>
+        <!-- jQuery Modal -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+  </head>
+  <body>
+    <%-include  navbar.ejs %>
+    <!-- 頁面標題文字 -->
+    <div id='memberHeader'>
+      <p class="fontsize30">Hi ~ 小食界會員</p>
+      <p class="fontsize16">讓我們透過小食，認識異國</p>
+    </div>
+    <!-- 選單區塊 -->
+    <div id='memberDashboard'>
+      <!-- 功能選單(搭配Javascript切換) -->
+      <%-include  member_dashboard_00_select.ejs %>
+      <!-- 功能內容區塊 -->
+      <div id='memberDashboardMain'>
+        <div id='memberSubscription' class="menberMainBox">
+          <!-- 送出前確認 -->
+          <div class="checkContent">
+            <h1 class="h1Position">小食界零食箱訂閱確認</h1>
+        <table id="checkTable">
+          <tr>
+            <td class="width200">訂單日期</td>
+            <td class="width400"><%= MerchantTradeDate %></td>
+          </tr>
+          <tr>
+            <td>訂單編號</td>
+            <td><%= MerchantTradeNo %></td>
+          </tr>
+          <tr>
+            <td>訂閱方案</td>
+            <td><%= TradeDesc %></td>
+          </tr>
+          <tr>
+            <td>方案金額</span></td>
+            <td><%= TotalAmount %></td>
+          </tr>
+          <tr>
+            <td>配送方式</></td>
+            <td>宅配</td>
+          </tr>
+        </table>
+            <form id="formCreditCard" method="post" accept-charset="UTF-8"
+              action="https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut/V5" target="Window2">
+              <div class="hideBox">
+                <input type="hidden" name="MerchantID" value="2000132" /><br />
+                <input type="hidden" name="MerchantTradeNo" value="<%= MerchantTradeNo %>" /><br />
+                <input type="hidden" name="MerchantTradeDate" value="<%= MerchantTradeDate %>"/><br />
+                <input type="hidden" name="PaymentType" value="aio" /><br />
+                <input type="hidden" name="TotalAmount" value="<%= TotalAmount %>" /><br />
+                <input type="hidden" name="TradeDesc" value="<%= TradeDesc %>" /><br />
+                <!-- <input type="text" name="TradeDesc" value="小食界零食箱訂閱" /><br /> -->
+                <input type="hidden" name="ItemName" value="<%= ItemName %>" /><br />
+                <input type="hidden" name="ReturnURL" value="https://developers.ecpay.tw/AioMock/MerchantReturnUrl" /><br />
+                <input type="hidden" name="ChoosePayment" value="Credit" /><br />
+                <input type="hidden" name="CheckMacValue" value="<%= sha %>" /><br />
+                <input type="hidden" name="EncryptType" value="1" /><br />
+              </div>
+              <input type="submit" value="送出訂單" class="orderSendBtn"/>
+              </form>
+          </div>
+        </div>
+      </div>
+    </div>
+     
+    <script src="/javascripts/member_dashboard.js"></script>
+    <!-- <script src="/javascripts/member_dashboard_03.js"></script> -->
+ 
+    <footer><%-include footer.ejs %></footer>
+  </body>
+  </html>
+  

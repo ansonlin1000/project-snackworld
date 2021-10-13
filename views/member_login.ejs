@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+  <head>
+    <%-include  css_js.ejs %>
+    <title><%= title %></title>
+  <style>
+    h3{
+      text-align: center;
+    }
+
+  
+
+    /* hr{
+      text-align: center;
+      width: 500px;
+    } */
+
+    .login_page{
+      width: 100%;
+      height: 750px;
+    }
+    #tel, #password,  #email, #username, #comfirm_password, #username2, #password2{
+      width: 200px;
+      height: 20px;
+      margin: 10px;
+      color: #dfcebe;
+      }
+    
+    #container{
+      margin: 50px;
+      padding: 30px;
+      width: 1000px;
+      height: 600px;
+      background-color:#dfcbba;
+      border-radius: 10px;
+
+      box-shadow: 0 0px 70px rgba(0, 0, 0, 0.1);
+    
+      position:relative;   
+      margin: auto;
+      top: 100px;
+      text-align:center;  
+      }
+    .login{
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .search {
+        width: 300px;
+        height: 40px;
+        border-radius: 18px;
+        outline: none;
+        border: 1px solid #ccc;
+        padding-left: 20px;
+        
+    }
+
+    .box{
+      text-align: center;
+    }
+
+    h5{
+    margin: 20px;
+    color: #a3a2a3;
+    }
+   .registerbtn{
+      /* margin: 10px; */
+      text-decoration: underline;
+      color: #19294f;
+    }
+
+    .registerbtn:hover{
+    color: black;
+    }
+
+    form{
+      display: flex;
+      flex-direction: column;
+      width: 450px;
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+      align-self: center;
+      margin: 20px 0 0 0 ;
+    }
+
+    .inputbox{
+      margin: 10px;
+    }
+  .inputbox span{
+    margin-right: 20px;
+    letter-spacing: 14px;
+  }
+  .inputbox input{
+    margin-right: 60px;
+    padding-left: 10px;
+  }
+
+  input:focus{
+    outline: none;
+  }
+
+    .system_name{
+    position:relative;   
+    margin: auto;
+    top: 100px;
+    text-align:center; 
+    }
+
+    .submit{
+    color: white;  
+    background: #19294f;
+    width: 180px;
+    height: 50px;
+    margin: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 0px;
+    line-height: 0px;
+    }
+
+    .submit:hover{
+    background: #19294f;
+    }
+
+    input{
+    padding: 5px;
+    border: none; 
+    background-color: var(--color2);
+    border-radius: 5px;
+    }
+
+    .progressBar{
+      width: 60%;
+      height: 50px;
+      position: relative;
+      margin: 50px 0 0 100px;
+    }
+    .progressBar div{
+      width: 100%;
+      height: 10px;
+      position: absolute;
+      top:50%;
+      left: 0;
+      margin-top:-20px;
+      border:1px solid #ddd;
+      background: #ccc;
+    }
+    .progressBar div span{
+      position: absolute;
+      display: inline-block;
+      height: 10px;
+      width: 25%;
+    }
+    .progressBar>span{
+      position: absolute;
+      top:0;
+      margin-top: -10px;
+      width: 40px;
+      height: 40px;
+      border:2px solid #ddd;
+      border-radius: 50%;
+      /* background:#19294f; */
+      margin-left: -20px;
+      color:#fff;
+    }
+    .progressBar>span:nth-child(1){
+      left: 0%;
+      background:#19294f;
+    }
+    .progressBar>span:nth-child(2){
+      left: 25%;
+      /* background:#19294f; */
+      
+    }
+    .progressBar>span:nth-child(3){
+    left: 50%;
+    /* background:#19294f; */
+
+    }
+
+    .like{ font-size:66px;  color:#ccc; cursor:pointer;}
+    .cs{color:#f00;}
+
+
+    .myform{
+    text-align: left;
+    }
+
+    .qty {
+    width: 100px;
+    height: 50px;
+    text-align: left;
+    border: 0;
+    border-top: 1px solid #aaa;
+    border-bottom: 1px solid #aaa;
+    }
+
+
+    input.qtyplus {
+    width: 30px;
+    height: 40px;
+    border: 1px solid #aaa;
+    background: #f8f8f8;
+    }
+
+    input.qtyminus {
+    width: 30px;
+    height: 40px;
+    border: 1px solid #aaa;
+    background: #f8f8f8;
+    }
+  </style>
+
+ 
+  </head>
+  <body>
+    <%-include  navbar.ejs %>
+    <div class="login_page">
+      <div id="container">
+
+        <div class="login">  
+          
+          <h3>開始吃遍世界</h3>
+          <h5>異國美食：透過小食，認識異國</h5>
+          <div class="imgbox"><img src="/images/login_in_img/login_icon.svg" alt=""></div>
+          
+
+          <form method="post" action="" >
+            
+            <div class="inputbox"><span>手機</span><input name="memberPhone" type="text"></div>
+            <div class="inputbox"><span>密碼</span><input name="password" type="password"></div>
+            
+            <div><a href="http://localhost:3000/member/forget">忘記密碼了？</a></div>
+            <span style="color:red"><%= messages %></span>
+            <div><input type="submit" value="我要進入小食界" class="submit" ></div>
+            
+          </form>  
+
+        
+          <a class="registerbtn" href="http://localhost:3000/member/register">我還不是小食界會員</a>
+        </div><!-- login end-->
+      </div><!-- container1 end-->
+    </div>
+
+
+
+
+
+
+    <!-- <div class="signup_page1">
+      <div id="container2">
+        
+        <div class="signup">  
+          
+          <h3>成為小食界會員</h3><br><br>
+
+          <button type="button" class="submit">Facebook</button>
+          <button type="button" class="submit">Instagram</button>
+          <button type="button" class="submit">Twitter</button>
+          <hr>
+
+          <form action="">
+            <input type="text" id="email" name="email" placeholder="電子信箱" required><br>
+            <div class="tab"></div>
+            <input type="text" id="password2" name="password" placeholder="密碼" required>
+            <div class="tab"></div>
+            <input type="text" id="comfirm_password" name="comfirm_password" placeholder="確認密碼" required>
+            <div class="tab"></div>            
+            <input type="submit" value="成為會員" class="submit">
+          </form>  
+          
+          <h5 onclick="show_hide()">我已經是小食界會員了</h5>
+
+          
+        </div>
+      </div>
+    </div> -->
+    
+    <footer><%-include footer.ejs %></footer>
+    <script>
+      function show_hide() {
+      var login = document.getElementById("container1");
+      var signup = document.getElementById("container2");
+      
+
+    if (login.style.display === "none") {
+        login.style.display = "block";  //lonin出現
+        document.getElementById("username").value="";
+        document.getElementById("password").value="";
+        signup.style.display = "none";  //signup消失
+        
+    } else {
+        login.style.display = "none";   //login消失
+        signup.style.display = "block"; //signup出現
+        signup.style.visibility="visible";
+        
+    
+        document.getElementById("fullname").value="";
+        document.getElementById("username2").value="";
+        document.getElementById("password2").value="";
+        document.getElementById("comfirm_password").value="";
+    }
+    }
+  </script>
+  </body>
+</html>

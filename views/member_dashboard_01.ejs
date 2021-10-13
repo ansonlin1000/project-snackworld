@@ -1,0 +1,103 @@
+<div id='memberInfo' class="menberMainBox">
+    <!-- 1-1 零食診斷結果 -->
+    <div id='snackTestResult'>
+    <p>零食診斷結果</p>
+    <div id='snackTestResultImg'>
+        <% for (let item of sqlMenberdata) { %>
+        <img src="/images/snack_test_img/card<%= item.memberSnackTestResult %>.svg" alt="">
+        <% } %>
+    </div>
+    </div>
+    <!-- 1-2 會員資料編輯 -->
+    <div id='memberPersonalInformation'>
+    <form id="memberForm" action="/member/dashboard/edit" method="post">
+        <% for (let item of sqlMenberdata) { %>
+            <table>
+                <tr>
+                    <td class="width100">會員編號</td>
+                    <td><p class="memberIdstyle"><%= item.memberId %></p></td>
+                    <td><input type="hidden" value="<%= item.memberId %>" name="memberId"></td>
+                </tr>
+                <tr>
+                    <td><span class="memberInfoText">姓名</span></td>
+                    <td><input type="text" value="<%= item.memberName %>" name="memberName"></td>
+                </tr>
+                <tr>
+                    <td><span class="memberInfoText">生日</span></td>
+                    <td><input type="text" name="memberBirthday" value="<%= `${item.memberBirthday.getFullYear()} / ${item.memberBirthday.getMonth()+1} / ${item.memberBirthday.getDate()}` %>" ></td>
+                </tr>
+                <tr>
+                    <td><span class="memberInfoText">性別</span></td>
+                    <td><input type="radio" name="memberGender"  <%= (item.memberGender == "M")? 'checked':'' %>>男 <input type="radio" name="memberGender" <%= (item.memberGender == "F")? 'checked':'' %> >女 </td>
+                </tr>
+                <tr>
+                    <td>聯絡電話</td>
+                    <td><input type="text" value="<%= item.memberTel %>" name="memberTel"></td>
+                </tr>
+                <tr>
+                    <td>手機號碼</td>
+                    <td><input type="text" value="<%= item.memberPhone %>" name="memberPhone"></td>
+                </tr>
+                <tr>
+                    <td>通訊地址</td>
+                    <td><input type="text" value="<%= item.memberAddress %>" name="memberAddress"></td>
+                </tr>
+            </table>
+        <% } %>
+        <input id="memberPersonalInfoSend" type="submit" value="確定" class="memberPersonalInformationEdit">
+    </form>
+    <!-- <button type="button" id='memberPersonalInformationEdit' class="memberDashboardBtn" >編輯</button> -->
+
+    <script>
+        $('#memberPersonalInfoSend').on('click',function(){
+            Swal.fire({
+                position: 'center',
+                // icon: 'success',
+                title: '成功更改',
+                showConfirmButton: false,
+                timer: 5000
+            })
+            
+        })
+        //監聽click事件，準備把資料丟給ajax
+        $('#memberPersonalInformationEdit').on('click', function () {
+            //整理表單資料到變數
+            var data = $('#memberForm').serializeArray()
+            JSONData = serializeToJSON(data)
+            alert(JSONData);
+
+            //ajax請求，準備資料丟給後端
+            $.ajax({
+                
+                url: "http://localhost:3000/member/dashboard/edit",
+                type: "post",
+                contentType: "application/json; charset=utf-8",
+                data: JSONData,
+                success: function (happy) {
+                    console.log(happy)
+                    // var res = JSON.parse(res)
+                    // //後端會封裝一個response class，預先寫好執行No.
+                    // if (res.errno === 1) {
+                    //     alert("新增成功!")
+                    // } else if (res.errno === 0) {
+                    //     alert("新增失敗!")
+                    // }
+                },
+                error: function () {
+                    alert("系統錯誤!")
+                },
+            })
+        })
+        //序列化轉JSON
+        function serializeToJSON(data) { 
+            var values = {};
+            for (index in data) {
+                values[data[index].name] = data[index].value;
+
+            }
+            return JSON.stringify(values)
+        }
+        
+    </script>
+    </div>
+</div>

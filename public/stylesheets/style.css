@@ -1,0 +1,212 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500&display=swap');
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+:root{
+  --color1: #16264f ;
+  --color2: #f2eae3 ;
+  --color3: #dfcbba ;
+  --color4: #c5724c ;
+}
+body {
+  font-family: 'Noto Sans TC', sans-serif;
+  color: var(--color1);
+  font-size: 18px;
+}
+
+a {
+  color: var(--color4);
+}
+
+/* navbar */
+#navbar{
+  position: fixed;
+  z-index: 5;
+  left: 0;
+  right: 0;
+  height: 70px;
+  z-index: 500;
+  background-color: unset;
+}
+#navbar_content{
+  height: 70px;
+}
+.nav-link {
+  font-weight: 500;
+  color: var(--color1);
+  margin: 0px 20px;
+}
+
+#navbarLogo{
+  width: 220px;
+  margin-left: 50px;
+}
+#navbarLoginBtn{
+  background-color: var(--color3);
+  border-radius: 20px;
+  color: var(--color1);
+  width: 130px;
+  height: 40px;
+  border: none;
+  margin: 0px 50px;
+}
+
+#navbarbox{
+  height: 100px;
+}
+
+#navbarBackgroundBox{
+  height: 150px;
+  background-color: var(--color2);
+  width: 100%;
+  top: 0px;
+}
+#navbarLeaf{
+  position: absolute;
+  top: -80px;
+  left: -60px;
+  width: 300px;
+}
+#navbarThreebars{
+  position: absolute;
+  width: 300px;
+  right: -130px;
+  top: 70px;
+}
+#navbarBgImg{
+  width: 100%;
+}
+#navbarBackground{
+  position: absolute;
+  z-index: -1;
+  top: 0px;
+  overflow: hidden;
+  height: 340px;
+}
+
+
+/* 購物車紅色提示 */
+.CartCount {
+  position: relative;
+  right: 1rem;
+  bottom: 1rem;
+}
+
+/* .紅心 */
+.heart {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  background: url(/images/product_img/heart.png) no-repeat;
+  cursor: pointer;
+}
+
+.heartHover {
+  background-position: -2800px 0;
+  transition: background 1s steps(28);
+}
+
+/* 購物車dropdown */
+.cartGocontainer {
+  width: 400px;
+  background-color: white;
+  float: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 5%;
+  position: relative;
+  right: 30px;
+  bottom:10px;
+}
+
+/* 購物車下拉 */
+.show{
+    display:none;
+}
+
+.cart{
+    cursor: pointer;
+}
+
+.cartItem {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border: 0.5px solid rgb(0, 0, 0, 0.2);
+}
+
+.cartTitle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.cartTitle > p {
+    margin-top: 1rem;
+    font-size: 20px;
+}
+
+.cartContent{
+    display: flex;
+    flex-direction: column;
+    align-items:flex-end;
+}
+
+.cartContent > p {
+  font-size: 20px;
+  text-align: center;
+}
+
+.cartImage {
+  width: 100px;
+  height: 100px;
+  background-position: center;
+  background-size: contain;
+}
+
+.garbageCan {
+  width: 20px;
+  height: 20px;
+  background: url(/images/garbageCan.svg);
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+  right: 10px;
+}
+
+.cartButton{
+    width: 100%;
+}
+
+/* 購物車結束，以上 */
+
+
+
+/* footer */
+footer{
+  background-color: var(--color1) ;
+  color: white ; 
+  height: 450px;
+  text-align: center;
+  padding: 40px;
+  line-height: 1.3;
+}
+
+footer img{
+  width: 24px;
+  margin: 16px;
+}
+
+footer a{
+  color: white;
+  margin: 10px;
+}
+
+footer a:hover{
+  color: white;
+}

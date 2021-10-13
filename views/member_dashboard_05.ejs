@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+  <head>
+    <%-include  css_js.ejs %>
+    <title>會員後台</title>
+    <link rel="stylesheet" href="/stylesheets/member_dashboard_05.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="  crossorigin="anonymous"> </script>
+        <!-- jQuery Modal -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+  </head>
+  <body>
+    <%-include  navbar.ejs %>
+    <!-- 頁面標題文字 -->
+    <div id='memberHeader'>
+      <p class="fontsize30">Hi ~ 小食界會員</p>
+      <p class="fontsize16">讓我們透過小食，認識異國</p>
+    </div>
+    <!-- 選單區塊 -->
+    <div id='memberDashboard'>
+      <!-- 功能選單(搭配Javascript切換) -->
+      <%-include  member_dashboard_00_select.ejs %>
+      <!-- 功能內容區塊 -->
+      <div id='memberDashboardMain'>
+        <div id='memberCollectProd' class="menberMainBox">
+          <!-- 收藏清單(用reacr產生內容) -->
+          <table id='memberCollectProdList'>
+              <tr class='memberCollectProdHeader'>
+                  <td class='width660'>我的收藏</td>
+                  <td class='width160'>單價</td>
+                  <td class='width160 cartBtn'>加入購物車</td>
+                  <td class='width160'>刪除</td>
+              </tr> <%  for (let item of collectedProd) {%> <tr>
+                  <td class="<%= item.memberId%>">
+                      <div class='memberCollectProdIngandName'>
+                          <img class='memberCollectProdImg' src="<%= item.prodPhoto1 %>" alt="no Image" />
+                          <div><%= item.prodName %></div>
+                      </div>
+                  </td>
+                  <td> NTD <%= item.prodPrice %></td>
+                  <td> <button class='memberCollectProdAddCaetBtn'><img src="/images/cart.svg" /></button></td>
+                  <td><button class='memberShoppingCartDelBtn deleteHandler' type="button"><img id=" <%= item.collectNo%> "
+                              src="/images/delete.svg" /></button></td>
+              </tr> <% }%>
+          </table>
+      </div>
+      <script>
+
+          $(".deleteHandler").on("click", (e) => {
+              var collectNo = { "collectNo": e.target.id }
+              // collectNo = JSON.stringify(collectNo)
+              console.log(collectNo)
+              $.ajax({
+                  type: "delete",
+                  url: "http://localhost:3000/member/dashboard/delete",
+                  data: collectNo
+              })
+              setTimeout(() => { window.location.reload(); }, 500)
+          })
+      </script>
+      <!-- <script type="text/babel">
+          // 收藏商品
+          class CollectProd extends React.Component {
+              // state = {
+              //     cartList: [
+              //         { collectprodId: 1, prodImg: "/images/member_img/product13.jpeg", prodName: "【英國】Gnaw松鼠啃無添加手工巧克力100g-軟焦糖/海鹽焦糖/覆盆莓/杏仁太妃糖海鹽/香蕉太妃派/草莓白巧克力/果乾和餅乾牛奶", prodPrice: "145" },
+              //         { collectprodId: 2, prodImg: "/images/member_img/product12.jpeg", prodName: "【德國】Kuhbonbon牛奶糖-經典焦糖/蜂蜜牛奶/咖啡/榛果/巧克力/蛋奶酒 (小牛糖)", prodPrice: "65" },
+              //         { collectprodId: 3, prodImg: "/images/member_img/product11.jpeg", prodName: "【西班牙】Salysol罐頭軟糖60g-綜合/草莓", prodPrice: "99" },
+              //     ]
+              // }
+
+              // downloadData = async () => {
+              //     let result = await $.ajax({
+              //         type: "get",
+              //         url: "http://localhost:3000/member/dashboard"
+              //     });
+              //     this.state.cartList = JSON.parse(result);
+              //     this.setState({});
+              // }
+
+              // constructor() {
+              //     super();
+              //     this.downloadData();
+              // }
+
+              constructor(props) {
+                  super(props)
+                  this.state = {
+                      cartList: []
+                      // { collectprodId: 1, prodImg: "/images/member_img/product13.jpeg", prodName: "【英國】Gnaw松鼠啃無添加手工巧克力100g-軟焦糖/海鹽焦糖/覆盆莓/杏仁太妃糖海鹽/香蕉太妃派/草莓白巧克力/果乾和餅乾牛奶", prodPrice: "145" },
+                      // { collectprodId: 2, prodImg: "/images/member_img/product12.jpeg", prodName: "【德國】Kuhbonbon牛奶糖-經典焦糖/蜂蜜牛奶/咖啡/榛果/巧克力/蛋奶酒 (小牛糖)", prodPrice: "65" },
+                      // { collectprodId: 3, prodImg: "/images/member_img/product11.jpeg", prodName: "【西班牙】Salysol罐頭軟糖60g-綜合/草莓", prodPrice: "99" },
+                  }
+              }
+
+              fetchingCartList = () => {
+                  fetch("http://localhost:3000/member/dashboard")
+                      .then((response) => response.json())
+                      .then((json) => {
+                              return alert(json)
+                          });
+              } 
+
+              componentDidMoumt() {
+                  this.fetchingCartList();
+              }
+              
+              render() {
+                  return (
+                      <React.Fragment>
+                          {
+                              this.state.cartList.map(item =>
+                                  <tr>
+                                      <td> <div className='memberCollectProdIngandName' ><img className='memberCollectProdImg' src={item.prodImg} alt="" /><div>{item.prodName} </div> </div> </td>
+                                      <td> NTD {item.prodPrice}  </td>
+                                      <td> <button className='memberCollectProdAddCaetBtn'><img src="/images/cart.svg" /></button></td>
+                                      <td><button className='memberShoppingCartDelBtn'><img src="/images/delete.svg" /></button></td>
+                                  </tr>
+                              )
+                          }
+                      </React.Fragment>
+                  )
+              }
+          }
+
+
+          class CollectProdList extends React.Component {
+              state = {}
+              render() {
+                  return (
+                      <React.Fragment>
+                          <tr className='memberCollectProdHeader'>
+                              <td className='width660'>我的收藏</td>
+                              <td className='width160' >單價</td>
+                              <td className='width160'>加入購物車</td>
+                              <td className='width160'>刪除</td>
+                          </tr>
+                          <CollectProd />
+                      </React.Fragment>
+                  );
+              }
+          }
+
+          ReactDOM.render(
+              <CollectProdList />,
+              document.getElementById("memberCollectProdList")
+          )
+
+      </script> -->
+        
+      </div>
+    </div>
+     
+    <script src="/javascripts/member_dashboard.js"></script>
+ 
+    <footer><%-include footer.ejs %></footer>
+  </body>
+  </html>
+  

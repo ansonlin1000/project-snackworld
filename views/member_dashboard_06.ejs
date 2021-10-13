@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+
+<head> <%-include  css_js.ejs %> <title>會員後台</title>
+    <link rel="stylesheet" href="/stylesheets/member_dashboard_06.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <!-- jQuery Modal -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+</head>
+
+<body> <%-include  navbar.ejs %>
+    <!-- 頁面標題文字 -->
+    <div id='memberHeader'>
+        <p class="fontsize30">Hi ~ 小食界會員</p>
+        <p class="fontsize16">讓我們透過小食，認識異國</p>
+    </div>
+    <!-- 選單區塊 -->
+    <div id='memberDashboard'>
+        <!-- 功能選單(搭配Javascript切換) --> <%-include  member_dashboard_00_select.ejs %>
+        <!-- 功能內容區塊 -->
+        <div id='memberDashboardMain'>
+            <div id='memberFeedback' class="menberMainBox">
+                <div> 
+                    <form method="POST" id="idForm">
+                        <div>訂單編號：
+                        <select id="subNo">
+                             <%  for(let index in orderList){ %> 
+                                <option><%= orderList[index].orderNo %></option> 
+                             <%  }%> 
+                        </select>
+                        </div>
+                        <input type="hidden" id="subNoPersudo" name="subNo">
+                        <div class="feedbackQuestion">
+                            <p>1. 對於本次零食箱配送方式，您的感受是：</p>
+                            <div class="feedbackQuestionSelect">
+                                <input type="radio" name="feedback1" value="非常滿意" id='feedback1-3'><label
+                                    for="feedback1-3">非常滿意</label>
+                                <input type="radio" name="feedback1" value="普通" id='feedback1-2'><label
+                                    for="feedback1-2">普通</label>
+                                <input type="radio" name="feedback1" value="不滿意" id='feedback1-1'><label
+                                    for="feedback1-1">不滿意</label>
+                            </div>
+                        </div>
+                        <div class="feedbackQuestion">
+                            <p>2. 對於本次零食箱零食內容，您的感受是：</p>
+                            <div class="feedbackQuestionSelect">
+                                <input type="radio" name="feedback2" value="非常滿意" id='feedback2-3'><label
+                                    for="feedback2-3">非常滿意</label>
+                                <input type="radio" name="feedback2" value="普通" id='feedback2-2'><label
+                                    for="feedback2-2">普通</label>
+                                <input type="radio" name="feedback2" value="不滿意" id='feedback2-1'><label
+                                    for="feedback2-1">不滿意</label>
+                            </div>
+                        </div>
+                        <div class="feedbackQuestion">
+                            <p>3. 對於本次零食箱品嚐感受，您的感受是：</p>
+                            <div class="feedbackQuestionSelect">
+                                <input type="radio" name="feedback3" value="非常滿意" id='feedback3-3'><label
+                                    for="feedback3-3">非常滿意</label>
+                                <input type="radio" name="feedback3" value="普通" id='feedback3-2'><label
+                                    for="feedback3-2">普通</label>
+                                <input type="radio" name="feedback3" value="不滿意" id='feedback3-1'><label
+                                    for="feedback3-1">不滿意</label>
+                            </div>
+                        </div>
+                        <div class="feedbackQuestion">
+                            <p>4. 對於本次整體服務，您的感受是：</p>
+                            <div class="feedbackQuestionSelect">
+                                <input type="radio" name="feedback4" value="非常滿意" id='feedback4-3'><label
+                                    for="feedback4-3">非常滿意</label>
+                                <input type="radio" name="feedback4" value="普通" id='feedback4-2'><label
+                                    for="feedback4-2">普通</label>
+                                <input type="radio" name="feedback4" value="不滿意" id='feedback4-1'><label
+                                    for="feedback4-1">不滿意</label>
+                            </div>
+                        </div>
+                        <div>
+                            <p>5. 其他意見</p>
+                            <div class="textareaBox">
+                                <input type="textarea" name="feedback_text" id='feedbackText'>
+                            </div>
+                        </div>
+                        <div id='memberFeedbackSend'>
+                            <input type="submit" id='memberFeedbackBtn' class="memberDashboardBtn">
+                        </div>
+                    </form>
+                    <!-- <div>
+                        <input type="submit" id='testinput' class="memberDashboardBtn">
+                    </div> -->
+                </div>
+                <script>
+                    // Test
+                    // $("#testinput").on("click", function (e) {
+                    //     console.log("click")
+
+                    //     var selectData = $("#subNo").val()
+                    //     console.log(`selectValue: ${selectData}`)
+
+                    //     var nameVal = $("#subNoPersudo").val(selectData)
+                    //     console.log(`inputValue: ${$("#subNoPersudo").val()}`)
+                    // });
+
+                    $('#memberFeedbackBtn').on('click', function () {
+                        Swal.fire({
+                            position: 'center',
+                            // icon: 'success',
+                            title: '感謝您的意見回饋',
+                            showConfirmButton: false,
+                            timer: 5000
+                        })
+
+                    })
+
+                    $("#idForm").submit(function (e) {
+                        var selectData = $("#subNo").val()
+                        $("#subNoPersudo").val(selectData);
+                        console.log(`inputValue: ${$("#subNoPersudo").val()}`)
+
+                        var formData = $(this).serializeArray();
+                        JSONData = serializeToJSON(formData)
+                        console.log(JSONData)
+
+                        $.ajax({
+                            type: "post",
+                            contentType: "application/json; charset=utf-8",
+                            url: "http://localhost:3000/member/dashboard/feedback/upload",
+                            data: JSONData,
+                            success: function (data) {
+                                console.log(data);
+                            }
+                        });
+                        // var message = alert('感謝您的意見回饋')
+                        // setTimeout((message)=>(location.reload(message)), 2000)
+                        // $("#idForm").css('display', 'none')
+
+                        e.preventDefault();
+                    });
+
+                    
+
+                    function serializeToJSON(data) {
+                        var values = {};
+                        for (index in data) {
+                            values[data[index].name] = data[index].value;
+                        }
+                        return JSON.stringify(values)
+                    }
+                </script>
+            </div>
+        </div>
+    </div>
+    <script src="/javascripts/member_dashboard.js"></script>
+    <footer><%-include footer.ejs %></footer>
+</body>
+
+</html>

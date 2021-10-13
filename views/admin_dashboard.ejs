@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+
+<head>
+  <%-include css_js.ejs %>
+    <title>
+      <%= title %>
+    </title>
+    <link rel="stylesheet" href="/stylesheets/admin_dashboard.css">
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/wangeditor@latest/dist/wangEditor.min.js"></script> -->
+</head>
+
+<body>
+  <div class="dashboard">
+    <!-- ----------------------左側選單部分------------------------------- -->
+    <div class="left-aside">
+      <div class="logoBox"> <a href="http://localhost:3000/"><img src="/images/admin_img/logo.svg" alt=""></a></div>
+      <div class="userBox">
+        <a href="http://localhost:3000/"><img src="/images/admin_img/adminuser.svg" alt=""></a>
+        <p>Hello! 小食界管理員</p>
+      </div>
+      <p>後台管理系統</p>
+      <ul class="asideList">
+        <li>
+          <img src="/images/admin_img/side1.svg" alt="">
+          <a id="productBtn" href="">商品管理</a>
+          <img src="/images/admin_img/arrow-right.svg" alt="">
+          <ul class="smallList " id="productList">
+            <li id="li-productList1"> <a id="a-productList1" href="#">商品列表</a></li>
+            <li id="li-productList2"><a id="a-productList2" href="#">新增商品</a></li>
+          </ul>
+
+        </li>
+
+
+        <li>
+          <img src="/images/admin_img/side2.svg" alt="">
+          <a id="orderBtn" href="">訂單管理</a>
+          <img src="/images/admin_img/arrow-right.svg" alt="">
+          <ul class="smallList" id="orderList">
+            <li id="li-orderList1"><a id="a-orderList1" href="#">一般訂單</a></li>
+            <li id="li-orderList2"><a id="a-orderList2" href="#">訂閱制訂單</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <img src="/images/admin_img/side3.svg" alt="">
+          <a id="memberBtn" href="">會員管理</a>
+          <img src="/images/admin_img/arrow-right.svg" alt="">
+          <ul class="smallList" id="memberList">
+            <li id="li-memberList1"><a id="a-memberList1" href="#">會員列表</a></li>
+          </ul>
+        </li>
+        <!-- <li>
+          <img src="/images/admin_img/side4.svg" alt="">
+          <a id="articleBtn" href="">文章管理</a>
+          <img src="/images/admin_img/arrow-right.svg" alt="">
+          <ul class="smallList" id="articleList">
+            <li id="li-articleList1"><a id="a-articleList1" href="#">文章列表</a></li>
+            <li id="li-articleList2"><a id="a-articleList2" href="#">新增文章</a></li>
+          </ul>
+        </li> -->
+      </ul>
+    </div>
+    <!-- ----------------------右側內容部分------------------------------- -->
+    <div class="right-content">
+      <!-- 商品管理區---商品列表 -->
+      <%-include  admin_dashboard_1_productlist.ejs %>
+
+      <!-- 商品管理區---新增商品 -->
+      <%-include  admin_dashboard_2_addproduct.ejs %>
+
+      <!-- 訂單管理區---訂單列表 -->
+      <%-include  admin_dashboard_3_orderlist.ejs %>
+
+      <!-- 訂單管理區---退貨訂單 -->
+      <%-include  admin_dashboard_4_returnorderlist.ejs %>
+
+      <!-- 會員管理區---會員列表 -->
+      <%-include  admin_dashboard_5_memberlist.ejs %>
+
+      <!-- 訂單管理區---訂單列表---查看 -->
+      <%-include  admin_dashboard_6_orderDetail.ejs %>
+
+      <!-- 訂單管理區---退貨訂單列表---查看 -->
+      <%-include  admin_dashboard_7_returnorderDetail %>
+
+      <!-- 商品列表---點"編輯"---編輯商品頁 -->
+      <%-include  admin_dashboard_8_editProductDetail %>
+
+      <!-- //會員列表---點"編輯"---編輯會員資料頁 -->
+      <%- include admin_dashboard_9_editMemberDetail %>
+
+       <!-- //會員列表---點"刪除"---刪除會員資料頁 -->
+      <%-include admin_dashboard_10_deleteMemberDetail %>
+
+      <!-------------------------------- //隱藏 ------------------------------------->
+      <!-- 文章管理區---文章列表 -->
+      <!-- <div class="containerdisplay" id="articlecontainer">
+      <div class="admin-breadcrumbs">
+        <p>文章管理 > 文章列表</p>
+      </div>
+      <div class="admin-topBox ">
+        <div>
+          <button class="deletemanyProductbtn">多個刪除</button>
+          <button class="addProductbtn">新增商品</button>
+        </div>
+
+        <form class="d-flex ">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <img src="/images/admin_img/magnifier.svg" alt="">
+        </form>
+      </div>
+      <div class="admin-ListBar">
+        <table>
+          <tr>
+            <td class="width40"><input type="checkbox"></td>
+            <td class="width100">分類</td>
+            <td class="width260">文章標題</td>
+            <td class="width460">文章摘要</td>
+            <td class="width150">
+              <select name="文章狀態" class="orderselect" id="">
+                <option value="">文章狀態</option>
+                <option value="">已發佈</option>
+                <option value="">草稿</option>
+              </select>
+            </td>
+            <td class="width160">最後更新時間</td>
+            <td class="width100">操作</td>
+          </tr>
+        </table>
+      </div>
+      <div class="admin-productListDetail">
+        <table>
+          <tr>
+            <td>
+              <div class="width40"><input type="checkbox"></div>
+            </td>
+            <td class="width100">紐澳零食</td>
+            <td class="width260">澳洲必吃5大熱銷經典巧克力</td>
+            <td class="width460">說到巧克力?，很多人可能會先想到比利時、瑞士等歐洲國家，但其實澳洲巧克力也是讓全世界...</td>
+            <td class="width150"><button class="orderFinishBtn">已發佈</button></td>
+            <td class="width160">2021-8-30 20:26</td>
+            <td class="width100">
+              <button class="admin-editBtn">編輯</button>
+              <button class="admin-deleteBtn">刪除</button>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div> -->
+      <!-- 文章管理區---新增文章 -->
+      <!-- <div class="containerdisplay" id="addarticlecontainer">
+      <div class="admin-breadcrumbs">
+        <p>文章管理 > 新增文章</p>
+      </div>
+      <div class="admin-addpage">
+        <div class="admin-addpage-flex">
+          <p>文章首圖：</p>
+          <div class="admin-addpage-uploadimg">
+           <p>上傳圖片</p> </div>
+        </div>
+        <div class="admin-addpage-flex">
+          <p>文章標題：</p>
+          <input type="text" style="width:350px ; height:30px;">
+        </div>
+        <div class="admin-addpage-flex" style="width:350px ; height:30px;">
+          <p>文章摘要：</p>
+          <input type="text">
+        </div>
+        <div class="admin-addpage-flex">
+          <p>文章分類：</p>
+          <select name="文章分類" class="orderselect" id="">
+            <option value=""></option>
+            <option value="">紐澳零食</option>
+            <option value="">美洲零食</option>
+            <option value="">台灣零食</option>
+            <option value="">歐洲零食</option>
+            <option value="">日韓零食</option>
+            <option value="">東南亞零食</option>
+          </select>
+        </div>
+        <p>文章內容：</p>
+        <div id="admin-articletextEditor">
+          <p>編輯文章內容</p>
+        </div>
+
+        <div class="admin-addpage-Btn">
+          <button class="admin-addarticleBtn">新增文章</button>
+          <button class="admin-savedraftBtn">儲存草稿</button>
+          <button class="orderCancelBtn">取消返回</button>
+        </div>
+      </div> -->
+
+
+
+
+    </div>
+  </div>
+  </div>
+
+  </div>
+  <!-- ////////////-------------React和JS部分------------//////////// -->
+  
+
+
+
+  <script type="text/babel">
+
+  
+    // // <!-- //商品列表元件 -->
+    // class ProductList extends React.Component {
+    //   state = {
+    //     productList: [
+    //       { prodSort: "甜食", productID: 11111, prodName: "【英國】Gnaw松鼠啃無添加手工巧克力100g-軟焦糖/海鹽焦糖/覆盆莓/杏仁太妃糖海鹽/香蕉太妃派/草莓白巧克力/果乾和餅乾牛奶", prodPrice: "NT$333", prodDiscount: "NT$333", prodMadeIn: "英國", prodquantity: "456", prodstate: "上架", time: "2021-8-30 20:26" },
+    //       { prodSort: "甜食", productID: 22222, prodName: "【德國】Kuhbonbon牛奶糖-經典焦糖/蜂蜜牛奶/咖啡/榛果/巧克力/蛋奶酒 (小牛糖)", prodPrice: "NT$213", prodDiscount: "NT$123", prodMadeIn: "德國", prodquantity: "126", prodstate: "上架", time: "2021-8-30 20:26" },
+    //       { prodSort: "甜食", productID: 33333, prodName: "【西班牙】Salysol罐頭軟糖60g-綜合/草莓", prodPrice: "NT$89", prodDiscount: "NT$79", prodMadeIn: "西班牙", prodquantity: "86", prodstate: "上架", time: "2021-8-30 20:26" },
+    //     ]
+    //   }
+    //   render() {
+    //     return (
+    //       <React.Fragment>
+    //         {
+    //           this.state.productList.map(item =>
+    //             <div class="admin-productListDetail" >
+    //               <table>
+    //                 <tr>
+    //                   <td>
+    //                     <div class="width40"><input type="checkbox" /></div>
+    //                   </td>
+    //                   <td class="width80"> {item.prodSort} </td>
+    //                   <td class="width100"> {item.productID} </td>
+    //                   <td class="width360"> {item.prodName} </td>
+    //                   <td class="width80"> {item.prodPrice} </td>
+    //                   <td class="width100">{item.prodDiscount}</td>
+    //                   <td class="width80">{item.prodMadeIn}</td>
+    //                   <td class="width80">{item.prodquantity}</td>
+    //                   <td class="width80"><button class="productON">{item.prodstate}</button></td>
+    //                   <td class="width160">{item.time}</td>
+    //                   <td class="width100">
+                        
+    //                     <button class="admin-editBtn" id="editProductDetailBtn">編輯</button>
+    //                     <button class="admin-deleteBtn">刪除</button>
+    //                   </td>
+    //                 </tr>
+    //               </table>
+    //             </div>
+    //           )
+    //         }
+    //       </React.Fragment>
+    //     )
+    //   }
+    // }
+    // ReactDOM.render(
+    //   <ProductList />,
+    //   document.getElementById("admin-productListDetail-content")
+    // )
+
+    // <!-- //訂單列表元件 -->
+    // class OrderList extends React.Component {
+    //   state = {
+    //     orderList: [
+    //       { orderID: 11111, orderName: "林易謙", orderPrice: "NT$333", time: "2021-8-30 20:26", orderstate: "已完成", paystate: "已付款", shipstate: "已出貨", ordersort: "一般訂單" },
+    //       { orderID: 22222, orderName: "黃曼菱", orderPrice: "NT$213", time: "2021-8-30 20:26", orderstate: "已完成", paystate: "已付款", shipstate: "已出貨", ordersort: "訂閱制訂單" },
+    //       { orderID: 33333, orderName: "謝仁繽", orderPrice: "NT$89", time: "2021-8-30 20:26", orderstate: "已完成", paystate: "已付款", shipstate: "已出貨", ordersort: "訂閱制訂單" },
+    //       { orderID: 44444, orderName: "施任珊", orderPrice: "NT$89", time: "2021-8-30 20:26", orderstate: "已完成", paystate: "已付款", shipstate: "已出貨", ordersort: "一般訂單" },
+    //     ]
+    //   }
+    //   render() {
+    //     return (
+    //       <React.Fragment>
+    //         {
+    //           this.state.orderList.map(item =>
+    //             <div class="admin-productListDetail">
+    //               <table>
+    //                 <tr>
+    //                   <td class="width100">{item.orderID}</td>
+    //                   <td class="width100">{item.orderName}</td>
+    //                   <td class="width160">{item.orderPrice}</td>
+    //                   <td class="width100" ><button id="checkorderdetailBtn">查看</button></td>
+    //                   <td class="width160">{item.time}</td>
+    //                   <td class="width150"><button class="orderFinishBtn">{item.orderstate}</button></td>
+    //                   <td class="width150"><button class="orderFinishBtn">{item.paystate}</button></td>
+    //                   <td class="width150"><button class="orderFinishBtn">{item.shipstate}</button></td>
+    //                   <td class="width150">{item.ordersort}</td>
+    //                 </tr>
+    //               </table>
+    //             </div>
+    //           )
+    //         }
+    //       </React.Fragment>
+    //     )
+    //   }
+    // }
+    // ReactDOM.render(
+    //   <OrderList />,
+    //   document.getElementById("admin-orderListDetail-content")
+    // )
+
+    // <!-- //退貨訂單列表元件 -->
+
+    class ReturnOrderList extends React.Component {
+      state = {
+        returnOrderList: [
+          { orderID: 11111, orderName: "趙世昌", orderPrice: "NT$1240", time: "2021-8-30 20:26", state: "已退貨", returnorderDetail: "顧客發現包裝有破損" },
+          { orderID: 22222, orderName: "謝羿卉", orderPrice: "NT$890", time: "2021-8-30 20:26", state: "待退貨", returnorderDetail: "顧客未拆封，整筆退貨" },
+
+        ]
+      }
+      render() {
+        return (
+          <React.Fragment>
+            {
+              this.state.returnOrderList.map(item =>
+                <div class="admin-productListDetail">
+                  <table>
+                    <tr>
+                      <td class="width100">{item.orderID}</td>
+                      <td class="width100">{item.orderName}</td>
+                      <td class="width160">{item.orderPrice}</td>
+                      <td class="width160"><button id="returnorderdetailBtn">查看</button></td>
+                      <td class="width160">{item.time}</td>
+                      <td class="width150"><button class="waitingBtn">{item.state}</button></td>
+                      <td class="width260">{item.returnorderDetail}</td>
+                      <td class="width160">
+                        <button class="admin-editBtn">退貨</button>
+                        <button class="admin-deleteBtn">刪除</button>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              )
+            }
+          </React.Fragment>
+        )
+      }
+    }
+    ReactDOM.render(
+      <ReturnOrderList />,
+      document.getElementById("admin-returnorderListDetail-content")
+    )
+
+    
+  </script>
+
+
+  <!-- // 文字編輯器-----------------  -->
+  <script type="text/javascript">
+    const E = window.wangEditor
+    const editor = new E('#admin-producttextEditor')
+    editor.create()
+  </script>
+
+<script src="/javascripts/admin_dashboard.js"></script>
+
+</body>
+
+</html>

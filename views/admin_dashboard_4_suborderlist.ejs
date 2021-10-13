@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+  <head>
+    <%-include css_js.ejs %>
+      <title>
+        <%= title %>
+      </title>
+      <link rel="stylesheet" href="/stylesheets/admin_dashboard.css">
+      <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/wangeditor@latest/dist/wangEditor.min.js"></script> -->
+  
+      <style>
+        #li-orderList2 {
+            width: 400px;
+            color: var(--color1);
+            background-color: var(--color3);
+            border-radius: 20px 0 0 20px;
+          }
+        #a-orderList2 {
+            
+            color: var(--color1);
+        
+          }
+        </style>
+  
+  
+  
+  
+  </head>
+<body>
+  <div class="dashboard">
+  <%-include  admin_dashboard_0_leftSelect.ejs %>
+  <div class="right-content">
+<!-- //訂閱訂單列表 -->
+
+<div class="containerdisplay" id="ordercontainer">
+  <div class="admin-breadcrumbs">
+    <p>訂單管理 > 訂單列表</p>
+  </div>
+  <div class="admin-topBox ">
+    <form class="d-flex ">
+      <input class="form-control me-2 light-table-filter searchbox" type="search" placeholder="Search" aria-label="Search" data-table="order-table" >
+      <img src="/images/admin_img/magnifier.svg" alt="">
+    </form>
+  </div>
+  <div class="admin-ListBar">
+    <table>
+      <tr>
+        <td class="width100">訂單編號</td>
+        <td class="width100">顧客姓名</td>
+        <td class="width160">消費金額</td>
+        <td class="width100">訂單詳情</td>
+        <td class="width160">訂單成立時間</td>
+        <td class="width150">
+          <select name="orderStateNo" class="orderselect" id="orderStateNo">
+            <option value="0">訂單狀態</option>
+            <option value="4">訂閱中</option>
+            <option value="5">處理中</option>
+            <option value="3">已取消</option>
+            <!-- <option value="4">退貨審核中</option> -->
+          </select>
+        </td>
+        <td class="width150">
+          <select name="orderPaymentNo" class="orderselect" id="orderPaymentNo">
+            <option value="0">付款方式</option>
+            <option value="1">信用卡</option>
+            <option value="2">ATM付款</option>
+          </select>
+        </td>
+        <td class="width150">
+          <select name="orderSendStateNo" class="orderselect" id="orderSendStateNo">
+            <option value="0">出貨狀態</option>
+            <option value="1">已送達</option>
+            <option value="2">配送中</option>
+            <option value="3">取消</option>
+            <option value="4">處理中</option>
+          </select>
+        </td>
+        <td class="width150">訂閱類別
+          <!-- <select name="訂單類別" class="orderselect" id="">
+            <option value="">訂單類別</option>
+            <option value="">一般訂單</option>
+            <option value="">訂閱制</option>
+          </select> -->
+        </td>
+      </tr>
+    </table>
+  </div>
+       <!-- //訂閱訂單列表(mysql產生) -->
+  <!-- <div id="admin-orderListDetail-content"></div> -->
+  <table class="order-table">
+  <% for (let item of sqlsuborderlist) { %>
+        <tr class="admin-productListDetail orderStateNo0 orderStateNo<%= item.orderStateNo %>  orderPaymentNo0  orderPaymentNo<%= item.orderPaymentNo %>  orderSendStateNo0  orderSendStateNo<%= item.orderSendStateNo %>">
+          <td class="width100"><%= item.orderNo %></td>
+          <td class="width100"><%=item.orderName %></td>
+          <td class="width160"><%=item.orderPrice %></td>
+          <td class="width100" ><a href="http://localhost:3000/admin/dashboard/suborderDetail/<%= item.orderNo %>"><button id="checkorderdetailBtn">查看</button></a></td>
+          <td class="width160"><%=`${item.orderDate.getFullYear()}/${item.orderDate.getMonth()+1}/${item.orderDate.getDate()}` %></td>
+          <td class="width150"><button class="orderState<%=item.orderStateNo %>Btn"><%=item.orderState %></button></td>
+          <td class="width150"><button class="orderPay<%=item.orderPaymentNo %>Btn"><%=item.orderPayment %></button></td>
+          <td class="width150"><button class="orderSend<%=item.orderSendStateNo %>Btn"><%=item.orderSendState %></button></td>
+          <td class="width150"><%=item.orderType %></td>
+        </tr>
+      <% } %>
+  </table>
+</div>
+
+</div>
+</div>
+<script>
+  (function(document) {
+    'use strict';
+  
+    // 建立 LightTableFilter
+    var LightTableFilter = (function(Arr) {
+  
+      var _input;
+  
+      // 資料輸入事件處理函數
+      function _onInputEvent(e) {
+        _input = e.target;
+        var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+        Arr.forEach.call(tables, function(table) {
+          Arr.forEach.call(table.tBodies, function(tbody) {
+            Arr.forEach.call(tbody.rows, _filter);
+          });
+        });
+      }
+  
+      // 資料篩選函數，顯示包含關鍵字的列，其餘隱藏
+      function _filter(row) {
+        var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+        row.style.display = text.indexOf(val) === -1 ? 'none' : 'block';
+      }
+  
+      return {
+        // 初始化函數
+        init: function() {
+          var inputs = document.getElementsByClassName('light-table-filter');
+          Arr.forEach.call(inputs, function(input) {
+            input.oninput = _onInputEvent;
+          });
+        }
+      };
+    })(Array.prototype);
+  
+    // 網頁載入完成後，啟動 LightTableFilter
+    document.addEventListener('readystatechange', function() {
+      if (document.readyState === 'complete') {
+        LightTableFilter.init();
+      }
+    });
+  
+  })(document);
+</script>
+<script src="/javascripts/admin_adshboard_4_orderlist.js"></script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+  <head>
+    <%-include css_js.ejs %>
+      <title>
+        <%= title %>
+      </title>
+      <link rel="stylesheet" href="/stylesheets/admin_dashboard.css">
+      <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/wangeditor@latest/dist/wangEditor.min.js"></script> -->
+      <style>
+        #li-productList2 {
+            width: 400px;
+            color: var(--color1);
+            background-color: var(--color3);
+            border-radius: 20px 0 0 20px;
+          }
+        #a-productList2 {
+            
+            color: var(--color1);
+        
+          }
+        #sendsuccess{
+          display: none;
+        }
+        #send{
+          padding: 0px 3px;
+          margin: 5px;
+        }
+        </style>
+  
+  
+  
+    </head>
+<body>
+  <div class="dashboard">
+  <%-include  admin_dashboard_0_leftSelect.ejs %>
+  <div class="right-content">
+<!-- //新增商品 -->
+
+<div class="containerdisplay" id="addproductcontainer">
+  <div class="admin-breadcrumbs">
+    <p>商品管理 > 新增商品</p>
+  </div>
+  
+    
+
+
+
+
+  <div class="admin-addpage">
+
+    <div class="admin-addpage-flex">
+      <p>商品首圖：</p>
+      <!-- <form action="" method="" enctype="multipart/form-data"> -->
+        <!-- class="admin-addpage-uploadimg" -->
+        <input type="file"  name="myfile" accept="image/*" value="選擇檔案">
+        <input type="submit" value="上傳檔案" id="send">&emsp;
+        <span style="color:red ;padding-top: 5px;"  id="sendsuccess">上傳成功！</span>
+    <!-- </form> -->
+    </div>
+
+    <form action="/admin/dashboard/addproduct" method="post" >
+      <input type="hidden" name="prodId" value="41" id="">
+      <input type="hidden" name="prodCountryNo" value="1" id="">
+      <input type="hidden" name="prodTaste" value="甜" id="">
+      <input type="hidden" name="prodTasteNo" value="1" id="">
+      <input type="hidden" name="prodTypeNo" value="1" id="">
+      <input type="hidden" name="prodPhoto1" value="/images/product_img/prodImg_41_1.jpg" id="">
+      <input type="hidden" name="prodPhoto2" value="2" id="">
+      <input type="hidden" name="prodPhoto3" value="3" id="">
+
+    
+    <div class="admin-addpage-flex">
+      <p>商品名稱：</p>
+      <input name="prodName" type="text" style="width:350px ; height:30px;">
+    </div>
+    <!-- <div class="admin-addpage-flex">
+      <p>商品說明：</p>
+      <input type="text" style="width:350px ; height:30px;">
+    </div> -->
+    <div class="admin-addpage-flex">
+      <p>商品分類：</p>
+      <select name="prodType" class="orderselect" id="">
+        <option value="">請選擇</option>
+        <option value="餅乾">餅乾</option>
+        <option value="洋芋片">洋芋片</option>
+        <option value="糖果">糖果</option>
+        <option value="堅果/果乾">堅果/果乾</option>
+        <option value="其他">其他</option>
+      </select>
+    </div>
+    <div class="admin-addpage-flex">
+      <p>售價：</p>
+      <input name="prodPrice" type="text" style="width:100px ; height:30px;">
+      <p>&emsp;元</p>
+    </div>
+    <!-- <div class="admin-addpage-flex">
+      <p>優惠價：</p>
+      <input type="text" style="width:100px ; height:30px;">
+      <p>&emsp;元</p>
+    </div> -->
+    <div class="admin-addpage-flex">
+      <p>數量：</p>
+      <input name="prodStock" type="text" style="width:100px ; height:30px;">
+    </div>
+    <div class="admin-addpage-flex">
+      <p>產地：</p>
+      <input name="prodCountry" type="text" style="width:100px ; height:30px;">
+      <!-- <select name="" class="orderselect" id="">
+        <option value=""></option>
+        <option value="">台灣</option>
+        <option value="">日本</option>
+        <option value="">泰國</option>
+        <option value="">西班牙</option>
+        <option value="">美國</option>
+        <option value="">澳洲</option>
+        <option value="">德國</option>
+        <option value="">韓國</option>
+        <option value="">其他</option>
+      </select> -->
+    </div>
+  
+    <p>商品內容：</p>
+    <textarea name="prodInfo" id="admin-producttextEditor" placeholder="請輸入商品內容"></textarea> 
+
+    
+
+    <div class="admin-addpage-Btn">
+      <input type="submit" name="" id="" class="admin-addarticleBtn">
+      <!-- <button class="admin-addarticleBtn">新增商品</button> -->
+      <a href="/admin/dashboard/productlist"><button class="orderCancelBtn">取消返回</button></a>
+    </div>
+  </div>
+</form>
+
+
+</div>
+</div>
+</div>
+<script>
+  $("#send").click(function (e) {
+    
+    $('#sendsuccess').css('display', 'block');})
+</script>
+
+</body>
+</html>

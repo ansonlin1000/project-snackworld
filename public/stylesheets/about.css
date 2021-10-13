@@ -1,0 +1,86 @@
+/* ================== MainWaveBanner ================== */
+.mainFirstWave {
+  position: absolute;
+  z-index: 100;
+}
+
+
+.mainPicHolder {
+  width: 100vw;
+  height: 70vh;
+  background-image: url("../images/About/AboutHero.jpg");
+  background-position:center -40px;
+  background-size: cover;
+  position: relative;
+  z-index: -1;
+}
+.mainSecondWave {
+  position: relative;
+  z-index: 30;
+  bottom: 3.5rem;
+}
+
+/* MainWaveBanner的兩個孩子 */
+.mainChildWaveBanner {
+  width: 100vw;
+}
+.mainChildFirstWave {
+  width: 100vw;
+  position: absolute;
+  z-index: 100;
+}
+
+.mainChildSecondWave {
+  width: 100vw;
+  position: relative;
+  z-index: 30;
+  bottom: 4rem;
+}
+
+.mainPicChildHolder {
+  width: 100vw;
+  height: 70vh;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  z-index: -1;
+}
+
+.mainPicChildHolder > img {
+  display: inline-block;
+  flex: 1;
+  object-position: center;
+  object-fit: cover;
+}
+
+/* ================== mainTextBanner ==================*/
+.mainTextBanner{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.mainHandWrittenText{
+    height: 30vh;
+}
+
+.mainHandWrittenText>img{
+    height: 85%;
+} 
+
+/* For the Final "小食World的誕生" */
+.mainHandWrittenText>#three{
+    height: 30%;
+}
+
+.mainParagraphDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+}
+.mainParagraph{
+    margin: 0.5rem 0;
+} 

@@ -1,0 +1,294 @@
+h3{ text-align: center; }
+
+.qty {
+    width: 30%;
+    height: 50px;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid var(--color1)
+}
+
+/* 購物車紅色提示 */
+.CartCount {
+  position: relative;
+  right: 1rem;
+  bottom: 1rem;
+}
+
+/* 購物車dropdown */
+.cartGocontainer {
+  width: 400px;
+  background-color: white;
+  float: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 5%;
+  position: relative;
+  right: 30px;
+  bottom:10px;
+}
+
+/* 購物車下拉 */
+.show{
+    display:none;
+}
+
+
+.cart{
+    cursor: pointer;
+}
+
+.cartItem {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border: 0.5px solid rgb(0, 0, 0, 0.2);
+}
+
+.cartTitle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.cartTitle > p {
+    margin-top: 1rem;
+    font-size: 20px;
+}
+
+.cartContent{
+    display: flex;
+    flex-direction: column;
+    align-items:flex-end;
+}
+
+.cartContent > p {
+  font-size: 20px;
+  text-align: center;
+}
+
+.cartImage {
+  width: 100px;
+  height: 100px;
+  background-position: center;
+  background-size: contain;
+}
+
+.garbageCan {
+  width: 20px;
+  height: 20px;
+  background: url(/images/garbageCan.svg);
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+  right: 10px;
+}
+
+.cartButton{
+    width: 100%;
+}
+
+/* 購物車結束，以上 */
+
+.myform{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
+input.qtyplus , input.qtyminus {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #aaa;
+    background: var(--color1);
+    border-radius: 20px;
+    color: white;
+    margin: 10px;
+}
+
+.eachProdInfo{
+    position: relative;
+    top: 110px;
+    width: 70%;
+    left: 0px;
+    right: 0px;
+    margin: 0px auto;
+    height: auto;
+    margin-bottom: 100px;
+}
+
+.prodHeader{
+    display: flex;
+    height: 460px;
+    
+}
+
+.prodInfoImg {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.prodInfoImg img{
+    width: 100%;
+    max-height: 460px;
+    max-width: 460px;
+}
+
+.prodInfoBox{
+    width: 50%;
+    height: 550px;
+    border-radius: 10px;
+    border: solid 1px var(--color1);
+    text-align: center;
+    padding: 20px 30px 20px 30px;
+}
+.prodLike{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.prodLike img{
+    width: 30px;
+}
+.prodTitle{
+    font-size: 24px;
+    height: 70px;
+}
+
+.pordInfoLine{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 110px;
+}
+.pordInfoLine p{
+    margin-bottom: 0;} 
+
+.infoLine{
+    width: 80%;
+    height: 0.5px;
+    border: 1px solid rgb(0, 0, 0, 0.3);
+}
+
+.infoContent img{
+    width: 100%;
+}
+.infoContent p{
+    line-height: 50px;
+
+}
+
+.prodPrice{
+    font-size: 28px;
+    color: var(--color4);
+}
+
+.shopBtn{
+    margin-top:30px;
+}
+
+.addToShoppingCart{
+    width: 150px;
+    height: 40px;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid var(--color1);
+    background-color: white;
+    color: var(--color1);
+    line-height: 29px;
+    margin: 5px;
+}
+.addToShoppingCart:hover{
+    background-color: var(--color1);
+    color: white;
+    
+}
+
+.shoppingNow{
+    width: 150px;
+    height: 40px;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid var(--color4);
+    background-color: var(--color4);
+    color: white;
+    line-height: 29px;
+    margin: 5px;
+}
+.shoppingNow:hover{
+    background-color: var(--color4);
+    color: white;
+}
+
+
+
+
+
+/* 下方商品列 */
+.prodCard{
+    text-align: center;
+    width: 16vw;
+    margin: 20px 1vw;
+    /* border: 1px solid var(--color1); */
+    border-radius: 10px;
+}
+.prodInfo{
+    padding: 14px;
+}
+.prodNameBox{
+    height: 66px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.heart{
+   position: relative;
+    top: -3px;
+}
+
+
+.prodPriceAndIcon{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.prodPriceAndIcon p{
+    /* flex-shrink: 1; */
+    margin-bottom: 0px;
+}
+
+.cartBtn{
+  margin-left: 1rem;
+  position: relative;
+  cursor: pointer;
+}
+
+.icon{
+    margin-left: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.socialIcon{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.icon img{
+    width: 30px;
+    margin: 10px;
+}
+
+#recommendProd{
+    display: flex;
+}
